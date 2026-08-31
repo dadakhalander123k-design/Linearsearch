@@ -271,78 +271,155 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
           </h2>
         </div>
 
-        {/* 5 Milestone Roadmap Grid with connecting dotted line */}
-        <div className="relative pt-2 pb-2">
+        {/* 5 Milestone Roadmap: Desktop Horizontal vs Mobile Vertical Connected */}
+        {/* DESKTOP / TABLET ROADMAP (sm and above) */}
+        <div className="hidden sm:block relative pt-2 pb-2">
           {/* Connector Line behind badges */}
-          <div className="hidden sm:block absolute top-[22px] left-[10%] right-[10%] border-t-2 border-dashed border-indigo-300 dark:border-indigo-800 z-0 pointer-events-none" />
+          <div className="absolute top-[22px] left-[10%] right-[10%] border-t-2 border-dashed border-indigo-300 dark:border-indigo-800 z-0 pointer-events-none" />
 
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 sm:gap-3 relative z-10">
+          <div className="grid grid-cols-5 gap-3 relative z-10">
             {/* 01: What is Linear Search? */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div 
+              onClick={() => {
+                sound.playClick();
+                onNavigate('learn');
+              }}
+              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 01
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
                 <Search className="w-5 h-5" />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {roadmap.steps[0].title}
               </span>
             </div>
 
             {/* 02: Search Algorithm */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div 
+              onClick={() => {
+                sound.playClick();
+                onNavigate('learn');
+              }}
+              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 02
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
                 <ListFilter className="w-5 h-5" />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {roadmap.steps[1].title}
               </span>
             </div>
 
             {/* 03: Time Complexity */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div 
+              onClick={() => {
+                sound.playClick();
+                onNavigate('learn');
+              }}
+              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 03
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
                 <Clock className="w-5 h-5" />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {roadmap.steps[2].title}
               </span>
             </div>
 
             {/* 04: Best, Worst & Average Case */}
-            <div className="flex flex-col items-center text-center space-y-2">
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div 
+              onClick={() => {
+                sound.playClick();
+                onNavigate('learn');
+              }}
+              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 04
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
                 <TrendingUp className="w-5 h-5" />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {roadmap.steps[3].title}
               </span>
             </div>
 
             {/* 05: Implementation Examples */}
-            <div className="flex flex-col items-center text-center space-y-2 col-span-2 sm:col-span-1">
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs">
+            <div 
+              onClick={() => {
+                sound.playClick();
+                onNavigate('learn');
+              }}
+              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+            >
+              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                 05
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
                 <Code className="w-5 h-5" />
               </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1">
+              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                 {roadmap.steps[4].title}
               </span>
             </div>
-
           </div>
+        </div>
+
+        {/* MOBILE VERTICAL CONNECTED ROADMAP (sm:hidden - REFERENCE IMAGE 2) */}
+        <div className="sm:hidden flex flex-col items-center justify-center py-2">
+          {roadmap.steps.map((step, sIdx) => {
+            const isLast = sIdx === roadmap.steps.length - 1;
+            return (
+              <div key={step.id} className="flex flex-col items-center w-full max-w-xs">
+                {/* Clickable Step Unit */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    sound.playClick();
+                    onNavigate('learn');
+                  }}
+                  className="flex flex-col items-center text-center group cursor-pointer focus:outline-hidden"
+                >
+                  {/* 1. Number Circle */}
+                  <div className="w-8 h-8 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-mono font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                    {step.number}
+                  </div>
+
+                  {/* 2. Thin Vertical Connector (Number to Icon) */}
+                  <div className="w-0.5 h-3 bg-indigo-200 dark:bg-indigo-800 my-0.5" />
+
+                  {/* 3. Concept Icon Container */}
+                  <div className="w-12 h-12 rounded-full bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/80 transition-colors">
+                    {step.iconType === 'search' && <Search className="w-5 h-5" />}
+                    {step.iconType === 'algorithm' && <ListFilter className="w-5 h-5" />}
+                    {step.iconType === 'time' && <Clock className="w-5 h-5" />}
+                    {step.iconType === 'cases' && <TrendingUp className="w-5 h-5" />}
+                    {step.iconType === 'code' && <Code className="w-5 h-5" />}
+                  </div>
+
+                  {/* 4. Concept Title */}
+                  <span className="text-xs font-bold text-slate-900 dark:text-white leading-snug px-2 mt-2 max-w-[200px] text-center group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                    {step.title}
+                  </span>
+                </button>
+
+                {/* 5. Thin Vertical Connector to Next Step */}
+                {!isLast && (
+                  <div className="w-0.5 h-7 bg-indigo-200 dark:bg-indigo-800 my-1.5" />
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

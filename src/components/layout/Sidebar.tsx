@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   LayoutGrid, 
   BookOpen, 
@@ -30,11 +31,13 @@ export function Sidebar({
   progress,
   overallProgress,
 }: SidebarProps) {
-  const navItems: { id: SectionId; label: string; icon: typeof LayoutGrid; badge?: string }[] = [
-    { id: 'overview', label: 'Overview', icon: LayoutGrid },
-    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length}/10` },
-    { id: 'visualize', label: 'Visualize', icon: Sparkles },
-    { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length}/5` },
+  const [isSidebarHovered, setIsSidebarHovered] = useState(false);
+
+  const navItems: { id: SectionId; label: string; icon: typeof LayoutGrid; badge: string }[] = [
+    { id: 'overview', label: 'Overview', icon: LayoutGrid, badge: 'Overview' },
+    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 10` },
+    { id: 'visualize', label: 'Visualize', icon: Sparkles, badge: 'Interactive' },
+    { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length} / 5` },
     { id: 'quiz', label: 'Quiz', icon: HelpCircle, badge: progress.isQuizCompleted ? 'Done' : '10 Qs' },
     { id: 'progress', label: 'Progress', icon: TrendingUp, badge: `${overallProgress}%` },
   ];
@@ -52,7 +55,9 @@ export function Sidebar({
 
       {/* Navigation Sidebar Panel */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
+        onMouseEnter={() => setIsSidebarHovered(true)}
+        onMouseLeave={() => setIsSidebarHovered(false)}
+        className={`group/sidebar fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Main Navigation"
@@ -113,20 +118,24 @@ export function Sidebar({
                     onClose();
                   }
                 }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 ${
                   isActive
                     ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold shadow-xs border border-indigo-200/70 dark:border-indigo-800/60'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 min-w-0">
                   <div className="w-5 h-5 flex items-center justify-center shrink-0">
                     <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-slate-500'}`} />
                   </div>
-                  <span>{item.label}</span>
+                  <span className="truncate">{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full whitespace-nowrap ${
+                  <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 ml-2 transition-opacity duration-150 ease-in-out ${
+                    isSidebarHovered
+                      ? 'opacity-100'
+                      : 'opacity-0 group-hover/sidebar:opacity-100 group-focus-within/sidebar:opacity-100'
+                  } ${
                     isActive
                       ? 'bg-indigo-200/60 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 font-bold'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'

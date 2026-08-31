@@ -144,7 +144,7 @@ export function VideoSection({
               Interactive Video Classroom
             </span>
             <span className="text-xs text-slate-500 dark:text-slate-400">
-              {progress.completedVideos.length}/2 Completed (+10 XP each)
+              {progress.completedVideos.length}/2 Lessons Completed
             </span>
           </div>
           <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
@@ -155,7 +155,7 @@ export function VideoSection({
         {isVideoCompleted && (
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-            <span>Watched & Completed (+10 XP)</span>
+            <span>Watched & Completed</span>
           </div>
         )}
       </div>

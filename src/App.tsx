@@ -15,6 +15,7 @@ import { ProgressSection } from './components/sections/ProgressSection';
 import { AchievementToast } from './components/common/AchievementToast';
 import { CertificateModal } from './components/certificate/CertificateModal';
 import { ResetModal } from './components/common/ResetModal';
+import { CompletionModal } from './components/common/CompletionModal';
 
 export default function App() {
   const [currentSection, setCurrentSection] = useState<SectionId>('overview');
@@ -22,6 +23,7 @@ export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isCertificateOpen, setIsCertificateOpen] = useState<boolean>(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
+  const [isCompletionModalOpen, setIsCompletionModalOpen] = useState<boolean>(false);
   const [unlockedAchievementId, setUnlockedAchievementId] = useState<string | null>(null);
 
   // Subscribe to progress manager updates & achievement unlock events
@@ -35,7 +37,16 @@ export default function App() {
     return unsubscribe;
   }, []);
 
-  // Sync theme with HTML document root
+  // Overall progress percentage across all curriculum parts
+  const overallProgress = progressManager.getOverallProgressPercentage();
+
+  // Check for 100% completion celebration trigger (strictly on genuine 100% completion)
+  useEffect(() => {
+    if (overallProgress === 100 && !progress.hasCelebrated100Percent) {
+      setIsCompletionModalOpen(true);
+      progressManager.markCelebrationShown();
+    }
+  }, [overallProgress, progress.hasCelebrated100Percent]);
   useEffect(() => {
     if (progress.theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -43,9 +54,6 @@ export default function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [progress.theme]);
-
-  // Overall progress percentage across all curriculum parts
-  const overallProgress = progressManager.getOverallProgressPercentage();
 
   // Navigation handler
   const handleNavigate = (section: SectionId) => {
@@ -162,6 +170,14 @@ export default function App() {
         isOpen={isResetModalOpen}
         onClose={() => setIsResetModalOpen(false)}
         onConfirmReset={() => progressManager.resetProgress()}
+      />
+
+      {/* 100% Congratulatory Completion Modal */}
+      <CompletionModal
+        isOpen={isCompletionModalOpen}
+        onClose={() => setIsCompletionModalOpen(false)}
+        progress={progress}
+        onOpenCertificate={() => setIsCertificateOpen(true)}
       />
     </div>
   );

@@ -3,14 +3,41 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
-  body {
-    @apply antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200;
-    font-family: 'Plus Jakarta Sans', sans-serif;
+  html {
+    color-scheme: light dark;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  code, pre, kbd {
-    font-family: 'JetBrains Mono', monospace;
+  body {
+    @apply antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
+
+  code, pre, kbd, samp {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Headings typography hierarchy */
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
+  }
+
+  /* Numeric legibility */
+  .font-mono, [data-tabular-nums] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Subtle, smooth transitions for interactive cards and buttons */
+.interactive-card {
+  @apply transition-all duration-150 ease-out hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700;
+}
+
+.interactive-btn {
+  @apply transition-all duration-150 ease-out active:scale-[0.98] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/50 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900;
 }
 
 /* Custom Scrollbars */
@@ -24,10 +51,11 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.4);
+  background-color: rgba(156, 163, 175, 0.35);
   border-radius: 9999px;
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: rgba(75, 85, 99, 0.4);
+  background-color: rgba(75, 85, 99, 0.45);
 }
+

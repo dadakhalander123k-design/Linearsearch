@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import { 
-  Gamepad2, 
   Trophy, 
   CheckCircle2, 
   RotateCcw, 
   Sparkles, 
   ArrowRight, 
-  HelpCircle, 
   Check, 
-  X, 
   FlaskConical,
-  Flame,
-  Award
+  Flame
 } from 'lucide-react';
 import { GAME_LEVELS } from '../../data/gameData';
-import { GameLevel, UserProgressState, SectionId } from '../../types';
+import { UserProgressState, SectionId } from '../../types';
 import { sound } from '../../audio/soundEngine';
 
 interface GameSectionProps {
@@ -31,6 +27,7 @@ export function GameSection({
   const [activeLevelId, setActiveLevelId] = useState<number>(1);
   const activeLevel = GAME_LEVELS.find((l) => l.id === activeLevelId) || GAME_LEVELS[0];
   const isLevelCompleted = progress.completedGameLevels.includes(activeLevel.id);
+  const allLevelsCompleted = progress.completedGameLevels.length >= 5;
 
   // Level 1 state
   const [l1CurrentStep, setL1CurrentStep] = useState<number>(0);
@@ -78,96 +75,469 @@ export function GameSection({
     }
   };
 
+  const handleOpenOrReplayLevel = (levelId: number) => {
+    sound.playClick();
+    if (levelId === 1) {
+      setL1CurrentStep(0);
+      setL1Completed(false);
+    } else if (levelId === 2) {
+      setL2Comparisons(0);
+      setL2CurrentIndex(-1);
+      setL2Solved(false);
+    } else if (levelId === 3) {
+      setL3Choice(null);
+      setL3Feedback(null);
+    } else if (levelId === 4) {
+      setL4Prediction(null);
+      setL4Feedback(null);
+    } else if (levelId === 5) {
+      setL5CurrentIdx(-1);
+      setL5Comparisons(0);
+      setL5Solved(false);
+    }
+    setActiveLevelId(levelId);
+  };
+
   const handleFinishLevel = (levelId: number) => {
     onCompleteLevel(levelId);
   };
 
+  // Tracker milestones definition
+  const milestones = [
+    { num: '01', title: 'Find the Number', levelId: 1 },
+    { num: '02', title: 'Find It Quickly', levelId: 2 },
+    { num: '03', title: 'Is It There?', levelId: 3 },
+    { num: '04', title: 'Count the Comparisons', levelId: 4 },
+    { num: '05', title: 'Linear Search Master', levelId: 5 },
+    { num: '06', title: 'Completion', isTrophy: true, levelId: 6 },
+  ];
+
+  // Exactly 6 Completion Cards (5 Game Levels + 1 Lab Sandbox)
+  const COMPLETION_CARDS = [
+    {
+      id: 1,
+      badge: 'LEVEL 01',
+      category: 'BASICS',
+      title: 'Find the Number',
+      description: 'Check the elements one by one until you find the target number.',
+      isLab: false,
+    },
+    {
+      id: 2,
+      badge: 'LEVEL 02',
+      category: 'SPEED SEARCH',
+      title: 'Find It Quickly',
+      description: 'Move through the array from left to right and stop as soon as the target is found.',
+      isLab: false,
+    },
+    {
+      id: 3,
+      badge: 'LEVEL 03',
+      category: 'PRESENCE CHECK',
+      title: 'Is It There?',
+      description: 'Determine whether the target exists in the array by comparing it with each element.',
+      isLab: false,
+    },
+    {
+      id: 4,
+      badge: 'LEVEL 04',
+      category: 'COMPLEXITY',
+      title: 'Count the Comparisons',
+      description: 'Track how many elements Linear Search checks before finding the target or reaching the end.',
+      isLab: false,
+    },
+    {
+      id: 5,
+      badge: 'LEVEL 05',
+      category: 'MASTER CHALLENGE',
+      title: 'Linear Search Master',
+      description: 'Apply Linear Search confidently and understand its search process, comparisons, and results.',
+      isLab: false,
+    },
+    {
+      id: 6,
+      badge: 'Sandbox',
+      category: 'CUSTOM ARRAYS',
+      title: 'Interactive Linear Search Lab',
+      description: 'Experiment with your own arrays, choose a target value, and watch Linear Search check each element step by step.',
+      actionLabel: 'Open Linear Search Lab',
+      isLab: true,
+    },
+  ];
+
+  const isCompletionView = activeLevelId === 6;
+
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pb-16">
-      {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300">
-              Level {activeLevel.levelNumber} of 5
+    <div className="max-w-5xl mx-auto space-y-6 pb-16">
+      
+      {/* ─── 1. TOP HORIZONTAL PROGRESS TRACKER (MATCHING IMAGE 1 & 2) ─── */}
+      <div className="py-4 px-2 sm:px-6">
+        <div className="relative flex items-center justify-between max-w-4xl mx-auto">
+          {/* Horizontal Connecting Track Line running behind circles */}
+          <div className="absolute left-6 right-6 top-[22px] h-[2px] bg-slate-200 dark:bg-slate-800 -z-0" />
+
+          {milestones.map((m) => {
+            const isMilestoneActive = m.levelId === activeLevelId;
+            const isMilestoneCompleted = m.isTrophy 
+              ? allLevelsCompleted 
+              : progress.completedGameLevels.includes(m.levelId);
+
+            return (
+              <div 
+                key={m.num} 
+                className="relative z-10 flex flex-col items-center group cursor-pointer"
+                onClick={() => {
+                  handleOpenOrReplayLevel(m.levelId);
+                }}
+              >
+                {/* Milestone Circular Indicator */}
+                <div className="h-11 flex items-center justify-center">
+                  {isMilestoneActive ? (
+                    // Active Level: Large purple/indigo outer ring + solid center + white dot
+                    <div className="w-10 h-10 rounded-full bg-[#5442F6] flex items-center justify-center shadow-lg ring-4 ring-[#5442F6]/25 dark:ring-[#5442F6]/40 transition-transform transform scale-105">
+                      <div className="w-3 h-3 rounded-full bg-white shadow-xs" />
+                    </div>
+                  ) : isMilestoneCompleted ? (
+                    // Completed Level
+                    <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xs">
+                      {m.isTrophy ? (
+                        <Trophy className="w-4 h-4 text-white" />
+                      ) : (
+                        <Check className="w-4 h-4 stroke-[3]" />
+                      )}
+                    </div>
+                  ) : m.isTrophy ? (
+                    // Final Trophy Circle (Incomplete)
+                    <div className="w-9 h-9 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-2xs">
+                      <Trophy className="w-4 h-4 text-slate-400 dark:text-slate-500" />
+                    </div>
+                  ) : (
+                    // Inactive Level Circle
+                    <div className="w-8 h-8 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-2xs">
+                      <div className="w-2.5 h-2.5 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800" />
+                    </div>
+                  )}
+                </div>
+
+                {/* Milestone Number */}
+                <span className={`text-[11px] font-mono font-bold mt-2 ${
+                  isMilestoneActive 
+                    ? 'text-[#5442F6] dark:text-indigo-400 font-extrabold' 
+                    : isMilestoneCompleted
+                    ? 'text-emerald-600 dark:text-emerald-400'
+                    : 'text-slate-500 dark:text-slate-400'
+                }`}>
+                  {m.num}
+                </span>
+
+                {/* Milestone Label Underneath */}
+                <span className={`text-[10px] sm:text-xs font-semibold text-center max-w-[76px] sm:max-w-[100px] line-clamp-1 sm:line-clamp-2 mt-0.5 leading-tight ${
+                  isMilestoneActive 
+                    ? 'text-[#5442F6] dark:text-indigo-400 font-bold' 
+                    : 'text-slate-600 dark:text-slate-400'
+                }`}>
+                  {m.title}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Level Banner Pill (Matching Image 2) */}
+        <div className="flex justify-center mt-5">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FF] dark:bg-indigo-950/70 border border-indigo-200/80 dark:border-indigo-800 text-[#4F46E5] dark:text-indigo-300 text-xs font-mono font-extrabold tracking-wide uppercase shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#5442F6] dark:text-indigo-400" />
+            {isCompletionView ? (
+              <span>COMPLETION & SANDBOX • 5 CHALLENGE LEVELS & INTERACTIVE LAB</span>
+            ) : (
+              <span>LEVEL 0{activeLevel.levelNumber} • LEVEL {activeLevel.levelNumber}: {activeLevel.title.toUpperCase()}</span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ─── 2. PROGRESS SUMMARY CARD (EXACTLY MATCHING IMAGE 1 & 2) ─── */}
+      <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="space-y-2">
+          {/* Metadata Row: Yellow Pill + Progress Text */}
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="px-3 py-0.5 rounded-full text-xs font-mono font-extrabold bg-[#FEF3C7] dark:bg-amber-950 text-[#92400E] dark:text-amber-300 shadow-2xs">
+              {isCompletionView ? 'Completion & Sandbox' : `Level ${activeLevel.levelNumber} of 5`}
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
-              {progress.completedGameLevels.length}/5 Completed (+15 XP each)
+            <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+              {progress.completedGameLevels.length}/5 Levels Completed
             </span>
           </div>
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-            {activeLevel.title}
+
+          {/* Current Level Title */}
+          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+            {isCompletionView ? 'Linear Search Game Completion' : activeLevel.title}
           </h2>
         </div>
 
-        {/* Level indicator status */}
-        {isLevelCompleted && (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+        {/* Right Status Badge */}
+        {isCompletionView ? (
+          allLevelsCompleted ? (
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ECFDF5] dark:bg-emerald-950/80 border border-emerald-300/90 dark:border-emerald-800 text-[#059669] dark:text-emerald-300 font-bold text-xs shadow-2xs self-start sm:self-center">
+              <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
+              <span>All 5 Levels Completed</span>
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 dark:bg-amber-950/80 border border-amber-300/90 dark:border-amber-800 text-amber-800 dark:text-amber-300 font-bold text-xs shadow-2xs self-start sm:self-center">
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+              <span>{5 - progress.completedGameLevels.length} Level(s) Remaining</span>
+            </div>
+          )
+        ) : isLevelCompleted ? (
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#ECFDF5] dark:bg-emerald-950/80 border border-emerald-300/90 dark:border-emerald-800 text-[#059669] dark:text-emerald-300 font-bold text-xs shadow-2xs self-start sm:self-center">
+            <CheckCircle2 className="w-4 h-4 text-[#10B981]" />
             <span>Completed & Saved</span>
+          </div>
+        ) : (
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 font-semibold text-xs self-start sm:self-center">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <span>In Progress</span>
           </div>
         )}
       </div>
 
-      {/* Level Selection Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+      {/* ─── 3. LEVEL CARDS ROW (EXACTLY MATCHING IMAGE 1) ─── */}
+      <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 sm:gap-3.5">
         {GAME_LEVELS.map((lvl) => {
           const isDone = progress.completedGameLevels.includes(lvl.id);
           const isCurrent = lvl.id === activeLevelId;
+
           return (
             <button
               key={lvl.id}
               onClick={() => {
-                sound.playClick();
-                setActiveLevelId(lvl.id);
+                handleOpenOrReplayLevel(lvl.id);
               }}
-              className={`p-3 rounded-2xl border text-left flex flex-col justify-between transition-all ${
+              className={`p-3.5 sm:p-4 rounded-2xl border text-left flex flex-col justify-between h-[86px] sm:h-[92px] transition-all cursor-pointer ${
                 isCurrent
-                  ? 'bg-amber-500 text-slate-950 border-amber-500 shadow-md font-bold'
-                  : isDone
-                  ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300'
-                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  ? 'bg-[#FF9800] text-slate-950 border-[#FF9800] shadow-md'
+                  : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60 shadow-2xs'
               }`}
             >
-              <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono font-extrabold uppercase">
-                  {lvl.badge}
+              {/* Card Header: LEVEL 0X on left, Icon on right */}
+              <div className="flex items-center justify-between w-full">
+                <span className={`text-[11px] font-mono font-extrabold uppercase tracking-wider ${
+                  isCurrent ? 'text-slate-950 font-black' : 'text-slate-700 dark:text-slate-300'
+                }`}>
+                  LEVEL 0{lvl.levelNumber}
                 </span>
+
                 {isDone ? (
-                  <Check className={`w-3.5 h-3.5 ${isCurrent ? 'text-slate-950' : 'text-emerald-500'}`} />
+                  <Check className={`w-4 h-4 stroke-[3] ${
+                    isCurrent ? 'text-slate-950' : 'text-emerald-500'
+                  }`} />
+                ) : isCurrent ? (
+                  <span className="w-2.5 h-2.5 rounded-full bg-slate-950" />
                 ) : (
-                  <Flame className={`w-3.5 h-3.5 ${isCurrent ? 'text-slate-950' : 'text-amber-500'}`} />
+                  <span className="w-3.5 h-3.5 rounded-full border-2 border-slate-300 dark:border-slate-700" />
                 )}
               </div>
-              <span className="text-xs font-bold mt-2 truncate">{lvl.title}</span>
+
+              {/* Card Title */}
+              <span className={`text-xs sm:text-[13px] font-bold truncate leading-snug ${
+                isCurrent ? 'text-slate-950 font-black' : 'text-slate-900 dark:text-slate-100'
+              }`}>
+                {lvl.title}
+              </span>
             </button>
           );
         })}
+
+        {/* 6th Tab for Completion & Sandbox */}
+        <button
+          onClick={() => {
+            sound.playClick();
+            setActiveLevelId(6);
+          }}
+          className={`p-3.5 sm:p-4 rounded-2xl border text-left flex flex-col justify-between h-[86px] sm:h-[92px] transition-all cursor-pointer ${
+            isCompletionView
+              ? 'bg-[#FF9800] text-slate-950 border-[#FF9800] shadow-md'
+              : 'bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-200/80 dark:border-indigo-900/60 text-slate-900 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-950/40 shadow-2xs'
+          }`}
+        >
+          <div className="flex items-center justify-between w-full">
+            <span className={`text-[11px] font-mono font-extrabold uppercase tracking-wider ${
+              isCompletionView ? 'text-slate-950 font-black' : 'text-indigo-700 dark:text-indigo-300'
+            }`}>
+              SANDBOX
+            </span>
+            {allLevelsCompleted ? (
+              <Trophy className={`w-4 h-4 ${isCompletionView ? 'text-slate-950' : 'text-amber-500'}`} />
+            ) : isCompletionView ? (
+              <span className="w-2.5 h-2.5 rounded-full bg-slate-950" />
+            ) : (
+              <FlaskConical className="w-3.5 h-3.5 text-indigo-500" />
+            )}
+          </div>
+          <span className={`text-xs sm:text-[13px] font-bold truncate leading-snug ${
+            isCompletionView ? 'text-slate-950 font-black' : 'text-indigo-900 dark:text-indigo-200'
+          }`}>
+            Completion & Lab
+          </span>
+        </button>
       </div>
 
-      {/* Level Card & Interactive Engine */}
-      <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-6">
-        {/* Objective banner */}
-        <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-1">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-              Objective
-            </span>
+      {/* ─── 4. INTERACTIVE GAMEPLAY ENGINE OR COMPLETION SECTION ─── */}
+      {isCompletionView ? (
+        /* ============================================================ */
+        /* 6-CARD COMPLETION & LAB GRID (PRESERVING EXACT REFERENCE SPECS) */
+        /* ============================================================ */
+        <div className="space-y-6">
+          <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-6">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-mono font-extrabold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+                <span>Linear Search Curriculum Cards</span>
+              </div>
+              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Linear Search Game Levels & Interactive Sandbox
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
+                Master every step of Linear Search through 5 sequential challenges, then experiment with custom arrays in the Interactive Lab.
+              </p>
+            </div>
+
+            {/* The Exactly Six Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {COMPLETION_CARDS.map((card) => {
+                const isCardDone = !card.isLab && progress.completedGameLevels.includes(card.id);
+
+                return (
+                  <div
+                    key={card.id}
+                    className={`rounded-2xl sm:rounded-3xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 ${
+                      card.isLab
+                        ? 'bg-gradient-to-br from-indigo-50/80 via-purple-50/50 to-indigo-50/80 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-indigo-950/40 border-indigo-200/90 dark:border-indigo-800/80 shadow-sm hover:border-indigo-300 dark:hover:border-indigo-700'
+                        : isCardDone
+                        ? 'bg-white dark:bg-slate-900 border-emerald-200/80 dark:border-emerald-900/60 shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700'
+                        : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-slate-300 dark:hover:border-slate-700'
+                    }`}
+                  >
+                    <div className="space-y-3">
+                      {/* Level Badge + Category Header */}
+                      <div className="flex items-center justify-between gap-2">
+                        <span className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-extrabold uppercase tracking-wider ${
+                          card.isLab
+                            ? 'bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
+                            : 'bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800'
+                        }`}>
+                          {card.badge}
+                        </span>
+
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[11px] font-mono font-bold uppercase tracking-wider ${
+                            card.isLab
+                              ? 'text-purple-600 dark:text-purple-400'
+                              : 'text-slate-400 dark:text-slate-500'
+                          }`}>
+                            {card.category}
+                          </span>
+                          {!card.isLab && isCardDone && (
+                            <span className="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                              <Check className="w-3.5 h-3.5 stroke-[3]" />
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Card Title */}
+                      <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+                        {card.title}
+                      </h4>
+
+                      {/* Card Description */}
+                      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-h-[44px]">
+                        "{card.description}"
+                      </p>
+                    </div>
+
+                    {/* Divider & Bottom Action Button */}
+                    <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                      {card.isLab ? (
+                        <button
+                          onClick={() => {
+                            sound.playNavigate();
+                            onNavigate('lab');
+                          }}
+                          className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer"
+                        >
+                          <FlaskConical className="w-4 h-4" />
+                          <span>Open Linear Search Lab</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => {
+                            handleOpenOrReplayLevel(card.id);
+                          }}
+                          className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer ${
+                            isCardDone
+                              ? 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700'
+                              : 'bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-100 text-white dark:text-slate-900'
+                          }`}
+                        >
+                          <span>{isCardDone ? `Replay Level 0${card.id}` : `Play Level 0${card.id}`}</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Navigation Footer for Completion View */}
+          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
             <button
-              onClick={handleResetLevel}
-              className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-1"
+              onClick={() => {
+                handleOpenOrReplayLevel(1);
+              }}
+              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
             >
-              <RotateCcw className="w-3 h-3" />
-              <span>Retry / Reset</span>
+              ← Back to Level 01
+            </button>
+
+            <button
+              onClick={() => {
+                sound.playNavigate();
+                onNavigate('quiz');
+              }}
+              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
+            >
+              <span>Take Mastery Quiz</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
-          <p className="text-sm font-bold text-slate-900 dark:text-white">
-            {activeLevel.objective}
-          </p>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            {activeLevel.description}
-          </p>
         </div>
+      ) : (
+        <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-6">
+          {/* Objective banner */}
+          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-1">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                Objective
+              </span>
+              <button
+                onClick={handleResetLevel}
+                className="text-xs text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 flex items-center gap-1 cursor-pointer"
+              >
+                <RotateCcw className="w-3 h-3" />
+                <span>Retry / Reset</span>
+              </button>
+            </div>
+            <p className="text-sm font-bold text-slate-900 dark:text-white">
+              {activeLevel.objective}
+            </p>
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              {activeLevel.description}
+            </p>
+          </div>
 
         {/* ---------------- LEVEL 01: CLICK SEQUENCE ---------------- */}
         {activeLevel.id === 1 && (
@@ -202,7 +572,7 @@ export function GameSection({
                           sound.playIncorrect();
                         }
                       }}
-                      className={`w-16 h-20 rounded-2xl flex flex-col items-center justify-center font-mono border-2 transition ${
+                      className={`w-16 h-20 rounded-2xl flex flex-col items-center justify-center font-mono border-2 transition cursor-pointer ${
                         isTargetFound
                           ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300 shadow-lg'
                           : isPast
@@ -222,7 +592,7 @@ export function GameSection({
               {l1Completed ? (
                 <div className="p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-center space-y-1">
                   <h4 className="text-emerald-300 font-extrabold text-sm">🎉 Level 1 Complete!</h4>
-                  <p className="text-xs text-slate-300">You inspected 4 → 9 → 2 → 7 in sequential order and found target 7! (+15 XP)</p>
+                  <p className="text-xs text-slate-300">You inspected 4 → 9 → 2 → 7 in sequential order and found target 7!</p>
                 </div>
               ) : (
                 <p className="text-center text-xs text-slate-400 font-mono">
@@ -282,14 +652,14 @@ export function GameSection({
                         }
                       }
                     }}
-                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md"
+                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md cursor-pointer"
                   >
                     Step & Inspect Next Item
                   </button>
                 ) : (
                   <div className="p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-center space-y-1 w-full">
                     <h4 className="text-emerald-300 font-extrabold text-sm">🎉 Level 2 Complete!</h4>
-                    <p className="text-xs text-slate-300">Found 23 at Index 2 using exactly 3 comparisons! (+15 XP)</p>
+                    <p className="text-xs text-slate-300">Found 23 at Index 2 using exactly 3 comparisons!</p>
                   </div>
                 )}
               </div>
@@ -326,7 +696,7 @@ export function GameSection({
                       setL3Choice('found');
                       setL3Feedback('❌ Incorrect. Look closely: 3, 14, 8, 21, 5 — none of these are 10!');
                     }}
-                    className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition ${
+                    className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
                       l3Choice === 'found' ? 'bg-red-500/20 border-red-500 text-red-300' : 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800'
                     }`}
                   >
@@ -340,7 +710,7 @@ export function GameSection({
                       setL3Feedback('✅ Correct! 10 is Not Found in the array after 5 comparisons.');
                       handleFinishLevel(3);
                     }}
-                    className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition ${
+                    className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
                       l3Choice === 'not_found' ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800'
                     }`}
                   >
@@ -395,7 +765,7 @@ export function GameSection({
                           setL4Feedback(`❌ ${count} comparisons is incorrect. 20 is at index 4 (5th box).`);
                         }
                       }}
-                      className={`w-12 h-10 rounded-xl font-mono font-bold text-xs border transition ${
+                      className={`w-12 h-10 rounded-xl font-mono font-bold text-xs border transition cursor-pointer ${
                         l4Prediction === count
                           ? count === 5
                             ? 'bg-emerald-600 border-emerald-400 text-white'
@@ -470,7 +840,7 @@ export function GameSection({
                         }
                       }
                     }}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer"
                   >
                     Step & Check Index {l5CurrentIdx + 1}
                   </button>
@@ -482,18 +852,25 @@ export function GameSection({
                       <span>•</span>
                       <span>Comparisons: {l5Comparisons}</span>
                       <span>•</span>
-                      <span className="text-amber-400 font-bold">XP Earned: +15 XP</span>
+                      <span className="text-emerald-400 font-bold">Status: Completed ✓</span>
                     </div>
-                    <div className="pt-2">
+                    <div className="pt-2 flex items-center justify-center gap-3">
+                      <button
+                        onClick={handleResetLevel}
+                        className="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 text-slate-300 font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
+                      >
+                        <RotateCcw className="w-3.5 h-3.5" />
+                        <span>Replay Level 05</span>
+                      </button>
                       <button
                         onClick={() => {
-                          sound.playNavigate();
-                          onNavigate('lab');
+                          sound.playClick();
+                          setActiveLevelId(6);
                         }}
-                        className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs inline-flex items-center gap-1.5"
+                        className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
                       >
-                        <FlaskConical className="w-3.5 h-3.5" />
-                        <span>Open Linear Search Lab →</span>
+                        <Trophy className="w-3.5 h-3.5 text-amber-300" />
+                        <span>View Game Completion →</span>
                       </button>
                     </div>
                   </div>
@@ -508,12 +885,11 @@ export function GameSection({
           <button
             onClick={() => {
               if (activeLevelId > 1) {
-                sound.playClick();
-                setActiveLevelId(activeLevelId - 1);
+                handleOpenOrReplayLevel(activeLevelId - 1);
               }
             }}
             disabled={activeLevelId === 1}
-            className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40"
+            className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
           >
             Previous Level
           </button>
@@ -521,10 +897,9 @@ export function GameSection({
           {activeLevelId < 5 ? (
             <button
               onClick={() => {
-                sound.playClick();
-                setActiveLevelId(activeLevelId + 1);
+                handleOpenOrReplayLevel(activeLevelId + 1);
               }}
-              className="px-5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center gap-1.5"
+              className="px-5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
             >
               <span>Next Level</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -532,39 +907,19 @@ export function GameSection({
           ) : (
             <button
               onClick={() => {
-                sound.playNavigate();
-                onNavigate('quiz');
+                sound.playClick();
+                setActiveLevelId(6);
               }}
-              className="px-5 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold flex items-center gap-1.5"
+              className="px-5 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer"
             >
-              <span>Go to Quiz Challenge</span>
+              <span>View Game Completion</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           )}
         </div>
       </div>
-
-      {/* 10. LAB AFTER GAME CALLOUT */}
-      <div className="p-6 rounded-3xl bg-indigo-50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="space-y-1 text-center sm:text-left">
-          <h3 className="text-base font-bold text-indigo-950 dark:text-indigo-200 flex items-center justify-center sm:justify-start gap-2">
-            <FlaskConical className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            Ready for the Lab?
-          </h3>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            You have learned how Linear Search works. Now experiment with your own custom lists!
-          </p>
-        </div>
-        <button
-          onClick={() => {
-            sound.playNavigate();
-            onNavigate('lab');
-          }}
-          className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm flex items-center gap-1.5 shrink-0"
-        >
-          <span>Open Linear Search Lab →</span>
-        </button>
-      </div>
+    )}
     </div>
   );
 }
+

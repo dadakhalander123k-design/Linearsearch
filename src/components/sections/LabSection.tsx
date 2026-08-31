@@ -12,7 +12,9 @@ import {
   Info,
   CheckCircle2,
   XCircle,
-  Sliders
+  Sliders,
+  ListPlus,
+  AlertCircle
 } from 'lucide-react';
 import { sound } from '../../audio/soundEngine';
 
@@ -31,9 +33,92 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
   const [comparisons, setComparisons] = useState<number>(0);
   const [speed, setSpeed] = useState<number>(1); // 0.5, 1, 1.5, 2
   const [log, setLog] = useState<string[]>([]);
-  const [customArrayStr, setCustomArrayStr] = useState<string>('');
+  
+  // User-defined custom array creation state
+  const [customSizeInput, setCustomSizeInput] = useState<number>(8);
+  const [customElements, setCustomElements] = useState<string[]>(['12', '7', '25', '4', '18', '33', '9', '14']);
+  const [validationError, setValidationError] = useState<string | null>(null);
+  const [appliedSuccess, setAppliedSuccess] = useState<boolean>(false);
 
   const timerRef = useRef<number | null>(null);
+
+  // Handle changing the custom array size
+  const handleCustomSizeChange = (newSize: number) => {
+    setValidationError(null);
+    setAppliedSuccess(false);
+
+    if (isNaN(newSize)) {
+      setCustomSizeInput(newSize);
+      return;
+    }
+
+    setCustomSizeInput(newSize);
+
+    if (newSize < 1) return;
+    const clamped = Math.min(Math.max(newSize, 1), 16);
+
+    setCustomElements(prev => {
+      if (clamped > prev.length) {
+        const added = Array(clamped - prev.length).fill('');
+        return [...prev, ...added];
+      } else {
+        return prev.slice(0, clamped);
+      }
+    });
+  };
+
+  // Handle updating an individual element input value
+  const handleElementValueChange = (index: number, val: string) => {
+    setValidationError(null);
+    setAppliedSuccess(false);
+    setCustomElements(prev => {
+      const updated = [...prev];
+      updated[index] = val;
+      return updated;
+    });
+  };
+
+  // Apply user-defined array to the Lab visualization
+  const handleApplyUserArray = () => {
+    // Validate size
+    if (isNaN(customSizeInput) || customSizeInput < 2 || customSizeInput > 16) {
+      sound.playError();
+      setValidationError('Array size must be between 2 and 16.');
+      return;
+    }
+
+    // Validate that all element inputs have valid numbers
+    const missing: number[] = [];
+    const parsed: number[] = [];
+
+    for (let i = 0; i < customElements.length; i++) {
+      const valStr = customElements[i]?.trim();
+      if (valStr === '' || valStr === undefined) {
+        missing.push(i + 1);
+      } else {
+        const n = parseInt(valStr, 10);
+        if (isNaN(n)) {
+          missing.push(i + 1);
+        } else {
+          parsed.push(n);
+        }
+      }
+    }
+
+    if (missing.length > 0) {
+      sound.playError();
+      setValidationError(`Please enter a valid number for Element ${missing.join(', ')}.`);
+      return;
+    }
+
+    sound.playSuccess();
+    setValidationError(null);
+    setArray(parsed);
+    setArraySize(parsed.length);
+    handleReset(false);
+    setAppliedSuccess(true);
+    setTimeout(() => setAppliedSuccess(false), 3000);
+  };
 
   // Generate random list of given size
   const handleGenerateRandom = (size = arraySize) => {
@@ -48,7 +133,11 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       }
     }
     setArray(newArr);
-    setCustomArrayStr(newArr.join(', '));
+    setArraySize(newArr.length);
+    setCustomSizeInput(newArr.length);
+    setCustomElements(newArr.map(n => n.toString()));
+    setValidationError(null);
+
     // Pick a random target (either present or not present)
     const pickPresent = Math.random() > 0.3;
     if (pickPresent && newArr.length > 0) {
@@ -58,20 +147,6 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       setTargetInput((Math.floor(Math.random() * 90) + 5).toString());
     }
     handleReset(false);
-  };
-
-  const handleApplyCustomArray = () => {
-    sound.playClick();
-    const parsed = customArrayStr
-      .split(/[\s,]+/)
-      .map(s => parseInt(s.trim(), 10))
-      .filter(n => !isNaN(n));
-
-    if (parsed.length >= 2 && parsed.length <= 15) {
-      setArray(parsed);
-      setArraySize(parsed.length);
-      handleReset(false);
-    }
   };
 
   const handleReset = (playSound = true) => {
@@ -171,17 +246,144 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
           <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
             Interactive Search Lab
           </span>
-          <span className="text-xs text-amber-600 dark:text-amber-400 font-semibold flex items-center gap-1">
-            <Sparkles className="w-3.5 h-3.5" />
-            +10 XP on search
-          </span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
           Interactive Linear Search Lab
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Enter a target value and watch the computer search through the list one item at a time.
+          Create your custom array or use presets, set a target value, and watch Linear Search inspect each element one by one.
         </p>
+      </div>
+
+      {/* Custom Array Creation Panel */}
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+              <ListPlus className="w-4 h-4" />
+            </div>
+            <div>
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+                Custom Array Configuration
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Choose the array size, enter desired integer values, and apply to search.
+              </p>
+            </div>
+          </div>
+
+          {/* Size presets quick buttons */}
+          <div className="flex items-center gap-1.5 text-xs">
+            <span className="text-slate-400 text-[11px] font-medium mr-1 hidden sm:inline">Size Presets:</span>
+            {[4, 6, 8, 10, 12].map(sz => (
+              <button
+                key={sz}
+                type="button"
+                onClick={() => handleCustomSizeChange(sz)}
+                className={`px-2.5 py-1 rounded-lg font-mono text-xs font-semibold transition ${
+                  customSizeInput === sz
+                    ? 'bg-indigo-600 text-white'
+                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                }`}
+              >
+                {sz}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Step 1 & 2: Array Size & Dynamic Element Inputs */}
+        <div className="space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+            <div className="w-full sm:w-56 space-y-1.5">
+              <label htmlFor="custom-array-size-input" className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                Array Size (2 – 16)
+              </label>
+              <div className="flex items-center gap-2">
+                <input
+                  id="custom-array-size-input"
+                  type="number"
+                  min={2}
+                  max={16}
+                  value={isNaN(customSizeInput) ? '' : customSizeInput}
+                  onChange={(e) => {
+                    const parsed = parseInt(e.target.value, 10);
+                    handleCustomSizeChange(parsed);
+                  }}
+                  className="w-full px-3 py-2 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono font-bold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+            </div>
+
+            <div className="flex-1 text-xs text-slate-500 dark:text-slate-400 sm:pt-5">
+              <span>Generating <strong className="text-indigo-600 dark:text-indigo-400 font-mono">{customElements.length}</strong> input fields below. Enter any integer for each element.</span>
+            </div>
+          </div>
+
+          {/* Dynamic Element Inputs Grid */}
+          <div className="space-y-2">
+            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+              Array Elements
+            </label>
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5">
+              {customElements.map((val, idx) => (
+                <div 
+                  key={idx} 
+                  className="flex flex-col p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 transition"
+                >
+                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pb-1">
+                    <span>Element {idx + 1}</span>
+                    <span className="text-slate-400 font-semibold">[{idx}]</span>
+                  </div>
+                  <input
+                    type="number"
+                    value={val}
+                    onChange={(e) => handleElementValueChange(idx, e.target.value)}
+                    placeholder={`val`}
+                    className="w-full bg-white dark:bg-slate-900 px-2 py-1.5 rounded-lg text-sm font-mono font-bold text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 text-center focus:outline-hidden focus:border-indigo-500"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Validation Feedback & Apply Button */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handleApplyUserArray}
+                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-xs font-bold shadow-sm flex items-center gap-2 transition focus:outline-hidden focus:ring-2 focus:ring-indigo-500/50"
+              >
+                <Check className="w-4 h-4" />
+                <span>Apply Array</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleGenerateRandom(customSizeInput || 8)}
+                className="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1.5 transition"
+              >
+                <Shuffle className="w-3.5 h-3.5" />
+                <span>Randomize</span>
+              </button>
+            </div>
+
+            {validationError && (
+              <div className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 font-medium">
+                <AlertCircle className="w-4 h-4 shrink-0" />
+                <span>{validationError}</span>
+              </div>
+            )}
+
+            {appliedSuccess && !validationError && (
+              <div className="flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-semibold animate-in fade-in duration-200">
+                <CheckCircle2 className="w-4 h-4 shrink-0" />
+                <span>Custom array of {array.length} elements applied!</span>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {/* Main Interactive Stage */}
@@ -306,24 +508,25 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
 
         {/* Controls Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
-          {/* Array Size & Target Inputs */}
+          {/* Target Input & Quick Actions */}
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              <label htmlFor="search-target-number-input" className="text-xs font-bold text-slate-700 dark:text-slate-300">
                 Search Target Number
               </label>
               <input
+                id="search-target-number-input"
                 type="number"
                 value={targetInput}
                 onChange={(e) => setTargetInput(e.target.value)}
                 placeholder="Enter a number"
-                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-mono font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-mono font-bold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
               />
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                Array Size (Preset)
+                Quick Array Presets
               </label>
               <div className="grid grid-cols-4 gap-1.5">
                 {[5, 8, 10, 15].map((sz) => (
@@ -331,7 +534,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     key={sz}
                     type="button"
                     onClick={() => {
-                      setArraySize(sz);
+                      handleCustomSizeChange(sz);
                       handleGenerateRandom(sz);
                     }}
                     className={`py-1.5 rounded-lg text-xs font-mono font-bold transition ${
@@ -340,7 +543,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                         : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'
                     }`}
                   >
-                    {sz}
+                    {sz} items
                   </button>
                 ))}
               </div>
@@ -403,7 +606,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
             </div>
           </div>
 
-          {/* Speed & Custom Array */}
+          {/* Speed settings */}
           <div className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
@@ -436,26 +639,14 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               </div>
             </div>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
-                Custom Array Values (Comma-separated)
-              </label>
-              <div className="flex gap-2">
-                <input
-                  type="text"
-                  value={customArrayStr}
-                  onChange={(e) => setCustomArrayStr(e.target.value)}
-                  placeholder="e.g. 10, 25, 7, 18, 30"
-                  className="flex-1 px-3 py-1.5 rounded-xl text-xs bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-mono text-slate-900 dark:text-white"
-                />
-                <button
-                  type="button"
-                  onClick={handleApplyCustomArray}
-                  className="px-3 py-1.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-xl"
-                >
-                  Set
-                </button>
-              </div>
+            <div className="p-3 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 text-xs text-indigo-900 dark:text-indigo-200 space-y-1">
+              <span className="font-bold flex items-center gap-1">
+                <Info className="w-3.5 h-3.5 text-indigo-500" />
+                Active Search Array
+              </span>
+              <p className="font-mono text-[11px] text-slate-600 dark:text-slate-400 break-all">
+                [{array.join(', ')}] ({array.length} items)
+              </p>
             </div>
           </div>
         </div>

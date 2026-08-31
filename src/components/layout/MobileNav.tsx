@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   X, 
   Compass, 
@@ -31,13 +32,15 @@ export function MobileNav({
   progress,
   overallProgress,
 }: MobileNavProps) {
+  const [isNavHovered, setIsNavHovered] = useState(false);
+
   if (!isOpen) return null;
 
-  const navItems: { id: SectionId; label: string; icon: typeof Compass; badge?: string }[] = [
-    { id: 'overview', label: 'Overview', icon: Compass },
-    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length}/10` },
-    { id: 'visualize', label: 'Visualize', icon: Eye },
-    { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length}/5` },
+  const navItems: { id: SectionId; label: string; icon: typeof Compass; badge: string }[] = [
+    { id: 'overview', label: 'Overview', icon: Compass, badge: 'Overview' },
+    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 10` },
+    { id: 'visualize', label: 'Visualize', icon: Eye, badge: 'Interactive' },
+    { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length} / 5` },
     { id: 'quiz', label: 'Quiz', icon: HelpCircle, badge: progress.isQuizCompleted ? 'Done' : '10 Qs' },
     { id: 'progress', label: 'Progress', icon: BarChart3, badge: `${overallProgress}%` },
   ];
@@ -52,7 +55,11 @@ export function MobileNav({
       />
 
       {/* Drawer */}
-      <div className="fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-slate-900 shadow-2xl border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-5 animate-in slide-in-from-left duration-200">
+      <div 
+        onMouseEnter={() => setIsNavHovered(true)}
+        onMouseLeave={() => setIsNavHovered(false)}
+        className="group/mobilenav fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-slate-900 shadow-2xl border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-5 animate-in slide-in-from-left duration-200"
+      >
         <div>
           {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
@@ -87,18 +94,26 @@ export function MobileNav({
                     onNavigate(item.id);
                     onClose();
                   }}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 ${
                     isActive
                       ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold border border-indigo-200/60 dark:border-indigo-800/60'
                       : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'}`} />
-                    <span>{item.label}</span>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'}`} />
+                    <span className="truncate">{item.label}</span>
                   </div>
                   {item.badge && (
-                    <span className="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                    <span className={`text-[11px] font-mono px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 ml-2 transition-opacity duration-150 ease-in-out ${
+                      isNavHovered
+                        ? 'opacity-100'
+                        : 'opacity-0 group-hover/mobilenav:opacity-100 group-focus-within/mobilenav:opacity-100'
+                    } ${
+                      isActive
+                        ? 'bg-indigo-200/60 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 font-bold'
+                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                    }`}>
                       {item.badge}
                     </span>
                   )}
@@ -112,13 +127,13 @@ export function MobileNav({
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
           <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-amber-500" />
+              <Sparkles className="w-4 h-4 text-indigo-500" />
               <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
                 {progress.learnerName}
               </span>
             </div>
-            <span className="text-xs font-extrabold font-mono text-amber-600 dark:text-amber-400">
-              {progress.xp} XP
+            <span className="text-xs font-extrabold font-mono text-indigo-600 dark:text-indigo-400">
+              {overallProgress}% Progress
             </span>
           </div>
         </div>

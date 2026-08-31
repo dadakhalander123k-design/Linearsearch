@@ -159,7 +159,7 @@ export function CertificateModal({
             <div className="flex flex-col items-center">
               <span className="font-mono text-[10px] text-slate-400">Credential ID</span>
               <span className="font-mono font-bold text-slate-800 dark:text-slate-200 mt-0.5">
-                ALGO-LS-{(progress.xp * 17).toString().padStart(6, '0')}
+                ALGO-LS-{((progress.completedTheoryModules.length * 13 + progress.completedGameLevels.length * 29 + 104) * 8121).toString().slice(-6).padStart(6, '7')}
               </span>
             </div>
           </div>

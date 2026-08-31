@@ -23,7 +23,24 @@ export interface TheoryModule {
   computerExamples?: string[];
   keyTakeaway: string;
   content: Array<{
-    type: 'paragraph' | 'callout' | 'table' | 'array_visual' | 'code' | 'step_list' | 'key_value_cards';
+    type: 
+      | 'paragraph' 
+      | 'callout' 
+      | 'table' 
+      | 'array_visual' 
+      | 'code' 
+      | 'step_list' 
+      | 'key_value_cards'
+      | 'visual_diagram'
+      | 'step_trace'
+      | 'index_diagram'
+      | 'flowchart'
+      | 'not_found_visual'
+      | 'comparison_cases'
+      | 'complexity_breakdown'
+      | 'use_case_comparison'
+      | 'multi_code'
+      | 'complexity_summary';
     heading?: string;
     text?: string;
     alertType?: 'info' | 'success' | 'warning' | 'tip';
@@ -101,10 +118,10 @@ export interface UserProgressState {
   isQuizCompleted: boolean;
   quizScore: number;
   quizTotal: number;
-  xp: number;
   achievements: string[];           // Array of achievement IDs
   learnerName: string;
   completionDate?: string;
+  hasCelebrated100Percent?: boolean;
   soundEnabled: boolean;
   theme: 'light' | 'dark';
 }

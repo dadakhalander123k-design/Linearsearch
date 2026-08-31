@@ -138,12 +138,12 @@ export function QuizSection({
 
   const gradeDetails = {
     excellent: {
-      badgeText: 'EXCELLENT — HASHING MASTER!',
+      badgeText: 'EXCELLENT — LINEAR SEARCH MASTER!',
       badgeClasses: 'bg-[#ECFDF5] dark:bg-emerald-950/80 text-[#059669] dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800',
       dotClasses: 'bg-[#10B981]',
       ringClasses: 'ring-emerald-200 dark:ring-emerald-900/60',
-      heading: 'Excellent — Hashing Master!',
-      description: 'Outstanding achievement! You scored in the top tier and have mastered all primary hashing concepts, collision mechanics, and resolution strategies.',
+      heading: 'Excellent — Linear Search Master!',
+      description: 'Outstanding achievement! You scored in the top tier and have mastered all primary linear search concepts, index traversal, and comparison mechanics.',
     },
     good: {
       badgeText: 'GOOD — REVIEW & TRY AGAIN',
@@ -151,7 +151,7 @@ export function QuizSection({
       dotClasses: 'bg-amber-500',
       ringClasses: 'ring-amber-200 dark:ring-amber-900/60',
       heading: 'Good — Review & Try Again',
-      description: 'Good performance! You understand the major hashing concepts, but reviewing collision handling and resolution strategies will strengthen your knowledge.',
+      description: 'Good performance! You understand the major linear search concepts, but reviewing worst/best case scenarios and step comparisons will strengthen your knowledge.',
     },
     keep_learning: {
       badgeText: 'KEEP LEARNING — REVIEW THEORY',
@@ -159,7 +159,7 @@ export function QuizSection({
       dotClasses: 'bg-rose-500',
       ringClasses: 'ring-rose-200 dark:ring-rose-900/60',
       heading: 'Keep Learning — Review Theory',
-      description: 'Keep learning! Review the hashing fundamentals, hash functions, collisions, and resolution strategies before attempting the quiz again.',
+      description: 'Keep learning! Review linear search fundamentals, sequential stepping, and search bounds before attempting the quiz again.',
     },
   }[scoreTier];
 

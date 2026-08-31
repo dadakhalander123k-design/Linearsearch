@@ -37,19 +37,10 @@ export function ProgressSection({
 }: ProgressSectionProps) {
   const [showResetModal, setShowResetModal] = useState<boolean>(false);
 
-  // Derive Rank Title based on XP
-  let rankTitle = 'Beginner Searcher';
-  let nextRankXp = 50;
-  if (progress.xp >= 150) {
-    rankTitle = 'Linear Search Grandmaster';
-    nextRankXp = 200;
-  } else if (progress.xp >= 100) {
-    rankTitle = 'Algorithm Analyst';
-    nextRankXp = 150;
-  } else if (progress.xp >= 50) {
-    rankTitle = 'Sequential Scout';
-    nextRankXp = 100;
-  }
+  const completedMilestones = 
+    progress.completedTheoryModules.length + 
+    progress.completedGameLevels.length + 
+    (progress.isQuizCompleted ? 1 : 0);
 
   const handleConfirmReset = () => {
     sound.playClick();
@@ -90,17 +81,23 @@ export function ProgressSection({
 
       {/* Main Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* XP Card */}
+        {/* Overall Completion Card */}
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Experience</span>
-            <Sparkles className="w-4 h-4 text-amber-500" />
+            <span className="text-xs font-mono text-slate-500 uppercase tracking-wider">Overall Progress</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
           <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white">
-            {progress.xp} <span className="text-sm font-sans font-bold text-amber-500">XP</span>
+            {overallProgress}%
+          </div>
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+              style={{ width: `${overallProgress}%` }}
+            />
           </div>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            Rank: <strong className="text-slate-800 dark:text-slate-200">{rankTitle}</strong>
+            <strong className="text-slate-800 dark:text-slate-200">{completedMilestones}</strong> of 16 Milestones Done
           </p>
         </div>
 
@@ -119,6 +116,9 @@ export function ProgressSection({
               style={{ width: `${(progress.completedTheoryModules.length / 10) * 100}%` }}
             />
           </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            {Math.round((progress.completedTheoryModules.length / 10) * 100)}% Modules Completed
+          </p>
         </div>
 
         {/* Game Challenges Card */}
@@ -136,6 +136,9 @@ export function ProgressSection({
               style={{ width: `${(progress.completedGameLevels.length / 5) * 100}%` }}
             />
           </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            {Math.round((progress.completedGameLevels.length / 5) * 100)}% Levels Beaten
+          </p>
         </div>
 
         {/* Quiz Score Card */}
@@ -147,9 +150,15 @@ export function ProgressSection({
           <div className="text-2xl sm:text-3xl font-extrabold font-mono text-slate-900 dark:text-white">
             {progress.isQuizCompleted ? `${progress.quizScore}/10` : 'Not Taken'}
           </div>
+          <div className="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-emerald-500 rounded-full"
+              style={{ width: `${progress.isQuizCompleted ? (progress.quizScore / 10) * 100 : 0}%` }}
+            />
+          </div>
           <p className="text-xs text-slate-500 dark:text-slate-400">
             Status: <strong className={progress.isQuizCompleted ? 'text-emerald-500' : 'text-slate-400'}>
-              {progress.isQuizCompleted ? 'Passed (≥70%)' : 'Pending'}
+              {progress.isQuizCompleted ? `${Math.round((progress.quizScore / 10) * 100)}% Score` : 'Pending'}
             </strong>
           </p>
         </div>
@@ -171,13 +180,6 @@ export function ProgressSection({
               section: 'learn' as SectionId,
             },
             {
-              title: 'Visualize Linear Search',
-              completed: 1,
-              total: 1,
-              icon: Search,
-              section: 'visualize' as SectionId,
-            },
-            {
               title: 'Challenge Games (5 Levels)',
               completed: progress.completedGameLevels.length,
               total: 5,
@@ -185,7 +187,7 @@ export function ProgressSection({
               section: 'game' as SectionId,
             },
             {
-              title: 'Mastery Quiz (10 Questions)',
+              title: 'Mastery Quiz (Comprehensive)',
               completed: progress.isQuizCompleted ? 1 : 0,
               total: 1,
               icon: HelpCircle,
@@ -294,7 +296,7 @@ export function ProgressSection({
             Reset Progress
           </h4>
           <p className="text-xs text-slate-600 dark:text-slate-400">
-            Clear all completed modules, quiz answers, earned XP, and restart your curriculum from scratch.
+            Clear all completed modules, quiz answers, challenge levels, and restart your curriculum from scratch.
           </p>
         </div>
 

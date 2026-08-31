@@ -1,336 +1,628 @@
 import { TheoryModule } from '../types';
 
 export const LEARN_MODULES: TheoryModule[] = [
+  // ─── TOPIC 01: WHAT IS SEARCHING? ──────────────────────────────────────
   {
     id: 1,
     slug: 'what-is-searching',
     badge: 'Module 01',
     title: '1. What Is Searching?',
-    subtitle: 'Looking for what we need in a collection',
-    summary: 'Searching means trying to find something we need from a group of items.',
+    subtitle: 'Finding a specific value from a collection of data',
+    summary: 'Searching means finding a particular item from a collection of items.',
     realLifeExample: {
       icon: 'BookOpen',
-      title: 'Finding the word "CAT"',
-      description: 'Imagine your teacher asks you to find the word "CAT" in a book. You look through the pages until you find it.'
+      title: 'Everyday Analogy: Finding a Name in an Attendance List',
+      description: 'Imagine a teacher with a list of students: Aarav, Riya, Kiran, Meera, Rahul. To find "Meera", the teacher looks through the names until Meera is found. Computers perform similar searches using algorithms.'
     },
     computerExamples: [
-      "A student's name in a school roster",
-      "A phone number in a contacts list",
-      "A product in an online store",
-      "A player's username in a multiplayer game",
-      "A saved file on your computer hard drive",
-      "The highest game score on a leaderboard"
+      "Finding a student's name in a school attendance roster",
+      "Looking up a friend's phone number in a contacts list",
+      "Searching for a product on an online shopping store",
+      "Looking up a player's username in a multiplayer game",
+      "Finding a saved document or file on your computer hard drive",
+      "Finding the highest score on a gaming leaderboard"
     ],
-    keyTakeaway: 'Searching means finding a particular item from a collection of items.',
+    keyTakeaway: 'Searching = Finding a required value inside a collection of data.',
     content: [
       {
         type: 'paragraph',
-        text: 'Searching is one of the most fundamental things computers do every single second. Whenever you open an app, look up a friend, or search for a video, the computer performs a search algorithm.'
+        text: 'Imagine you have a box containing many books and you want to find one specific book. You look through the books until you find the one you need. That simple process is called searching.'
+      },
+      {
+        type: 'paragraph',
+        text: 'In computer science, we often have a collection of data and need to find a particular value inside it. For example, consider an array [ 12, 7, 25, 4, 18 ] where we want to find the value 25. The computer needs a systematic way to locate 25 inside the collection. That is the fundamental purpose of a searching algorithm.'
+      },
+      {
+        type: 'visual_diagram',
+        heading: 'Visual Search Diagram',
+        data: {
+          title: 'Searching an Array Collection for Target: 25',
+          array: [12, 7, 25, 4, 18],
+          highlightIndex: 2,
+          target: 25,
+          caption: 'We are searching the collection to find the value 25 stored inside the array.'
+        }
       },
       {
         type: 'callout',
         alertType: 'info',
         heading: 'Think About It',
-        text: 'Whether you are looking for your missing socks in a drawer or searching for a contact on a phone, you are performing a search process!'
+        text: 'Whether you are looking for your keys in a bag or searching for a contact on your phone, you are performing a search process. A search algorithm is simply a clear recipe a computer follows to do this.'
       }
     ]
   },
+
+  // ─── TOPIC 02: WHAT IS LINEAR SEARCH? ──────────────────────────────────
   {
     id: 2,
     slug: 'what-is-linear-search',
     badge: 'Module 02',
     title: '2. What Is Linear Search?',
-    subtitle: 'Checking every item one by one from start to end',
-    summary: 'Linear Search is a searching method that checks every item one by one from the beginning until the required item is found.',
+    subtitle: 'Checking every item sequentially one by one from left to right',
+    summary: 'Linear Search checks elements one by one from the beginning until the required value is found or the array ends.',
     realLifeExample: {
       icon: 'Users',
-      title: 'The Red Ball in the Line',
-      description: 'Imagine students standing in a line. Your teacher asks, "Who has the red ball?" You check the first student. If they don\'t have it, check the second. Then the third. Keep going until you find it.'
+      title: 'Core Intuition: Sequential Inspection',
+      description: 'Linear Search is one of the simplest searching techniques. It starts at the first element, checks the next, then the next, moving sequentially from left to right until the target is found or there are no more elements.'
     },
-    keyTakeaway: 'Never skip an item. The search always moves sequentially: First → Second → Third → Fourth → ...',
+    keyTakeaway: 'Linear Search = Check one element at a time until the target is found.',
     content: [
+      {
+        type: 'paragraph',
+        text: 'Linear Search is one of the simplest searching techniques. It starts at the first element, then checks the next element, then the next. It continues moving from left to right until either the target is found or there are no more elements to check.'
+      },
+      {
+        type: 'step_trace',
+        heading: 'Step-by-Step Search Progression for Target = 42',
+        data: {
+          array: [10, 25, 7, 42, 18],
+          target: 42,
+          steps: [
+            { step: 1, index: 0, val: 10, match: false, note: 'Step 1: Check 10 → 10 ≠ 42 (Not Found, move right)' },
+            { step: 2, index: 1, val: 25, match: false, note: 'Step 2: Check 25 → 25 ≠ 42 (Not Found, move right)' },
+            { step: 3, index: 2, val: 7, match: false, note: 'Step 3: Check 7 → 7 ≠ 42 (Not Found, move right)' },
+            { step: 4, index: 3, val: 42, match: true, note: 'Step 4: Check 42 → 42 == 42 (FOUND! Stop searching)' }
+          ]
+        }
+      },
       {
         type: 'callout',
         alertType: 'warning',
-        heading: 'The Golden Rule of Linear Search',
-        text: 'Never skip an item! We always inspect the elements in order: First → Second → Third → Fourth → ...'
-      },
-      {
-        type: 'step_list',
-        heading: 'Why is it called "Linear"?',
-        data: [
-          'Linear comes from the word "Line".',
-          'It checks items in a single straight path from left to right.',
-          'It does not jump ahead or look in random spots.'
-        ]
+        heading: 'Important Concept',
+        text: 'Linear Search does NOT jump directly to the middle or guess positions. It checks elements sequentially in a single straight line from start to finish.'
       }
     ]
   },
+
+  // ─── TOPIC 03: UNDERSTANDING POSITIONS & INDEXES ───────────────────────
   {
     id: 3,
     slug: 'understanding-positions',
     badge: 'Module 03',
     title: '3. Understanding Positions & Indexes',
-    subtitle: 'How computers locate items in arrays starting at 0',
-    summary: 'Computers identify positions inside lists using numbers called indexes, starting at 0.',
-    keyTakeaway: 'Index = position in line (starts at 0). Value = the item stored at that position.',
+    subtitle: 'How computers number and access array positions starting from 0',
+    summary: 'An index tells us the position of an element in an array.',
+    realLifeExample: {
+      icon: 'Hash',
+      title: 'Zero-Based Indexing',
+      description: 'Computers number array positions starting from 0. An array index tells us WHERE an element is located in memory, while the value is WHAT is stored inside that box.'
+    },
+    keyTakeaway: 'Index tells us WHERE an array element is located.',
     content: [
       {
         type: 'paragraph',
-        text: 'When we store items in a list (also called an Array), computers assign a numbered badge to each spot. In computer science, we almost always start counting from 0 instead of 1!'
+        text: 'Computers usually number array positions starting from 0. Position and index are closely related, but remember that in programming languages (like C, Java, Python, and JavaScript), array indexing always starts at 0.'
+      },
+      {
+        type: 'index_diagram',
+        heading: 'Visual Array & Index Structure',
+        data: {
+          array: [15, 8, 23, 42, 11],
+          highlightIndex: 3,
+          label: 'The value 42 is stored at index 3.'
+        }
       },
       {
         type: 'table',
-        heading: 'Array Index vs. Value Example',
+        heading: 'Linear Search + Index Walkthrough for Target = 42',
         data: [
-          { index: 0, value: 15, label: 'First Item (Index 0)' },
-          { index: 1, value: 8, label: 'Second Item (Index 1)' },
-          { index: 2, value: 23, label: 'Third Item (Index 2)' },
-          { index: 3, value: 7, label: 'Fourth Item (Index 3)' },
-          { index: 4, value: 19, label: 'Fifth Item (Index 4)' }
+          { index: 0, value: 15, label: 'Check index 0 → 15 → Not Found' },
+          { index: 1, value: 8, label: 'Check index 1 → 8 → Not Found' },
+          { index: 2, value: 23, label: 'Check index 2 → 23 → Not Found' },
+          { index: 3, value: 42, label: 'Check index 3 → 42 → FOUND! (Target = 42 found at index 3)' },
+          { index: 4, value: 11, label: 'Index 4 is not checked because we already stopped.' }
         ]
       },
       {
         type: 'callout',
         alertType: 'tip',
-        heading: 'Important Distinction',
-        text: 'A[2] = 23 means: The value 23 is stored at index 2.'
+        heading: 'Think About It',
+        text: 'If an array has 5 elements, the valid index numbers are 0, 1, 2, 3, and 4. The 4th item in natural speech is stored at index 3!'
       }
     ]
   },
+
+  // ─── TOPIC 04: HOW DOES LINEAR SEARCH WORK? ───────────────────────────
   {
     id: 4,
     slug: 'how-it-works',
     badge: 'Module 04',
     title: '4. How Does Linear Search Work?',
-    subtitle: 'Step-by-step walk-through of searching for 18',
-    summary: 'Follow the step-by-step comparison as we find the target number in an array.',
-    keyTakeaway: 'Check each item. If it matches, STOP and celebrate! If it does not match, move forward.',
+    subtitle: 'The Compare → Move → Compare → Move search cycle',
+    summary: 'Linear Search moves through an array from left to right and compares each element with the target.',
+    realLifeExample: {
+      icon: 'Repeat',
+      title: 'The Search Rhythm: COMPARE → MOVE',
+      description: 'Linear Search repeatedly performs: COMPARE → MOVE → COMPARE → MOVE until the target is found or the array ends.'
+    },
+    keyTakeaway: 'Linear Search repeatedly performs: COMPARE → MOVE → COMPARE → MOVE until the target is found or the array ends.',
     content: [
       {
-        type: 'array_visual',
-        heading: 'Example Search: Target = 18',
+        type: 'paragraph',
+        text: 'Let us follow a clear step-by-step visual example searching for Target = 12 in the array [ 18, 5, 31, 12, 44 ].'
+      },
+      {
+        type: 'step_trace',
+        heading: 'Visual Execution Steps (Target = 12)',
         data: {
-          array: [10, 25, 7, 18, 30],
-          target: 18,
+          array: [18, 5, 31, 12, 44],
+          target: 12,
           steps: [
-            { step: 1, index: 0, val: 10, match: false, note: 'Check 10: 10 ≠ 18 ❌ Not found' },
-            { step: 2, index: 1, val: 25, match: false, note: 'Check 25: 25 ≠ 18 ❌ Not found' },
-            { step: 3, index: 2, val: 7, match: false, note: 'Check 7: 7 ≠ 18 ❌ Not found' },
-            { step: 4, index: 3, val: 18, match: true, note: 'Check 18: 18 = 18 ✅ Found!' },
-            { step: 5, index: 3, val: 18, match: true, note: 'Step 5: Stop searching immediately!' }
+            { step: 1, index: 0, val: 18, match: false, note: 'Step 1: Check 18 == 12 ? NO (18 ≠ 12) → Move to next element.' },
+            { step: 2, index: 1, val: 5, match: false, note: 'Step 2: Check 5 == 12 ? NO (5 ≠ 12) → Move to next element.' },
+            { step: 3, index: 3, val: 31, match: false, note: 'Step 3: Check 31 == 12 ? NO (31 ≠ 12) → Move to next element.' },
+            { step: 4, index: 3, val: 12, match: true, note: 'Step 4: Check 12 == 12 ? YES! Match found at index 3. STOP SEARCHING.' }
           ]
         }
+      },
+      {
+        type: 'flowchart',
+        heading: 'Linear Search Decision Flow',
+        data: [
+          { step: 'START', desc: 'Initialize search at index 0' },
+          { step: 'CHECK ELEMENT', desc: 'Is array[i] == target?' },
+          { step: 'IF YES', desc: 'FOUND → Return current index i → STOP' },
+          { step: 'IF NO', desc: 'Move to next element (i = i + 1)' },
+          { step: 'IF ARRAY ENDS', desc: 'NO match found in entire array → Return -1 (NOT FOUND)' }
+        ]
       }
     ]
   },
+
+  // ─── TOPIC 05: LINEAR SEARCH ALGORITHM ────────────────────────────────
   {
     id: 5,
     slug: 'the-algorithm',
     badge: 'Module 05',
     title: '5. Linear Search Algorithm',
-    subtitle: 'The 4-step rhythm of sequential search',
-    summary: 'The universal 4-part recipe every computer uses for Linear Search.',
-    keyTakeaway: '👀 Look → 🔎 Compare → ➡️ Move → 🔁 Repeat → 🎯 Found',
+    subtitle: 'The complete formal algorithm, pseudocode, and decision flow',
+    summary: 'An algorithm is a step-by-step procedure used to solve a problem.',
+    realLifeExample: {
+      icon: 'ListChecks',
+      title: 'Formal Algorithm Recipe',
+      description: 'Start at index 0. Compare array[i] with target. If equal, return i. Otherwise increase i. If all elements checked without match, return -1.'
+    },
+    keyTakeaway: 'Linear Search repeatedly compares the target with each array element until a match is found.',
     content: [
       {
-        type: 'callout',
-        alertType: 'success',
-        heading: 'The 4-Step Mental Model',
-        text: 'Look → Compare → Move → Repeat'
+        type: 'step_list',
+        heading: 'Complete Linear Search Algorithm Steps',
+        data: [
+          'Step 1: Start from the first element of the array (index i = 0).',
+          'Step 2: Compare the current element array[i] with the target value.',
+          'Step 3: If the current element equals the target, return its index i.',
+          'Step 4: If it does not match, move to the next element (i = i + 1).',
+          'Step 5: Repeat the comparison until the target is found or the array ends.',
+          'Step 6: If every element has been checked and the target was not found, return "Not Found" (-1).'
+        ]
       },
       {
         type: 'code',
         heading: 'Pseudocode (Computer Recipe)',
-        data: `Start from the first item (Index 0).
+        data: `LINEAR_SEARCH(array, target)
 
-For each item in the list:
-    Compare the current item with the target.
+1. For i = 0 to n - 1
+2.     If array[i] == target
+3.         Return i
+4. Return -1
 
-    If they are equal:
-        The item is found!
-        Stop searching (return index).
-
-    Otherwise:
-        Move to the next item.
-
-If we reach the end of the list:
-    The item was not found.`
+// Notes:
+// i represents the current index.
+// n represents the number of elements in the array.
+// -1 means the target was not found.`
+      },
+      {
+        type: 'flowchart',
+        heading: 'Visual Algorithm Flow',
+        data: [
+          { step: 'START', desc: 'Set i = 0' },
+          { step: 'CHECK array[i]', desc: 'Is array[i] == target?' },
+          { step: 'YES branch', desc: 'Return index i (Match Found)' },
+          { step: 'NO branch', desc: 'Increase i by 1' },
+          { step: 'REMAINING?', desc: 'If i < n, check next element; otherwise Return -1 (NOT FOUND)' }
+        ]
+      },
+      {
+        type: 'table',
+        heading: 'Example Trace: Array [4, 9, 15, 21, 30] searching for Target = 21',
+        data: [
+          { index: 0, value: 4, label: 'i = 0 → 4 ≠ 21 (No match, continue)' },
+          { index: 1, value: 9, label: 'i = 1 → 9 ≠ 21 (No match, continue)' },
+          { index: 2, value: 15, label: 'i = 2 → 15 ≠ 21 (No match, continue)' },
+          { index: 3, value: 21, label: 'i = 3 → 21 == 21 ✓ (Match! Return Index 3)' }
+        ]
       }
     ]
   },
+
+  // ─── TOPIC 06: WHAT IF WE CANNOT FIND IT? ─────────────────────────────
   {
     id: 6,
     slug: 'item-not-found',
     badge: 'Module 06',
     title: '6. What If We Cannot Find It?',
-    subtitle: 'Handling the missing item edge case',
-    summary: 'When the target is not in the list, the search checks all items to the very end.',
-    keyTakeaway: 'If Linear Search reaches the end of the list without finding the target, the search reports that the item is not present.',
+    subtitle: 'Understanding the NOT FOUND case and safe termination',
+    summary: 'Sometimes the target value does not exist in the array. Linear Search checks every element and reports NOT FOUND.',
+    realLifeExample: {
+      icon: 'SearchX',
+      title: 'Everyday Analogy: Book Not on the Shelf',
+      description: 'Imagine looking for a specific book on a shelf. You check every book one by one. If you reach the last book and still haven\'t found it, the book is simply not on that shelf.'
+    },
+    keyTakeaway: 'If Linear Search checks every element without finding the target, the result is NOT FOUND (return -1).',
     content: [
       {
-        type: 'array_visual',
-        heading: 'Searching for 30 in [5, 12, 8, 20, 14]',
+        type: 'paragraph',
+        text: 'Sometimes the target value does not exist in the array. Linear Search checks every element from start to finish. If none of them matches the target, the algorithm safely terminates and reports that the value was not found.'
+      },
+      {
+        type: 'not_found_visual',
+        heading: 'Searching for Missing Target = 50 in [10, 25, 7, 42, 18]',
         data: {
-          array: [5, 12, 8, 20, 14],
-          target: 30,
-          steps: [
-            { step: 1, index: 0, val: 5, match: false, note: '5 ≠ 30 ❌' },
-            { step: 2, index: 1, val: 12, match: false, note: '12 ≠ 30 ❌' },
-            { step: 3, index: 2, val: 8, match: false, note: '8 ≠ 30 ❌' },
-            { step: 4, index: 3, val: 20, match: false, note: '20 ≠ 30 ❌' },
-            { step: 5, index: 4, val: 14, match: false, note: '14 ≠ 30 ❌' }
+          array: [10, 25, 7, 42, 18],
+          target: 50,
+          comparisons: [
+            { val: 10, res: '10 ≠ 50 ✗' },
+            { val: 25, res: '25 ≠ 50 ✗' },
+            { val: 7, res: '7 ≠ 50 ✗' },
+            { val: 42, res: '42 ≠ 50 ✗' },
+            { val: 18, res: '18 ≠ 50 ✗' }
           ]
         }
       },
       {
         type: 'callout',
         alertType: 'warning',
-        heading: 'Result: ❌ 30 was not found',
-        text: 'There are no more items left to check in the list. The algorithm safely finishes and outputs "Not Found" (often represented as -1 in code).'
+        heading: 'Important Concept & Return Values',
+        text: 'The search must stop after the final element has been checked. The algorithm must not continue searching beyond the array boundaries. In programming implementations: Found → return the index (e.g. 3). Not Found → return -1.'
       }
     ]
   },
+
+  // ─── TOPIC 07: HOW MANY ITEMS DO WE CHECK? ────────────────────────────
   {
     id: 7,
     slug: 'best-average-worst-case',
     badge: 'Module 07',
     title: '7. How Many Items Do We Check?',
-    subtitle: 'Best case, average case, and worst case',
-    summary: 'Depending on where the target is located, we might find it right away or need to check everyone.',
-    keyTakeaway: 'Best case: 1 check. Average case: n/2 checks. Worst case: n checks (when at the end or missing).',
+    subtitle: 'How target position determines the number of comparisons',
+    summary: 'The number of elements Linear Search checks depends on where the target is located.',
+    realLifeExample: {
+      icon: 'Scale',
+      title: 'Location Determines Work',
+      description: 'The farther the target is from the beginning of the array, the more elements Linear Search must check.'
+    },
+    keyTakeaway: 'The farther the target is from the beginning, the more elements Linear Search may need to check.',
     content: [
       {
-        type: 'key_value_cards',
-        heading: 'The Three Scenarios',
+        type: 'paragraph',
+        text: 'The number of elements Linear Search checks depends on where the target is located. Sometimes the target is at the very beginning, in the middle, at the end, or not present at all.'
+      },
+      {
+        type: 'comparison_cases',
+        heading: 'The 4 Search Scenarios',
         data: [
           {
-            title: 'Best Case (1 check)',
-            badge: 'Lucky! 🍀',
-            description: 'Target is the first item! Example: Searching for 25 in [25, 10, 7, 18]. Only 1 comparison needed.'
+            title: 'Case 1 — Target First (Best Case)',
+            array: [25, 10, 40, 8, 17],
+            target: 25,
+            targetIndex: 0,
+            checks: 1,
+            badge: '1 check',
+            desc: 'Target is the very first element. Only 1 comparison needed (25 == 25 ✓).'
           },
           {
-            title: 'Average Case (~3 checks)',
-            badge: 'Normal ⚖️',
-            description: 'Target is somewhere in the middle. Example: Searching for 25 in [10, 7, 25, 18, 30]. Takes 3 comparisons.'
+            title: 'Case 2 — Target in the Middle (Average Case)',
+            array: [10, 20, 30, 40, 50],
+            target: 30,
+            targetIndex: 2,
+            checks: 3,
+            badge: '3 checks',
+            desc: 'Check: 10 → 20 → 30 ✓. Takes 3 comparisons to find 30.'
           },
           {
-            title: 'Worst Case (5 checks)',
-            badge: 'Max Effort 🐢',
-            description: 'Target is last or missing. Example: Searching for 30 (or 50) in [10, 7, 25, 18, 30]. Takes 5 comparisons.'
+            title: 'Case 3 — Target Last (Worst Case)',
+            array: [10, 20, 30, 40, 50],
+            target: 50,
+            targetIndex: 4,
+            checks: 5,
+            badge: '5 checks',
+            desc: 'Check: 10 → 20 → 30 → 40 → 50 ✓. Takes 5 comparisons (all elements).'
+          },
+          {
+            title: 'Case 4 — Target Not Present (Worst Case)',
+            array: [10, 20, 30, 40, 50],
+            target: 99,
+            targetIndex: -1,
+            checks: 5,
+            badge: '5 checks (Not Found)',
+            desc: 'Check: 10 → 20 → 30 → 40 → 50 (All fail). Result = Not Found.'
           }
         ]
       }
     ]
   },
+
+  // ─── TOPIC 08: HOW FAST IS LINEAR SEARCH? ─────────────────────────────
   {
     id: 8,
     slug: 'time-complexity',
     badge: 'Module 08',
     title: '8. How Fast Is Linear Search?',
-    subtitle: 'Introduction to Time Complexity and O(n)',
-    summary: 'In computer science, we express the speed of an algorithm using Big-O notation.',
-    keyTakeaway: 'Linear Search has O(n) time complexity. More items in the list means proportionally more checks.',
+    subtitle: 'Understanding Time Complexity, O(n), Best Case, and Worst Case',
+    summary: 'Linear Search checks elements one by one. If there are n elements, it may need up to n checks, giving it a time complexity of O(n).',
+    realLifeExample: {
+      icon: 'Zap',
+      title: 'What Does O(n) Mean?',
+      description: 'As the number of elements (n) increases, the amount of work Linear Search may need to do also increases proportionally in a direct straight line.'
+    },
+    keyTakeaway: 'Linear Search is easy to implement, but its worst-case time grows linearly with the size of the array.',
     content: [
       {
-        type: 'callout',
-        alertType: 'info',
-        heading: 'Time Complexity: O(n)',
-        text: 'Here "n" represents the total number of items in the list. In the worst case, we must check all n items.'
+        type: 'paragraph',
+        text: 'Linear Search checks elements one by one. If there are n elements, the algorithm may need to check all n elements in the worst case. This gives Linear Search a time complexity of O(n). In simple terms: 10 elements → up to 10 checks; 100 elements → up to 100 checks; 1,000 elements → up to 1,000 checks.'
       },
       {
-        type: 'step_list',
-        heading: 'Number of Items vs. Maximum Checks',
+        type: 'complexity_breakdown',
+        heading: 'Time Complexity Breakdown',
         data: [
-          '5 items in array → at most 5 checks',
-          '10 items in array → at most 10 checks',
-          '100 items in array → at most 100 checks',
-          '1,000 items in array → at most 1,000 checks'
+          {
+            caseType: 'Best Case',
+            notation: 'O(1)',
+            comparisons: '1 comparison',
+            badge: 'Fastest',
+            explanation: 'The target happens to be the very first element (index 0). Only 1 check is needed regardless of array size.'
+          },
+          {
+            caseType: 'Average Case',
+            notation: 'O(n)',
+            comparisons: '≈ n / 2 comparisons',
+            badge: 'Expected',
+            explanation: 'The target is somewhere in the array. On average, approximately half the elements need to be checked.'
+          },
+          {
+            caseType: 'Worst Case',
+            notation: 'O(n)',
+            comparisons: 'n comparisons',
+            badge: 'Maximum Work',
+            explanation: 'The target is at the very end of the array OR does not exist at all. All n elements must be inspected.'
+          }
         ]
       },
       {
         type: 'callout',
         alertType: 'tip',
-        heading: 'Simple Rule for Beginners',
-        text: 'More items can mean more checking. We don’t need complex calculus to see that searching 100 bags takes 100 times longer than 1 bag!'
+        heading: 'Important Takeaway',
+        text: 'Linear Search is simple and useful, but it can become slow for very large collections because it may need to inspect every single item one by one.'
       }
     ]
   },
+
+  // ─── TOPIC 09: WHERE DO WE USE LINEAR SEARCH? ─────────────────────────
   {
     id: 9,
     slug: 'real-life-uses',
     badge: 'Module 09',
     title: '9. Where Do We Use Linear Search?',
-    subtitle: 'Everyday applications in real life and computers',
-    summary: 'Linear search is used in unsorted lists, small datasets, and everyday physical searching.',
-    keyTakeaway: 'Many everyday "check one by one" activities are similar to Linear Search.',
+    subtitle: 'Real-world scenarios, small datasets, unsorted arrays, and when to use it',
+    summary: 'Linear Search is useful when data is small, unsorted, or when simplicity is more important than advanced searching performance.',
+    realLifeExample: {
+      icon: 'Compass',
+      title: 'Practical Application Rule',
+      description: 'Linear Search is especially useful when the data is small or unsorted and a simple, direct solution is sufficient.'
+    },
+    keyTakeaway: 'Linear Search is especially useful when the data is small or unsorted and a simple solution is sufficient.',
     content: [
       {
         type: 'key_value_cards',
-        heading: 'Everyday Examples',
+        heading: '5 Real-World & Software Examples',
         data: [
           {
-            title: '🎒 Finding a School Bag',
-            badge: 'Physical',
-            description: 'Checking each cubby or hook one by one until you see your bag.'
+            title: '1. Contact List',
+            badge: 'Everyday',
+            description: 'Looking through a small contact list on your phone to find a person’s name.'
           },
           {
-            title: '📚 Finding a Book',
-            badge: 'Library',
-            description: 'Scanning books on a shelf one after another until you spot the title.'
+            title: '2. Shopping List',
+            badge: 'Tasks',
+            description: 'Scanning down a grocery list to check whether a particular item is already written.'
           },
           {
-            title: '👩‍🎓 Finding a Student',
+            title: '3. Attendance List',
             badge: 'Classroom',
-            description: 'Calling attendance or scanning a roster name by name.'
+            description: 'Searching for a student’s name across an attendance roll call sheet.'
           },
           {
-            title: '🎮 Finding a Game Score',
-            badge: 'Gaming',
-            description: 'Scanning a leaderboard to find your current high score.'
+            title: '4. Unsorted Data',
+            badge: 'Programming',
+            description: 'Searching an array where values are not arranged in any specific sorted order.'
           },
           {
-            title: '🛒 Finding a Product',
-            badge: 'Shopping',
-            description: 'Looking along a grocery aisle until you locate the item you need.'
+            title: '5. Small Collections',
+            badge: 'Efficiency',
+            description: 'For a small number of elements (e.g. 10 to 50 items), Linear Search is simple, fast, and needs zero extra overhead.'
           }
         ]
+      },
+      {
+        type: 'use_case_comparison',
+        heading: 'When is Linear Search a Good Choice?',
+        data: {
+          good: [
+            'Small arrays and lists',
+            'Unsorted data (where items appear in random order)',
+            'Simple programs and scripts',
+            'Learning and basic algorithmic implementations',
+            'Situations where simplicity and low memory are priorities'
+          ],
+          caution: [
+            'For very large sorted datasets (e.g. millions of items), other algorithms such as Binary Search can be much faster when their sorted requirements are satisfied.'
+          ]
+        }
       }
     ]
   },
+
+  // ─── TOPIC 10: LINEAR SEARCH IN CODE ──────────────────────────────────
   {
     id: 10,
     slug: 'linear-search-in-code',
     badge: 'Module 10',
     title: '10. Linear Search in Code',
-    subtitle: 'Translating the logic into Java & TypeScript',
-    summary: 'See how a real loop and conditional check implement Linear Search in code.',
-    keyTakeaway: 'The loop (for) walks through positions (i), the if statement compares (==), and break stops the search when found.',
+    subtitle: 'Working, beginner-friendly implementations in C, Java, and Python with step walkthrough',
+    summary: 'See how a loop and conditional comparison implement Linear Search across C, Java, and Python.',
+    realLifeExample: {
+      icon: 'Code2',
+      title: 'Core Pattern Across All Languages',
+      description: 'A loop visits each index (i), an if statement compares arr[i] == target, returning the index if matched or -1 if the loop finishes without a match.'
+    },
+    keyTakeaway: 'The loop visits each index, the condition checks for a match, and -1 indicates the element was not found.',
     content: [
       {
-        type: 'code',
-        heading: 'Java Code Example',
-        data: `int[] numbers = {10, 25, 7, 18, 30};
-int target = 18;
-
-for (int i = 0; i < numbers.length; i++) {
-    if (numbers[i] == target) {
-        System.out.println("Found at index " + i);
-        break; // Stop searching once found
-    }
-}`
+        type: 'step_list',
+        heading: 'Part A — The Universal Algorithm Recipe',
+        data: [
+          '1. Start from index 0.',
+          '2. Compare the current element arr[i] with the target.',
+          '3. If they are equal, return the current index i.',
+          '4. Otherwise move to the next index.',
+          '5. Continue until the target is found or the array ends.',
+          '6. If the target is not found after checking all items, return -1.'
+        ]
       },
       {
-        type: 'step_list',
-        heading: 'Code Breakdown for Beginners',
+        type: 'multi_code',
+        heading: 'Working Implementations: C, Java, & Python',
+        data: {
+          c: `#include <stdio.h>
+
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) {
+            return i; // Found at index i
+        }
+    }
+
+    return -1; // Not found
+}
+
+int main() {
+    int arr[] = {10, 25, 7, 42, 18};
+    int n = 5;
+    int target = 42;
+
+    int result = linearSearch(arr, n, target);
+
+    if (result != -1) {
+        printf("Element found at index %d\\n", result);
+    } else {
+        printf("Element not found\\n");
+    }
+
+    return 0;
+}`,
+          cExplanation: [
+            'arr[] stores the values.',
+            'n stores the number of elements.',
+            'target is the value we want to find.',
+            'The for loop checks each element from 0 to n-1.',
+            'If a match is found, the index is returned.',
+            'If the loop finishes without a match, -1 is returned.'
+          ],
+          java: `public class LinearSearch {
+
+    static int linearSearch(int[] arr, int target) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == target) {
+                return i; // Found at index i
+            }
+        }
+
+        return -1; // Not found
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {10, 25, 7, 42, 18};
+        int target = 42;
+
+        int result = linearSearch(arr, target);
+
+        if (result != -1) {
+            System.out.println("Element found at index " + result);
+        } else {
+            System.out.println("Element not found");
+        }
+    }
+}`,
+          javaExplanation: [
+            'int[] arr creates our array of integers.',
+            'arr.length gives the total number of items.',
+            'The for loop iterates through every position i.',
+            'If arr[i] == target, return index i immediately.',
+            'Returns -1 if the loop completes without finding a match.'
+          ],
+          python: `def linear_search(arr, target):
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Found at index i
+
+    return -1  # Not found
+
+
+arr = [10, 25, 7, 42, 18]
+target = 42
+
+result = linear_search(arr, target)
+
+if result != -1:
+    print("Element found at index", result)
+else:
+    print("Element not found")`,
+          pythonExplanation: [
+            'arr is a Python list containing the numbers.',
+            'range(len(arr)) generates indices from 0 to len(arr) - 1.',
+            'arr[i] accesses the current element.',
+            'If arr[i] == target, returns index i.',
+            'Returns -1 if the element is not found.'
+          ]
+        }
+      },
+      {
+        type: 'table',
+        heading: 'Part E — Code Walkthrough for Array: [10, 25, 7, 42, 18] & Target: 42',
         data: [
-          'int[] numbers → Creates our list of items.',
-          'target → Stores the value we want to find (18).',
-          'i → Keeps track of our current index/position (0, 1, 2...).',
-          'numbers[i] → Accesses the value at the current position.',
-          '== → Checks whether the current item equals our target.',
-          'break → Stops the loop as soon as the item is found.'
+          { index: 0, value: 10, label: 'i = 0 → 10 == 42 ? ✗ (No match)' },
+          { index: 1, value: 25, label: 'i = 1 → 25 == 42 ? ✗ (No match)' },
+          { index: 2, value: 7, label: 'i = 2 → 7 == 42 ? ✗ (No match)' },
+          { index: 3, value: 42, label: 'i = 3 → 42 == 42 ? ✓ (Match found! RETURN 3)' }
         ]
+      },
+      {
+        type: 'complexity_summary',
+        heading: 'Part F — Complexity Summary',
+        data: {
+          time: 'O(n) — In the worst case, every element may need to be checked.',
+          space: 'O(1) — It uses only a small, constant amount of additional memory for variables (i, target).'
+        }
       }
     ]
   }

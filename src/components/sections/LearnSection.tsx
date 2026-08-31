@@ -8,9 +8,18 @@ import {
   Lightbulb, 
   Check, 
   Code2, 
-  ListChecks,
-  Clock,
-  Search
+  ListChecks, 
+  Clock, 
+  Search,
+  CheckCircle,
+  XCircle,
+  Hash,
+  Repeat,
+  Zap,
+  HelpCircle,
+  Terminal,
+  ShieldCheck,
+  AlertTriangle
 } from 'lucide-react';
 import { LEARN_MODULES } from '../../data/learnData';
 import { UserProgressState, SectionId } from '../../types';
@@ -89,37 +98,10 @@ export function LearnSection({
         </div>
       </div>
 
-      {/* Mobile-only horizontal chapter selector */}
-      <div className="lg:hidden flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-        {LEARN_MODULES.map((m) => {
-          const isDone = progress.completedTheoryModules.includes(m.id);
-          const isCurrent = m.id === activeModuleId;
-          return (
-            <button
-              key={m.id}
-              onClick={() => {
-                sound.playClick();
-                setActiveModuleId(m.id);
-              }}
-              className={`px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap flex items-center gap-2 border transition ${
-                isCurrent
-                  ? 'bg-[#4F3FF5] text-white border-[#4F3FF5] shadow-xs'
-                  : isDone
-                  ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900/50 hover:bg-emerald-100'
-                  : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-50'
-              }`}
-            >
-              <span>{m.id.toString().padStart(2, '0')}. {m.title.replace(/^\d+\.\s*/, '')}</span>
-              {isDone && <Check className={`w-3.5 h-3.5 ${isCurrent ? 'text-white' : 'text-emerald-500'}`} />}
-            </button>
-          );
-        })}
-      </div>
-
       {/* ─── TWO COLUMN LAYOUT: SIDEBAR TOC + MAIN CONTENT (REFERENCE IMAGE 3) ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* LEFT COLUMN: TABLE OF CONTENTS (lg:col-span-4) */}
-        <div className="hidden lg:block lg:col-span-4 sticky top-6">
+        {/* TABLE OF CONTENTS (Full width vertical list on Mobile, Left Column lg:col-span-4 sticky on Desktop) */}
+        <div className="w-full lg:col-span-4 lg:sticky lg:top-6">
           <div className="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs overflow-hidden">
             {/* TOC Card Header */}
             <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
@@ -131,7 +113,7 @@ export function LearnSection({
               </span>
             </div>
 
-            {/* Chapter Items List */}
+            {/* Chapter Items Vertical Full-Width List */}
             <div className="divide-y divide-slate-100/80 dark:divide-slate-800/60">
               {LEARN_MODULES.map((m) => {
                 const isDone = progress.completedTheoryModules.includes(m.id);
@@ -160,12 +142,12 @@ export function LearnSection({
                       }`}>
                         {chapterNum}
                       </span>
-                      <span className={`text-xs sm:text-sm truncate ${isCurrent ? 'font-bold' : 'font-semibold text-slate-800 dark:text-slate-200'}`}>
+                      <span className={`text-xs sm:text-sm leading-snug ${isCurrent ? 'font-bold' : 'font-semibold text-slate-800 dark:text-slate-200'}`}>
                         {moduleName}
                       </span>
                     </div>
 
-                    {/* Right status indicator: Purple dot, green checkmark, or hollow circle */}
+                    {/* Right status indicator: Purple solid dot for active, green checkmark for completed, hollow circle for incomplete */}
                     {isDone ? (
                       <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                     ) : isCurrent ? (
@@ -414,6 +396,539 @@ export function LearnSection({
                 );
               }
 
+              if (block.type === 'visual_diagram' && block.data) {
+                const { title, array, highlightIndex, target, caption } = block.data;
+                return (
+                  <div key={idx} className="p-5 sm:p-6 rounded-2xl bg-slate-900 border border-slate-800 text-white space-y-4 shadow-sm">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                      <h4 className="text-xs sm:text-sm font-bold text-indigo-300 font-mono tracking-wide uppercase flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-amber-400" />
+                        {block.heading || title}
+                      </h4>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-mono font-bold px-2.5 py-1 rounded-md bg-amber-400/20 text-amber-300 border border-amber-400/30">
+                          TARGET = {target}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="overflow-x-auto py-2">
+                      <div className="min-w-[320px] flex flex-col items-center gap-3">
+                        <span className="font-mono text-xs font-bold text-slate-400 uppercase tracking-widest">
+                          ARRAY COLLECTION
+                        </span>
+                        <div className="flex items-center justify-center gap-2 sm:gap-3">
+                          {array.map((num: number, aIdx: number) => {
+                            const isTarget = aIdx === highlightIndex;
+                            return (
+                              <div key={aIdx} className="flex flex-col items-center gap-1.5">
+                                <span className={`text-[11px] font-mono font-bold ${isTarget ? 'text-amber-400' : 'text-slate-400'}`}>
+                                  [{aIdx}]
+                                </span>
+                                <div
+                                  className={`w-12 h-14 sm:w-14 sm:h-16 rounded-xl flex items-center justify-center font-mono text-base sm:text-lg font-extrabold transition-all duration-200 ${
+                                    isTarget
+                                      ? 'bg-amber-400 text-slate-950 ring-4 ring-amber-400/40 shadow-lg scale-105'
+                                      : 'bg-slate-800 border border-slate-700 text-white'
+                                  }`}
+                                >
+                                  {num}
+                                </div>
+                                {isTarget && (
+                                  <div className="flex flex-col items-center animate-bounce mt-1">
+                                    <span className="text-amber-400 text-xs font-mono font-extrabold">▲</span>
+                                    <span className="text-[10px] font-mono font-extrabold text-amber-300 uppercase tracking-wider">
+                                      TARGET
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {caption && (
+                      <p className="text-xs sm:text-sm text-slate-300 text-center font-medium pt-1 border-t border-slate-800/80">
+                        {caption}
+                      </p>
+                    )}
+                  </div>
+                );
+              }
+
+              if (block.type === 'step_trace' && block.data) {
+                const { array, target, steps } = block.data;
+                return (
+                  <div key={idx} className="space-y-4">
+                    {block.heading && (
+                      <div className="flex items-center justify-between flex-wrap gap-2">
+                        <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2 font-mono uppercase">
+                          <ListChecks className="w-4 h-4 text-[#4F3FF5]" />
+                          {block.heading}
+                        </h4>
+                        <span className="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-800 font-mono text-xs font-bold text-[#4F3FF5] dark:text-indigo-300">
+                          Target: {target}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="space-y-3">
+                      {steps.map((st: any, sIdx: number) => {
+                        return (
+                          <div
+                            key={sIdx}
+                            className={`p-4 rounded-2xl border transition-all ${
+                              st.match
+                                ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700/60'
+                                : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-800'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <span className={`font-mono text-xs font-extrabold uppercase px-2.5 py-0.5 rounded-full ${
+                                st.match 
+                                  ? 'bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300' 
+                                  : 'bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                              }`}>
+                                Step {st.step}: Checking Index {st.index}
+                              </span>
+                              <span className={`text-xs font-mono font-bold flex items-center gap-1 ${
+                                st.match ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-500 dark:text-slate-400'
+                              }`}>
+                                {st.match ? (
+                                  <>
+                                    <CheckCircle2 className="w-3.5 h-3.5" />
+                                    FOUND!
+                                  </>
+                                ) : (
+                                  <>
+                                    <XCircle className="w-3.5 h-3.5" />
+                                    Not Match
+                                  </>
+                                )}
+                              </span>
+                            </div>
+
+                            {/* Array visual at this step */}
+                            <div className="overflow-x-auto pb-1">
+                              <div className="flex items-center gap-2">
+                                {array.map((val: number, aIdx: number) => {
+                                  const isCurrent = aIdx === st.index;
+                                  const isFound = isCurrent && st.match;
+                                  const isCheckedPast = aIdx < st.index;
+                                  return (
+                                    <div key={aIdx} className="flex flex-col items-center gap-1">
+                                      <span className="text-[10px] font-mono text-slate-400">
+                                        [{aIdx}]
+                                      </span>
+                                      <div
+                                        className={`w-10 h-11 sm:w-11 sm:h-12 rounded-xl flex items-center justify-center font-mono text-sm font-extrabold border transition-all ${
+                                          isFound
+                                            ? 'bg-emerald-500 text-white border-emerald-400 ring-2 ring-emerald-400/40 shadow-sm'
+                                            : isCurrent
+                                            ? 'bg-[#4F3FF5] text-white border-indigo-400 ring-2 ring-indigo-400/30'
+                                            : isCheckedPast
+                                            ? 'bg-slate-200 dark:bg-slate-800 text-slate-400 border-slate-300 dark:border-slate-700 opacity-60'
+                                            : 'bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 border-slate-200 dark:border-slate-700'
+                                        }`}
+                                      >
+                                        {val}
+                                      </div>
+                                      {isCurrent && (
+                                        <span className={`text-[10px] font-mono font-extrabold uppercase ${
+                                          isFound ? 'text-emerald-600 dark:text-emerald-400' : 'text-[#4F3FF5] dark:text-indigo-400'
+                                        }`}>
+                                          {isFound ? 'FOUND ✓' : 'CHECKING'}
+                                        </span>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            </div>
+
+                            <p className="text-xs sm:text-sm font-mono mt-2.5 text-slate-700 dark:text-slate-300 font-medium">
+                              {st.note}
+                            </p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'index_diagram' && block.data) {
+                const { array, highlightIndex, label } = block.data;
+                return (
+                  <div key={idx} className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-4 shadow-xs">
+                    {block.heading && (
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono uppercase flex items-center gap-2">
+                        <Hash className="w-4 h-4 text-[#4F3FF5]" />
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    <div className="overflow-x-auto py-2">
+                      <div className="min-w-[320px] flex flex-col items-center gap-3">
+                        <div className="grid grid-cols-5 gap-2 sm:gap-3 w-full max-w-lg">
+                          {array.map((num: number, aIdx: number) => {
+                            const isHighlight = aIdx === highlightIndex;
+                            return (
+                              <div key={aIdx} className="flex flex-col items-center gap-1.5">
+                                <div className="px-2.5 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900 text-indigo-700 dark:text-indigo-300 font-mono text-xs font-bold w-full text-center">
+                                  Index {aIdx}
+                                </div>
+                                <div
+                                  className={`w-full py-3 sm:py-4 rounded-xl flex items-center justify-center font-mono text-base sm:text-lg font-extrabold border transition-all ${
+                                    isHighlight
+                                      ? 'bg-[#4F3FF5] text-white border-indigo-400 shadow-md ring-2 ring-indigo-400/40 scale-105'
+                                      : 'bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white'
+                                  }`}
+                                >
+                                  {num}
+                                </div>
+                                {isHighlight && (
+                                  <span className="text-[10px] font-mono font-extrabold text-[#4F3FF5] dark:text-indigo-400 uppercase tracking-wide">
+                                    Target 42
+                                  </span>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+
+                    {label && (
+                      <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium text-center">
+                        {label}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
+              if (block.type === 'flowchart' && Array.isArray(block.data)) {
+                return (
+                  <div key={idx} className="p-5 sm:p-6 rounded-2xl bg-slate-900 text-white space-y-4 shadow-sm border border-slate-800">
+                    {block.heading && (
+                      <h4 className="text-xs sm:text-sm font-bold text-indigo-300 font-mono uppercase tracking-wider flex items-center gap-2">
+                        <Repeat className="w-4 h-4 text-indigo-400" />
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    <div className="space-y-2">
+                      {block.data.map((item: any, fIdx: number) => (
+                        <div key={fIdx} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 p-3 rounded-xl bg-slate-800/80 border border-slate-700/80">
+                          <span className="font-mono text-xs font-extrabold px-2.5 py-1 rounded-md bg-[#4F3FF5] text-white shrink-0">
+                            {item.step}
+                          </span>
+                          <span className="font-mono text-xs sm:text-sm text-slate-200 font-medium">
+                            {item.desc}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'not_found_visual' && block.data) {
+                const { array, target, comparisons } = block.data;
+                return (
+                  <div key={idx} className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-red-200 dark:border-red-900/60 space-y-4 shadow-xs">
+                    <div className="flex items-center justify-between flex-wrap gap-2">
+                      <h4 className="text-sm font-bold text-red-600 dark:text-red-400 font-mono uppercase flex items-center gap-2">
+                        <XCircle className="w-4 h-4" />
+                        {block.heading}
+                      </h4>
+                      <span className="px-2.5 py-1 rounded-md bg-red-100 dark:bg-red-950/60 border border-red-200 dark:border-red-900 font-mono text-xs font-bold text-red-700 dark:text-red-300">
+                        Target = {target} (MISSING)
+                      </span>
+                    </div>
+
+                    <div className="overflow-x-auto py-2">
+                      <div className="min-w-[300px] flex items-center justify-center gap-2 sm:gap-3">
+                        {array.map((num: number, aIdx: number) => (
+                          <div key={aIdx} className="flex flex-col items-center gap-1.5">
+                            <span className="text-[11px] font-mono text-slate-400">[{aIdx}]</span>
+                            <div className="w-12 h-14 sm:w-14 sm:h-16 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-mono text-base font-extrabold flex items-center justify-center">
+                              {num}
+                            </div>
+                            <span className="text-red-500 text-xs font-bold font-mono">✗</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-900/40 text-xs sm:text-sm text-red-900 dark:text-red-200 font-mono space-y-1">
+                      <div className="font-bold flex items-center gap-2">
+                        <span>Search Result: NOT FOUND ➔ Return -1</span>
+                      </div>
+                      <p className="text-xs font-sans text-red-700 dark:text-red-300 font-normal">
+                        Every single element was checked sequentially and all comparisons failed.
+                      </p>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'comparison_cases' && Array.isArray(block.data)) {
+                return (
+                  <div key={idx} className="space-y-4">
+                    {block.heading && (
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono uppercase flex items-center gap-2">
+                        <Zap className="w-4 h-4 text-amber-500" />
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {block.data.map((cCase: any, cIdx: number) => (
+                        <div
+                          key={cIdx}
+                          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-3 shadow-xs"
+                        >
+                          <div className="flex items-center justify-between">
+                            <h5 className="font-bold text-slate-900 dark:text-white text-sm">
+                              {cCase.title}
+                            </h5>
+                            <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">
+                              {cCase.badge}
+                            </span>
+                          </div>
+
+                          {/* Array preview */}
+                          <div className="flex items-center gap-1.5 overflow-x-auto py-1">
+                            {cCase.array.map((val: number, aIdx: number) => {
+                              const isTargetMatch = aIdx === cCase.targetIndex;
+                              return (
+                                <div
+                                  key={aIdx}
+                                  className={`w-9 h-10 rounded-lg flex items-center justify-center font-mono text-xs font-bold border shrink-0 ${
+                                    isTargetMatch
+                                      ? 'bg-emerald-500 text-white border-emerald-400 font-extrabold'
+                                      : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
+                                  }`}
+                                >
+                                  {val}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-medium">
+                            {cCase.desc}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'complexity_breakdown' && Array.isArray(block.data)) {
+                return (
+                  <div key={idx} className="space-y-4">
+                    {block.heading && (
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono uppercase flex items-center gap-2">
+                        <Clock className="w-4 h-4 text-[#4F3FF5]" />
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      {block.data.map((cItem: any, cIdx: number) => (
+                        <div
+                          key={cIdx}
+                          className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2.5 shadow-xs"
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-sm text-slate-900 dark:text-white">
+                              {cItem.caseType}
+                            </span>
+                            <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                              {cItem.badge}
+                            </span>
+                          </div>
+                          <div className="flex items-baseline gap-2">
+                            <span className="text-2xl font-black font-mono text-[#4F3FF5] dark:text-indigo-400">
+                              {cItem.notation}
+                            </span>
+                            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                              ({cItem.comparisons})
+                            </span>
+                          </div>
+                          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed font-normal">
+                            {cItem.explanation}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'use_case_comparison' && block.data) {
+                const { good, caution } = block.data;
+                return (
+                  <div key={idx} className="space-y-4">
+                    {block.heading && (
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono uppercase">
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="p-5 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/60 space-y-3">
+                        <div className="flex items-center gap-2 text-emerald-800 dark:text-emerald-300 font-bold text-sm font-mono uppercase">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                          <span>When Linear Search Is Ideal</span>
+                        </div>
+                        <ul className="space-y-2">
+                          {good.map((item: string, gIdx: number) => (
+                            <li key={gIdx} className="text-xs sm:text-sm text-emerald-900 dark:text-emerald-200 flex items-start gap-2">
+                              <span className="text-emerald-600 font-bold">✓</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div className="p-5 rounded-2xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/60 space-y-3">
+                        <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-bold text-sm font-mono uppercase">
+                          <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+                          <span>When To Consider Other Methods</span>
+                        </div>
+                        <ul className="space-y-2">
+                          {caution.map((item: string, cIdx: number) => (
+                            <li key={cIdx} className="text-xs sm:text-sm text-amber-900 dark:text-amber-200 flex items-start gap-2">
+                              <span className="text-amber-600 font-bold">!</span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'multi_code' && block.data) {
+                const { c, cExplanation, java, javaExplanation, python, pythonExplanation } = block.data;
+                return (
+                  <div key={idx} className="space-y-6">
+                    {block.heading && (
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white font-mono uppercase flex items-center gap-2">
+                        <Code2 className="w-4 h-4 text-[#4F3FF5]" />
+                        {block.heading}
+                      </h4>
+                    )}
+
+                    {/* C Code */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-700 dark:text-slate-300">
+                        <span className="px-2.5 py-0.5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                          PART B // C IMPLEMENTATION
+                        </span>
+                      </div>
+                      <CodeBlock code={c} language="c" title="linear_search.c" />
+                      {cExplanation && (
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                          <span className="font-bold text-slate-800 dark:text-slate-200 block">Explanation:</span>
+                          <ul className="list-disc list-inside space-y-0.5">
+                            {cExplanation.map((line: string, lIdx: number) => (
+                              <li key={lIdx}>{line}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Java Code */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-700 dark:text-slate-300">
+                        <span className="px-2.5 py-0.5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                          PART C // JAVA IMPLEMENTATION
+                        </span>
+                      </div>
+                      <CodeBlock code={java} language="java" title="LinearSearch.java" />
+                      {javaExplanation && (
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                          <span className="font-bold text-slate-800 dark:text-slate-200 block">Explanation:</span>
+                          <ul className="list-disc list-inside space-y-0.5">
+                            {javaExplanation.map((line: string, lIdx: number) => (
+                              <li key={lIdx}>{line}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Python Code */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 font-mono text-xs font-extrabold text-slate-700 dark:text-slate-300">
+                        <span className="px-2.5 py-0.5 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200">
+                          PART D // PYTHON IMPLEMENTATION
+                        </span>
+                      </div>
+                      <CodeBlock code={python} language="python" title="linear_search.py" />
+                      {pythonExplanation && (
+                        <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-400 space-y-1">
+                          <span className="font-bold text-slate-800 dark:text-slate-200 block">Explanation:</span>
+                          <ul className="list-disc list-inside space-y-0.5">
+                            {pythonExplanation.map((line: string, lIdx: number) => (
+                              <li key={lIdx}>{line}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                );
+              }
+
+              if (block.type === 'complexity_summary' && block.data) {
+                const { time, space } = block.data;
+                return (
+                  <div key={idx} className="p-5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 space-y-3">
+                    {block.heading && (
+                      <h4 className="text-xs font-mono font-extrabold uppercase text-[#4F3FF5] dark:text-indigo-400 tracking-wider">
+                        {block.heading}
+                      </h4>
+                    )}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900 space-y-1">
+                        <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">
+                          Time Complexity
+                        </span>
+                        <div className="text-lg font-mono font-black text-[#4F3FF5] dark:text-indigo-300">
+                          O(n)
+                        </div>
+                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                          {time}
+                        </p>
+                      </div>
+
+                      <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-indigo-100 dark:border-indigo-900 space-y-1">
+                        <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">
+                          Space Complexity
+                        </span>
+                        <div className="text-lg font-mono font-black text-emerald-600 dark:text-emerald-400">
+                          O(1)
+                        </div>
+                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                          {space}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               if (block.type === 'code' && block.data) {
                 return (
                   <div key={idx} className="space-y-2">
@@ -472,7 +987,7 @@ export function LearnSection({
                 ) : (
                   <>
                     <Sparkles className="w-4 h-4" />
-                    <span>Mark Complete (+5 XP)</span>
+                    <span>Mark Complete</span>
                   </>
                 )}
               </button>

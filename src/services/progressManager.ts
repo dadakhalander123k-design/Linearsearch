@@ -12,7 +12,6 @@ export const INITIAL_PROGRESS: UserProgressState = {
   isQuizCompleted: false,
   quizScore: 0,
   quizTotal: 10,
-  xp: 0,
   achievements: [],
   learnerName: 'Young Explorer',
   soundEnabled: true,
@@ -102,7 +101,7 @@ class ProgressManager {
     this.notify();
   }
 
-  // --- XP and Progress Checkers ---
+  // --- Progress & Achievements Checkers ---
 
   private checkAchievements() {
     const unlockedNow: string[] = [];
@@ -172,7 +171,6 @@ class ProgressManager {
   public completeTheoryModule(moduleId: number) {
     if (!this.state.completedTheoryModules.includes(moduleId)) {
       this.state.completedTheoryModules.push(moduleId);
-      this.state.xp += 5; // +5 XP per theory module
       sound.playCorrect();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -182,7 +180,6 @@ class ProgressManager {
   public completeVideo(videoId: number) {
     if (!this.state.completedVideos.includes(videoId)) {
       this.state.completedVideos.push(videoId);
-      this.state.xp += 10; // +10 XP per video
       sound.playCorrect();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -192,7 +189,6 @@ class ProgressManager {
   public completeGameLevel(levelId: number) {
     if (!this.state.completedGameLevels.includes(levelId)) {
       this.state.completedGameLevels.push(levelId);
-      this.state.xp += 15; // +15 XP per game level
       sound.playLevelComplete();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -202,20 +198,15 @@ class ProgressManager {
   public completeLabActivity(activityId: string) {
     if (!this.state.completedLabActivities.includes(activityId)) {
       this.state.completedLabActivities.push(activityId);
-      this.state.xp += 10; // +10 XP for lab
       sound.playCorrect();
       this.notify();
     }
   }
 
   public completeQuiz(score: number, total: number = 10) {
-    const wasCompleted = this.state.isQuizCompleted;
     this.state.isQuizCompleted = true;
     this.state.quizScore = score;
     this.state.quizTotal = total;
-    if (!wasCompleted) {
-      this.state.xp += 50; // +50 XP for completing the quiz
-    }
     sound.playLevelComplete();
     const unlocked = this.checkAchievements();
     this.notify(unlocked[0]);
@@ -230,6 +221,19 @@ class ProgressManager {
       (this.state.isQuizCompleted ? 1 : 0);
     
     return Math.min(100, Math.round((completedCount / TOTAL_CORE_ITEMS) * 100));
+  }
+
+  public isFullyCompleted(): boolean {
+    return (
+      this.state.completedTheoryModules.length >= 10 &&
+      this.state.completedGameLevels.length >= 5 &&
+      this.state.isQuizCompleted
+    );
+  }
+
+  public markCelebrationShown() {
+    this.state.hasCelebrated100Percent = true;
+    this.saveState();
   }
 
   public resetAllProgress() {

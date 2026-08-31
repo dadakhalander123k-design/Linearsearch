@@ -1,13 +1,14 @@
 import { GameLevel } from '../types';
 
-export const GAME_LEVELS: GameLevel[] = [
+export const GAME_LEVELS: (GameLevel & { category?: string })[] = [
   {
     id: 1,
     levelNumber: 1,
     badge: 'Level 01',
+    category: 'BASICS',
     title: 'Find the Number',
     objective: 'Find the target number 7 by clicking items in linear order from index 0.',
-    description: 'Linear Search must check items one by one starting from the beginning. Click the boxes in order to find 7!',
+    description: 'Check the elements one by one until you find the target number.',
     type: 'click_sequence',
     sampleArray: [4, 9, 2, 7, 5],
     target: 7,
@@ -18,9 +19,10 @@ export const GAME_LEVELS: GameLevel[] = [
     id: 2,
     levelNumber: 2,
     badge: 'Level 02',
+    category: 'SPEED SEARCH',
     title: 'Find It Quickly',
     objective: 'Find target 23 within exactly 3 comparisons.',
-    description: 'You have a comparison budget! Step through the array until you locate 23. Can you do it in exactly 3 steps?',
+    description: 'Move through the array from left to right and stop as soon as the target is found.',
     type: 'budget_search',
     sampleArray: [11, 6, 23, 8, 15],
     target: 23,
@@ -32,9 +34,10 @@ export const GAME_LEVELS: GameLevel[] = [
     id: 3,
     levelNumber: 3,
     badge: 'Level 03',
+    category: 'PRESENCE CHECK',
     title: 'Is It There?',
     objective: 'Inspect the array and decide: Is 10 present, or Not Found?',
-    description: 'Check each item sequentially until you reach the end. Does 10 exist in this list?',
+    description: 'Determine whether the target exists in the array by comparing it with each element.',
     type: 'boolean_detect',
     sampleArray: [3, 14, 8, 21, 5],
     target: 10,
@@ -46,9 +49,10 @@ export const GAME_LEVELS: GameLevel[] = [
     id: 4,
     levelNumber: 4,
     badge: 'Level 04',
+    category: 'COMPLEXITY',
     title: 'Count the Comparisons',
     objective: 'Predict how many items Linear Search will check to find 20.',
-    description: 'Before the computer starts, predict the exact comparison count required to find 20 in the array [7, 4, 12, 9, 20, 5].',
+    description: 'Track how many elements Linear Search checks before finding the target or reaching the end.',
     type: 'count_comparisons',
     sampleArray: [7, 4, 12, 9, 20, 5],
     target: 20,
@@ -59,9 +63,10 @@ export const GAME_LEVELS: GameLevel[] = [
     id: 5,
     levelNumber: 5,
     badge: 'Level 05',
+    category: 'MASTER CHALLENGE',
     title: 'Linear Search Master',
     objective: 'Complete the Master Challenge with a dynamic randomized array and target.',
-    description: 'Put all your skills together! Step through the randomized list, track comparisons in real-time, and confirm when the target is found or absent.',
+    description: 'Apply Linear Search confidently and understand its search process, comparisons, and results.',
     type: 'master_search',
     sampleArray: [8, 19, 42, 15, 63, 27, 91, 34],
     target: 63,
@@ -69,3 +74,4 @@ export const GAME_LEVELS: GameLevel[] = [
     hint: 'Start at index 0 and step forward one by one until the target value matches!'
   }
 ];
+

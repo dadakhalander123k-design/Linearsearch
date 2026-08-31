@@ -7,6 +7,7 @@ import {
   RotateCcw
 } from 'lucide-react';
 import { SectionId, UserProgressState } from '../../types';
+import { sound } from '../../audio/soundEngine';
 
 interface HeaderProps {
   currentSection: SectionId;
@@ -40,18 +41,28 @@ export function Header({
   const currentSectionName = sectionDisplayNames[currentSection] || 'Overview';
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between transition-colors">
+    <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between transition-colors">
       {/* LEFT: Hamburger & AlgoLearn Brand + Current Section */}
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-center gap-3 sm:gap-3.5">
         {/* Hamburger Menu Button */}
         <button
-          onClick={onOpenMobileMenu}
-          className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/30 flex items-center justify-center shrink-0"
+          onClick={() => {
+            sound.playClick();
+            onOpenMobileMenu();
+          }}
+          className="w-10 h-10 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 flex items-center justify-center shrink-0 shadow-2xs"
           aria-label="Open navigation"
           title="Open navigation"
         >
           <Menu className="w-5 h-5" />
         </button>
+
+        {/* Empty Logo Container Placeholder with subtle border matching reference */}
+        <div 
+          id="header-logo-container"
+          className="w-10 h-10 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/40 shadow-2xs shrink-0"
+          aria-hidden="true"
+        />
 
         {/* Brand and Current Section Title */}
         <div className="flex flex-col">
@@ -68,8 +79,10 @@ export function Header({
       <div className="flex items-center gap-2 sm:gap-2.5">
         {/* Light / Dark Theme Toggle Button */}
         <button
-          onClick={onToggleTheme}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95 flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20"
+          onClick={() => {
+            onToggleTheme();
+          }}
+          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/30 shadow-2xs"
           title={progress.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           aria-label={progress.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
@@ -82,8 +95,10 @@ export function Header({
 
         {/* Sound / Audio Toggle Button */}
         <button
-          onClick={onToggleSound}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95 flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20"
+          onClick={() => {
+            onToggleSound();
+          }}
+          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/30 shadow-2xs"
           title={progress.soundEnabled ? 'Mute audio' : 'Unmute audio'}
           aria-label={progress.soundEnabled ? 'Mute audio' : 'Unmute audio'}
         >
@@ -96,8 +111,11 @@ export function Header({
 
         {/* Reset Progress Button */}
         <button
-          onClick={onOpenResetModal}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-200 dark:hover:border-red-900/60 transition active:scale-95 flex items-center justify-center focus:outline-hidden focus:ring-2 focus:ring-red-500/20"
+          onClick={() => {
+            sound.playClick();
+            onOpenResetModal();
+          }}
+          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-200 dark:hover:border-red-900/60 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-red-500/30 shadow-2xs"
           title="Reset Progress"
           aria-label="Reset Progress"
         >
