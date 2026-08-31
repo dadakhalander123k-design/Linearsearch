@@ -1,0 +1,7 @@
+{
+  "name": "AlgoLearn",
+  "description": "Interactive Linear Search learning platform for beginners with step-by-step theory, visualization, lab, games, videos, and quizzes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

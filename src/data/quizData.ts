@@ -1,0 +1,127 @@
+import { QuizQuestion } from '../types';
+
+export const QUIZ_QUESTIONS: QuizQuestion[] = [
+  {
+    id: 1,
+    question: 'What does searching mean?',
+    options: [
+      { key: 'A', label: 'A', text: 'Sorting numbers in order' },
+      { key: 'B', label: 'B', text: 'Finding a required item in a collection' },
+      { key: 'C', label: 'C', text: 'Deleting an item from a list' },
+      { key: 'D', label: 'D', text: 'Adding numbers together' },
+    ],
+    correctKey: 'B',
+    explanation: 'Searching is the process of locating a specific target item from within a collection of items.',
+  },
+  {
+    id: 2,
+    question: 'How does Linear Search normally begin?',
+    options: [
+      { key: 'A', label: 'A', text: 'From the middle of the list' },
+      { key: 'B', label: 'B', text: 'From the last item' },
+      { key: 'C', label: 'C', text: 'From the first item (Index 0)' },
+      { key: 'D', label: 'D', text: 'From a random item' },
+    ],
+    correctKey: 'C',
+    explanation: 'Linear search always begins at the very first element (index 0) and inspects items sequentially.',
+  },
+  {
+    id: 3,
+    question: 'Given the array [5, 8, 12, 20], what is the index of 12?',
+    context: 'Array: [5, 8, 12, 20]',
+    options: [
+      { key: 'A', label: 'A', text: 'Index 0' },
+      { key: 'B', label: 'B', text: 'Index 1' },
+      { key: 'C', label: 'C', text: 'Index 2' },
+      { key: 'D', label: 'D', text: 'Index 3' },
+    ],
+    correctKey: 'C',
+    explanation: 'Array indexes start at 0: index 0 holds 5, index 1 holds 8, and index 2 holds 12.',
+  },
+  {
+    id: 4,
+    question: 'If the target is the very first element in the list, how many comparisons are needed?',
+    options: [
+      { key: 'A', label: 'A', text: '0 comparisons' },
+      { key: 'B', label: 'B', text: '1 comparison (Best case)' },
+      { key: 'C', label: 'C', text: '2 comparisons' },
+      { key: 'D', label: 'D', text: 'n comparisons' },
+    ],
+    correctKey: 'B',
+    explanation: 'This is the best-case scenario: the target is checked on the first step, so only 1 comparison is performed.',
+  },
+  {
+    id: 5,
+    question: 'What happens when Linear Search finds the target?',
+    options: [
+      { key: 'A', label: 'A', text: 'It deletes the item' },
+      { key: 'B', label: 'B', text: 'It stops searching and returns the result' },
+      { key: 'C', label: 'C', text: 'It sorts the entire array' },
+      { key: 'D', label: 'D', text: 'It restarts from the beginning' },
+    ],
+    correctKey: 'B',
+    explanation: 'Once the target is found, the algorithm stops immediately (using a break or return) without checking the rest of the list.',
+  },
+  {
+    id: 6,
+    question: 'What happens if the target is not present in the list at all?',
+    options: [
+      { key: 'A', label: 'A', text: 'The search continues forever in an infinite loop' },
+      { key: 'B', label: 'B', text: 'The search checks all items and reports that it was not found' },
+      { key: 'C', label: 'C', text: 'The entire array is deleted' },
+      { key: 'D', label: 'D', text: 'The first item is returned by default' },
+    ],
+    correctKey: 'B',
+    explanation: 'Linear search scans every element. If it reaches the end of the array without a match, it reports "Not Found".',
+  },
+  {
+    id: 7,
+    question: 'What is the worst-case time complexity of Linear Search on a list of size n?',
+    options: [
+      { key: 'A', label: 'A', text: 'O(1)' },
+      { key: 'B', label: 'B', text: 'O(log n)' },
+      { key: 'C', label: 'C', text: 'O(n)' },
+      { key: 'D', label: 'D', text: 'O(n²)' },
+    ],
+    correctKey: 'C',
+    explanation: 'In the worst case (target is at the end or missing), linear search must inspect all n elements, giving a time complexity of O(n).',
+  },
+  {
+    id: 8,
+    question: 'Given [10, 20, 30, 40, 50], how many comparisons are needed to find 50?',
+    context: 'Array: [10, 20, 30, 40, 50] | Target: 50',
+    options: [
+      { key: 'A', label: 'A', text: '1 comparison' },
+      { key: 'B', label: 'B', text: '3 comparisons' },
+      { key: 'C', label: 'C', text: '4 comparisons' },
+      { key: 'D', label: 'D', text: '5 comparisons' },
+    ],
+    correctKey: 'D',
+    explanation: 'Since 50 is at index 4 (the 5th element), the algorithm checks 10, 20, 30, 40, and 50 = 5 comparisons.',
+  },
+  {
+    id: 9,
+    question: 'Given the list [3, 7, 11, 15], search for 8. What is the result?',
+    context: 'Array: [3, 7, 11, 15] | Target: 8',
+    options: [
+      { key: 'A', label: 'A', text: 'Found at Index 1' },
+      { key: 'B', label: 'B', text: 'Not Found' },
+      { key: 'C', label: 'C', text: 'Found at Index 2' },
+      { key: 'D', label: 'D', text: 'Found at Index 0' },
+    ],
+    correctKey: 'B',
+    explanation: 'The value 8 is not anywhere in [3, 7, 11, 15], so the search ends with "Not Found".',
+  },
+  {
+    id: 10,
+    question: 'Which phrase best describes how Linear Search works?',
+    options: [
+      { key: 'A', label: 'A', text: 'Jump and skip every other item' },
+      { key: 'B', label: 'B', text: 'Check one by one from the beginning' },
+      { key: 'C', label: 'C', text: 'Always start checking from the middle' },
+      { key: 'D', label: 'D', text: 'Sort all items before searching' },
+    ],
+    correctKey: 'B',
+    explanation: 'Linear search systematically checks elements one by one from start to finish.',
+  },
+];
