@@ -87,11 +87,11 @@ export function CompletionModal({
       />
 
       {/* Modal Card */}
-      <div className="relative w-full max-w-lg bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] rounded-3xl shadow-2xl overflow-hidden z-10 animate-in zoom-in-95 duration-200 p-6 sm:p-8 space-y-6">
+      <div className="relative w-full max-w-lg bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] rounded-3xl shadow-2xl overflow-hidden z-10 animate-in zoom-in-95 duration-200 p-6 sm:p-8 space-y-6">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full border border-[#E1E7F0] dark:border-[#25204B] text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#111633] transition active:scale-95 cursor-pointer"
+          className="absolute top-4 right-4 p-2 rounded-full border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#64748B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] transition active:scale-95 cursor-pointer"
           aria-label="Close completion dialog"
         >
           <X className="w-4 h-4" />
@@ -99,7 +99,7 @@ export function CompletionModal({
 
         {/* Top Celebration Icon & Badge */}
         <div className="flex flex-col items-center text-center space-y-3 pt-2">
-          <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#4F46F5] via-[#6C4CFF] to-purple-600 flex items-center justify-center shadow-lg shadow-[#4F46F5]/30 text-3xl">
+          <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-[#4F46E5] via-[#6366F1] to-purple-600 flex items-center justify-center shadow-md shadow-[#4F46E5]/25 text-3xl">
             🎉
           </div>
 
@@ -111,33 +111,33 @@ export function CompletionModal({
           <div className="space-y-1">
             <h2
               id="completion-title"
-              className="text-2xl sm:text-3xl font-black text-[#11182D] dark:text-[#F5F7FF] tracking-tight leading-tight"
+              className="text-2xl sm:text-3xl font-black text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight"
             >
               Congratulations!
             </h2>
-            <p className="text-base sm:text-lg font-bold text-[#4F46F5] dark:text-[#A58FFF]">
+            <p className="text-base sm:text-lg font-bold text-[#4F46E5] dark:text-[#818CF8]">
               You've completed everything!
             </p>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-sm pt-1 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] max-w-sm pt-1 leading-relaxed">
               Excellent work — you've successfully completed the entire learning journey and mastered Linear Search fundamentals.
             </p>
           </div>
         </div>
 
         {/* Milestone Verification Breakdown */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] space-y-3">
-          <span className="text-[11px] font-mono font-extrabold uppercase tracking-wider text-slate-400 dark:text-slate-500 block">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] space-y-3">
+          <span className="text-[11px] font-mono font-extrabold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] block">
             Activities Completed ({totalActivitiesCompleted} / 20)
           </span>
 
           <div className="grid grid-cols-2 gap-2.5">
             {/* Theory */}
-            <div className="p-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] flex items-center justify-center shrink-0">
+            <div className="p-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.2)] text-[#4F46E5] dark:text-[#818CF8] flex items-center justify-center shrink-0">
                 <BookOpen className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-[#11182D] dark:text-[#F5F7FF] block">
+                <span className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] block">
                   Theory
                 </span>
                 <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
@@ -147,12 +147,12 @@ export function CompletionModal({
             </div>
 
             {/* Videos */}
-            <div className="p-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
+            <div className="p-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-950/50 text-[#4F46E5] dark:text-[#818CF8] flex items-center justify-center shrink-0">
                 <Eye className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-[#11182D] dark:text-[#F5F7FF] block">
+                <span className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] block">
                   Lessons
                 </span>
                 <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
@@ -162,12 +162,12 @@ export function CompletionModal({
             </div>
 
             {/* Game */}
-            <div className="p-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] flex items-center gap-2.5">
+            <div className="p-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-950/50 text-amber-600 dark:text-amber-400 flex items-center justify-center shrink-0">
                 <Gamepad2 className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-[#11182D] dark:text-[#F5F7FF] block">
+                <span className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] block">
                   Games
                 </span>
                 <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
@@ -177,12 +177,12 @@ export function CompletionModal({
             </div>
 
             {/* Quiz */}
-            <div className="p-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] flex items-center gap-2.5">
+            <div className="p-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
                 <HelpCircle className="w-4 h-4" />
               </div>
               <div className="min-w-0">
-                <span className="text-xs font-bold text-[#11182D] dark:text-[#F5F7FF] block">
+                <span className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] block">
                   Quiz
                 </span>
                 <span className="text-[11px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
@@ -200,7 +200,7 @@ export function CompletionModal({
               onClose();
               onOpenCertificate();
             }}
-            className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#4F46F5] hover:bg-[#4338CA] dark:bg-[#6C4CFF] dark:hover:bg-[#5B3EE0] text-white font-bold text-xs sm:text-sm shadow-md flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer"
+            className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold text-xs sm:text-sm shadow-xs flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer"
           >
             <Award className="w-4 h-4" />
             <span>View Certificate</span>
@@ -208,7 +208,7 @@ export function CompletionModal({
 
           <button
             onClick={onClose}
-            className="w-full sm:w-auto py-3 px-5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0B1025] text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm hover:bg-slate-50 dark:hover:bg-[#111633] transition active:scale-98 cursor-pointer flex items-center justify-center gap-1.5"
+            className="w-full sm:w-auto py-3 px-5 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] bg-white dark:bg-[#0F172A] text-[#0F172A] dark:text-[#F8FAFC] font-bold text-xs sm:text-sm hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] transition active:scale-98 cursor-pointer flex items-center justify-center gap-1.5"
           >
             <span>Continue</span>
             <ArrowRight className="w-3.5 h-3.5" />

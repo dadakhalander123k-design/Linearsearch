@@ -508,17 +508,17 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
           return (
             <div
               key={lesson.id}
-              className={`p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0B1025] border transition-all flex flex-col justify-between shadow-xs ${
+              className={`p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0F172A] border transition-all flex flex-col justify-between shadow-xs ${
                 isSelected
-                  ? 'border-[#4F46F5] dark:border-[#6C4CFF] ring-2 ring-[#4F46F5]/20 dark:ring-[#6C4CFF]/30 shadow-md'
-                  : 'border-[#E1E7F0] dark:border-[#25204B] hover:border-slate-300 dark:hover:border-slate-700'
+                  ? 'border-[#4F46E5] dark:border-[#6366F1] ring-2 ring-[#4F46E5]/20 dark:ring-[#6366F1]/30 shadow-xs'
+                  : 'border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] hover:border-[#CBD5E1] dark:hover:border-[rgba(129,140,248,0.35)]'
               }`}
             >
               <div className="space-y-4">
                 {/* Top Row: Lesson Label, Completion Badge & Top-Right Video Icon */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold tracking-wider text-[#4F46F5] dark:text-[#A58FFF] uppercase">
+                    <span className="text-xs font-mono font-bold tracking-wider text-[#4F46E5] dark:text-[#818CF8] uppercase">
                       {lesson.lessonNumber}
                     </span>
                     {progress?.completedVideos.includes(lesson.id) && (
@@ -528,18 +528,18 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                       </span>
                     )}
                   </div>
-                  <div className="p-2 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
+                  <div className="p-2 rounded-xl bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] text-[#4F46E5] dark:text-[#818CF8] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)]">
                     <VideoIcon className="w-4 h-4" />
                   </div>
                 </div>
 
                 {/* Main Heading */}
-                <h2 className="text-lg sm:text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight leading-snug">
+                <h2 className="text-lg sm:text-xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-snug">
                   {lesson.heading}
                 </h2>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed min-h-[48px]">
+                <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed min-h-[48px]">
                   {lesson.description}
                 </p>
 
@@ -548,7 +548,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                   {lesson.chips.map((chip, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 rounded-lg text-xs font-medium bg-[#F8FAFC] dark:bg-[#111633] text-slate-700 dark:text-slate-300 border border-[#E1E7F0] dark:border-[#25204B]"
+                      className="px-3 py-1 rounded-lg text-xs font-medium bg-[#F1F5F9] dark:bg-[#16203B] text-[#475569] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]"
                     >
                       {chip}
                     </span>
@@ -563,11 +563,11 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                   onClick={() => handleSelectLesson(lesson.id, true)}
                   className={`w-full py-3.5 px-4 rounded-xl font-bold text-xs sm:text-sm tracking-wider uppercase flex items-center justify-center gap-2 border transition active:scale-98 cursor-pointer ${
                     isSelected && isPlaying
-                      ? 'bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white border-transparent shadow-sm'
-                      : 'bg-[#EEF2FF] hover:bg-[#E0E7FF] dark:bg-[#6C4CFF]/20 dark:hover:bg-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] border-[#4F46F5]/20 dark:border-[#6C4CFF]/30'
+                      ? 'bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white border-transparent shadow-xs'
+                      : 'bg-[#EEF2FF] hover:bg-[#E0E7FF] dark:bg-[rgba(99,102,241,0.18)] dark:hover:bg-[rgba(99,102,241,0.28)] text-[#4F46E5] dark:text-[#818CF8] border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)]'
                   }`}
                 >
-                  <Play className={`w-4 h-4 ${isSelected && isPlaying ? 'fill-white' : 'fill-[#4F46F5] dark:fill-[#A58FFF]'}`} />
+                  <Play className={`w-4 h-4 ${isSelected && isPlaying ? 'fill-white' : 'fill-[#4F46E5] dark:fill-[#818CF8]'}`} />
                   <span>{isSelected && isPlaying ? 'NOW PLAYING' : 'CLICK TO WATCH'}</span>
                 </button>
               </div>
@@ -576,42 +576,42 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
         })}
       </div>
 
-      {/* 3. VIDEO PLAYING VIEW (REFERENCE IMAGES 1, 2 & 3) */}
+      {/* 3. VIDEO PLAYING VIEW */}
       <div ref={playerSectionRef} className="space-y-4 pt-2">
         {/* Video Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs">
           <div className="flex items-center gap-3">
             {/* Small Rounded Video Icon Container */}
-            <div className="p-2.5 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 shrink-0">
+            <div className="p-2.5 rounded-xl bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] text-[#4F46E5] dark:text-[#818CF8] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] shrink-0">
               <VideoIcon className="w-5 h-5" />
             </div>
 
             {/* Current Lesson & Now Playing Title */}
             <div>
-              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#4F46F5] dark:text-[#A58FFF] block">
+              <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider text-[#4F46E5] dark:text-[#818CF8] block">
                 CURRENT LESSON
               </span>
-              <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight leading-tight mt-0.5">
+              <h2 className="text-base sm:text-lg md:text-xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight leading-tight mt-0.5">
                 NOW PLAYING: {activeLesson.title}
               </h2>
             </div>
           </div>
 
           {/* Right Side Filename Status Badge */}
-          <div className="self-start sm:self-center px-3 py-1.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 font-mono text-xs font-semibold flex items-center gap-1.5">
-            <FileVideo className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
+          <div className="self-start sm:self-center px-3 py-1.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] font-mono text-xs font-semibold flex items-center gap-1.5">
+            <FileVideo className="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#818CF8]" />
             <span>[{activeLesson.filename}]</span>
           </div>
         </div>
 
-        {/* Video Player Container (Supports Native or Simulated Fullscreen) */}
+        {/* Video Player Container */}
         <div
           ref={playerContainerRef}
           onMouseMove={handleMouseMove}
           className={`relative overflow-hidden transition-all duration-300 ${
             isFullscreen 
-              ? 'fixed inset-0 z-50 bg-[#080D20] text-white flex flex-col justify-between h-screen w-screen p-0 m-0' 
-              : 'rounded-2xl bg-[#080D20] text-white border border-[#25204B] shadow-xl'
+              ? 'fixed inset-0 z-50 bg-[#090D1A] text-white flex flex-col justify-between h-screen w-screen p-0 m-0' 
+              : 'rounded-2xl bg-[#090D1A] text-white border border-[rgba(99,102,241,0.2)] shadow-xl'
           }`}
         >
           {/* Animated Lecture Video Stage (16:9 Aspect Ratio) */}
@@ -888,26 +888,26 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
           )}
         </div>
 
-        {/* 5. NORMAL / NON-FULLSCREEN VIDEO PLAYER CONTROL BAR (REFERENCE IMAGE 1) */}
+        {/* 5. NORMAL / NON-FULLSCREEN VIDEO PLAYER CONTROL BAR */}
         {!isFullscreen && (
-          <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-sm space-y-3.5 transition-all">
+          <div className="p-4 sm:p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-3.5 transition-all">
             {/* Top Progress Bar Track */}
             <div className="space-y-1.5">
-              <div className="flex items-center justify-between text-xs font-mono font-semibold text-slate-500 dark:text-slate-400 px-0.5">
+              <div className="flex items-center justify-between text-xs font-mono font-semibold text-[#64748B] dark:text-[#94A3B8] px-0.5">
                 <span>{formatTime(currentTime)}</span>
                 <span>{formatTime(activeLesson.durationSeconds)}</span>
               </div>
 
               <div className="relative group cursor-pointer flex items-center py-1">
-                <div className="h-1.5 sm:h-2 w-full bg-slate-100 dark:bg-[#111633] rounded-full overflow-hidden">
+                <div className="h-1.5 sm:h-2 w-full bg-[#E2E8F0] dark:bg-[#16203B] rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#4F46F5] dark:bg-[#6C4CFF] rounded-full relative transition-all duration-75"
+                    className="h-full bg-[#4F46E5] dark:bg-[#6366F1] rounded-full relative transition-all duration-75"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
                 {/* Draggable Progress Thumb */}
                 <div
-                  className="absolute w-3.5 h-3.5 bg-[#4F46F5] dark:bg-[#6C4CFF] border-2 border-white dark:border-[#0B1025] rounded-full shadow-md transform -translate-x-1/2 pointer-events-none transition-all duration-75 group-hover:scale-130"
+                  className="absolute w-3.5 h-3.5 bg-[#4F46E5] dark:bg-[#6366F1] border-2 border-white dark:border-[#0F172A] rounded-full shadow-md transform -translate-x-1/2 pointer-events-none transition-all duration-75 group-hover:scale-125"
                   style={{ left: `${progressPercent}%` }}
                 />
                 <input
@@ -931,7 +931,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                 <button
                   type="button"
                   onClick={handleRewind10}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-200 hover:text-[#4F46F5] dark:hover:text-[#A58FFF] hover:bg-[#EEF2FF]/50 dark:hover:bg-[#6C4CFF]/15 transition active:scale-95 shadow-xs cursor-pointer flex items-center justify-center"
+                  className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D] transition active:scale-95 shadow-xs cursor-pointer flex items-center justify-center"
                   title="Rewind 10s (J / Left Arrow)"
                   aria-label="Rewind 10 seconds"
                 >
@@ -942,7 +942,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                 <button
                   type="button"
                   onClick={togglePlay}
-                  className="px-5 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-sm transition active:scale-95 cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold text-xs sm:text-sm flex items-center gap-2 shadow-xs transition active:scale-95 cursor-pointer"
                   aria-label={isPlaying ? 'Pause' : 'Play'}
                 >
                   {isPlaying ? (
@@ -962,7 +962,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                 <button
                   type="button"
                   onClick={handleForward10}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-200 hover:text-[#4F46F5] dark:hover:text-[#A58FFF] hover:bg-[#EEF2FF]/50 dark:hover:bg-[#6C4CFF]/15 transition active:scale-95 shadow-xs cursor-pointer flex items-center justify-center"
+                  className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D] transition active:scale-95 shadow-xs cursor-pointer flex items-center justify-center"
                   title="Forward 10s (L / Right Arrow)"
                   aria-label="Forward 10 seconds"
                 >
@@ -973,7 +973,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
               {/* RIGHT SIDE: Playback Speed, Volume, Fullscreen */}
               <div className="flex items-center gap-2 sm:gap-3">
                 {/* Playback Speed Selector [0.5x] [1x] [1.5x] [2x] */}
-                <div className="flex items-center gap-1 bg-[#F8FAFC] dark:bg-[#111633] p-1 rounded-xl border border-[#E1E7F0] dark:border-[#25204B]">
+                <div className="flex items-center gap-1 bg-[#F1F5F9] dark:bg-[#16203B] p-1 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]">
                   {[0.5, 1, 1.5, 2].map((spd) => (
                     <button
                       key={spd}
@@ -985,8 +985,8 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                       }}
                       className={`px-2 py-1 rounded-lg text-[10px] sm:text-xs font-mono font-bold transition cursor-pointer ${
                         playbackSpeed === spd
-                          ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
-                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                          ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white shadow-xs'
+                          : 'text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC]'
                       }`}
                       aria-label={`Playback speed ${spd}x`}
                     >
@@ -996,11 +996,11 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                 </div>
 
                 {/* Volume Control */}
-                <div className="hidden sm:flex items-center gap-1.5 bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] px-2.5 py-1.5 rounded-xl">
+                <div className="hidden sm:flex items-center gap-1.5 bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] px-2.5 py-1.5 rounded-xl">
                   <button
                     type="button"
                     onClick={toggleMute}
-                    className="text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition cursor-pointer"
+                    className="text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] transition cursor-pointer"
                     title={isMuted ? 'Unmute' : 'Mute'}
                     aria-label="Toggle Mute"
                   >
@@ -1018,7 +1018,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                     max={100}
                     value={isMuted ? 0 : volume}
                     onChange={(e) => handleVolumeChange(parseInt(e.target.value, 10))}
-                    className="w-18 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer accent-[#4F46F5]"
+                    className="w-18 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer accent-[#4F46E5]"
                     aria-label="Volume"
                   />
                 </div>
@@ -1027,7 +1027,7 @@ export function VisualizeSection({ progress, onCompleteVideo }: VisualizeSection
                 <button
                   type="button"
                   onClick={toggleFullscreen}
-                  className="p-2.5 rounded-xl bg-white dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-200 hover:text-[#4F46F5] dark:hover:text-[#A58FFF] hover:bg-[#EEF2FF]/50 dark:hover:bg-[#6C4CFF]/15 transition active:scale-95 shadow-xs cursor-pointer"
+                  className="p-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D] transition active:scale-95 shadow-xs cursor-pointer"
                   title="Toggle Fullscreen (F)"
                   aria-label="Toggle fullscreen"
                 >

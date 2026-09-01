@@ -58,23 +58,23 @@ export function MobileNav({
       <div 
         onMouseEnter={() => setIsNavHovered(true)}
         onMouseLeave={() => setIsNavHovered(false)}
-        className="group/mobilenav fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-slate-900 shadow-2xl border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-5 animate-in slide-in-from-left duration-200"
+        className="group/mobilenav fixed inset-y-0 left-0 w-4/5 max-w-xs bg-white dark:bg-[#090D1A] shadow-2xl border-r border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex flex-col justify-between p-5 animate-in slide-in-from-left duration-200"
       >
         <div>
           {/* Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-slate-800">
+          <div className="flex items-center justify-between pb-4 border-b border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)]">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-sm">
+              <div className="w-9 h-9 rounded-xl bg-[#4F46E5] dark:bg-[#6366F1] flex items-center justify-center text-white shadow-xs">
                 <Search className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-extrabold text-slate-900 dark:text-white text-base">AlgoLearn</h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Linear Search</p>
+                <h3 className="font-extrabold text-[#0F172A] dark:text-[#F8FAFC] text-base">AlgoLearn</h3>
+                <p className="text-xs text-[#64748B] dark:text-[#94A3B8]">Linear Search</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="p-1.5 rounded-lg text-[#64748B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] transition cursor-pointer"
               aria-label="Close navigation"
             >
               <X className="w-5 h-5" />
@@ -94,14 +94,14 @@ export function MobileNav({
                     onNavigate(item.id);
                     onClose();
                   }}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46E5]/40 cursor-pointer ${
                     isActive
-                      ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold border border-indigo-200/60 dark:border-indigo-800/60'
-                      : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                      ? 'bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.16)] text-[#4F46E5] dark:text-[#F8FAFC] font-semibold border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)]'
+                      : 'text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC]'
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400'}`} />
+                    <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-[#4F46E5] dark:text-[#818CF8]' : 'text-[#64748B]'}`} />
                     <span className="truncate">{item.label}</span>
                   </div>
                   {item.badge && (
@@ -111,8 +111,8 @@ export function MobileNav({
                         : 'opacity-0 group-hover/mobilenav:opacity-100 group-focus-within/mobilenav:opacity-100'
                     } ${
                       isActive
-                        ? 'bg-indigo-200/60 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 font-bold'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                        ? 'bg-[#4F46E5]/10 dark:bg-[#6366F1]/20 text-[#4F46E5] dark:text-[#818CF8] font-bold border border-[#4F46E5]/20 dark:border-[#6366F1]/30'
+                        : 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#64748B] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]'
                     }`}>
                       {item.badge}
                     </span>
@@ -124,15 +124,15 @@ export function MobileNav({
         </div>
 
         {/* Footer Pill */}
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
-          <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
+        <div className="pt-4 border-t border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)]">
+          <div className="flex items-center justify-between p-3 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-indigo-500" />
-              <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
+              <Sparkles className="w-4 h-4 text-[#4F46E5] dark:text-[#818CF8]" />
+              <span className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 {progress.learnerName}
               </span>
             </div>
-            <span className="text-xs font-extrabold font-mono text-indigo-600 dark:text-indigo-400">
+            <span className="text-xs font-extrabold font-mono text-[#4F46E5] dark:text-[#818CF8]">
               {overallProgress}% Progress
             </span>
           </div>

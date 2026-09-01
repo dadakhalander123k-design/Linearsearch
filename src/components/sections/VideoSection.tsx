@@ -137,17 +137,17 @@ export function VideoSection({
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] text-[#4F46E5] dark:text-[#818CF8] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)]">
               Interactive Video Classroom
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+            <span className="text-xs text-[#64748B] dark:text-[#94A3B8] font-medium">
               {progress.completedVideos.length}/2 Lessons Completed
             </span>
           </div>
-          <h2 className="text-xl font-bold text-[#11182D] dark:text-[#F5F7FF] mt-1">
+          <h2 className="text-xl font-bold text-[#0F172A] dark:text-[#F8FAFC] mt-1">
             {video.title}
           </h2>
         </div>
@@ -174,19 +174,19 @@ export function VideoSection({
               }}
               className={`p-4 rounded-2xl border text-left flex items-center justify-between transition cursor-pointer ${
                 isCurrent
-                  ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white border-[#4F46F5] dark:border-[#6C4CFF] shadow-md'
+                  ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white border-[#4F46E5] dark:border-[#6366F1] shadow-xs'
                   : isDone
                   ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300'
-                  : 'bg-white dark:bg-[#0B1025] border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633]'
+                  : 'bg-white dark:bg-[#0F172A] border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <div className={`p-2.5 rounded-xl ${isCurrent ? 'bg-white/20' : 'bg-slate-100 dark:bg-[#111633]'}`}>
+                <div className={`p-2.5 rounded-xl ${isCurrent ? 'bg-white/20' : 'bg-[#F1F5F9] dark:bg-[#16203B]'}`}>
                   <Tv className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold truncate">{v.title}</h4>
-                  <span className={`text-xs ${isCurrent ? 'text-indigo-100' : 'text-slate-500 dark:text-slate-400'}`}>
+                  <span className={`text-xs ${isCurrent ? 'text-indigo-100' : 'text-[#64748B] dark:text-[#94A3B8]'}`}>
                     Duration: {v.durationLabel}
                   </span>
                 </div>
@@ -200,16 +200,16 @@ export function VideoSection({
       {/* Interactive Video Player Stage */}
       <div
         ref={containerRef}
-        className={`relative overflow-hidden rounded-3xl bg-slate-950 text-white border border-slate-800 shadow-2xl transition-all ${
+        className={`relative overflow-hidden rounded-3xl bg-[#090D1A] text-white border border-[rgba(99,102,241,0.2)] shadow-2xl transition-all ${
           isFullscreen ? 'fixed inset-0 z-50 rounded-none' : ''
         }`}
       >
         {/* Animated Presentation Screen */}
-        <div className="relative aspect-video w-full flex flex-col justify-between p-6 sm:p-10 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950">
+        <div className="relative aspect-video w-full flex flex-col justify-between p-6 sm:p-10 bg-gradient-to-b from-[#0F172A] via-[#090D1A] to-[#090D1A]">
           {/* Top Stage Header */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="px-2.5 py-1 rounded-lg bg-indigo-600 text-white font-mono font-bold text-xs">
+              <span className="px-2.5 py-1 rounded-lg bg-[#4F46E5] text-white font-mono font-bold text-xs">
                 Lesson {video.id}
               </span>
               <span className="text-xs sm:text-sm font-bold text-slate-300">
@@ -244,8 +244,8 @@ export function VideoSection({
                             isFound
                               ? 'bg-emerald-600/40 border-emerald-400 text-emerald-300 scale-110 shadow-lg shadow-emerald-950'
                               : isCur
-                              ? 'bg-indigo-600/40 border-amber-400 text-amber-300 scale-105 ring-2 ring-amber-400'
-                              : 'bg-slate-900 border-slate-700 text-slate-300'
+                              ? 'bg-[#4F46E5]/40 border-amber-400 text-amber-300 scale-105 ring-2 ring-amber-400'
+                              : 'bg-[#16203B] border-[rgba(99,102,241,0.2)] text-slate-300'
                           }`}
                         >
                           <span className="text-[9px] text-slate-400 font-sans">idx {idx}</span>
@@ -258,7 +258,7 @@ export function VideoSection({
                 </div>
 
                 {/* Active message */}
-                <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-xs sm:text-sm font-mono text-slate-200 shadow-sm">
+                <div className="p-3 rounded-xl bg-[#16203B]/90 border border-[rgba(99,102,241,0.2)] text-xs sm:text-sm font-mono text-slate-200 shadow-xs">
                   {activeChapter.visualState.message}
                 </div>
               </div>
@@ -272,12 +272,12 @@ export function VideoSection({
         </div>
 
         {/* Player Controls Bar */}
-        <div className="p-4 bg-slate-900/95 border-t border-slate-800 space-y-3">
+        <div className="p-4 bg-[#0F172A] border-t border-[rgba(99,102,241,0.18)] space-y-3">
           {/* Progress scrubber */}
           <div className="relative group cursor-pointer">
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-[#16203B] rounded-full overflow-hidden">
               <div
-                className="h-full bg-indigo-500 rounded-full relative"
+                className="h-full bg-[#4F46E5] dark:bg-[#6366F1] rounded-full relative"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
@@ -297,7 +297,7 @@ export function VideoSection({
             <div className="flex items-center gap-2">
               <button
                 onClick={togglePlay}
-                className="p-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition shadow-sm"
+                className="p-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold transition shadow-xs cursor-pointer"
                 aria-label={isPlaying ? 'Pause video' : 'Play video'}
               >
                 {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4 fill-white" />}
@@ -305,7 +305,7 @@ export function VideoSection({
 
               <button
                 onClick={() => handleSkip(-10)}
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-[#16203B] transition cursor-pointer"
                 title="Rewind 10 seconds (J)"
                 aria-label="Rewind 10s"
               >
@@ -314,7 +314,7 @@ export function VideoSection({
 
               <button
                 onClick={() => handleSkip(10)}
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-[#16203B] transition cursor-pointer"
                 title="Forward 10 seconds (L)"
                 aria-label="Forward 10s"
               >
@@ -329,7 +329,7 @@ export function VideoSection({
             {/* Right controls */}
             <div className="flex items-center gap-2">
               {/* Playback speed selector */}
-              <div className="flex items-center gap-1 bg-slate-800/80 p-1 rounded-xl">
+              <div className="flex items-center gap-1 bg-[#16203B] p-1 rounded-xl border border-[rgba(99,102,241,0.2)]">
                 {[0.5, 1, 1.5, 2].map((spd) => (
                   <button
                     key={spd}
@@ -337,8 +337,8 @@ export function VideoSection({
                       sound.playClick();
                       setPlaybackSpeed(spd);
                     }}
-                    className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold transition ${
-                      playbackSpeed === spd ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white'
+                    className={`px-2 py-0.5 rounded-lg text-[10px] font-mono font-bold transition cursor-pointer ${
+                      playbackSpeed === spd ? 'bg-[#4F46E5] text-white' : 'text-slate-400 hover:text-white'
                     }`}
                   >
                     {spd}x
@@ -352,7 +352,7 @@ export function VideoSection({
                   sound.playClick();
                   setIsFullscreen(!isFullscreen);
                 }}
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-[#16203B] transition cursor-pointer"
                 title="Toggle Fullscreen (F)"
                 aria-label="Toggle Fullscreen"
               >
@@ -366,9 +366,9 @@ export function VideoSection({
       {/* Chapters & Topics Covered List */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Chapters */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-[#11182D] dark:text-[#F5F7FF] flex items-center gap-2">
-            <List className="w-4 h-4 text-[#4F46F5] dark:text-[#A58FFF]" />
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2">
+            <List className="w-4 h-4 text-[#4F46E5] dark:text-[#818CF8]" />
             Lesson Chapters ({video.chapters.length})
           </h3>
           <div className="space-y-2">
@@ -383,17 +383,17 @@ export function VideoSection({
                    }}
                    className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition cursor-pointer ${
                      isChapActive
-                       ? 'bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border-[#4F46F5]/40 dark:border-[#6C4CFF]/50 text-[#4F46F5] dark:text-[#A58FFF] font-semibold'
-                       : 'bg-[#F8FAFC] dark:bg-[#111633] border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#191F44]'
+                       ? 'bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] border-[rgba(79,70,229,0.3)] dark:border-[rgba(99,102,241,0.4)] text-[#4F46E5] dark:text-[#818CF8] font-semibold'
+                       : 'bg-[#F1F5F9] dark:bg-[#16203B] border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D]'
                    }`}
                  >
                    <div className="flex items-center gap-3">
-                     <span className="font-mono text-xs font-bold text-[#4F46F5] dark:text-[#A58FFF]">
+                     <span className="font-mono text-xs font-bold text-[#4F46E5] dark:text-[#818CF8]">
                        {formatTime(chap.time)}
                      </span>
                      <span className="text-xs truncate">{chap.title}</span>
                    </div>
-                   {isChapActive && <span className="text-[10px] uppercase font-bold text-[#4F46F5] dark:text-[#A58FFF]">Now Playing</span>}
+                   {isChapActive && <span className="text-[10px] uppercase font-bold text-[#4F46E5] dark:text-[#818CF8]">Now Playing</span>}
                  </button>
                );
              })}
@@ -401,16 +401,16 @@ export function VideoSection({
         </div>
 
         {/* Topics Covered */}
-        <div className="p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-[#11182D] dark:text-[#F5F7FF] flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-[#4F46F5] dark:text-[#A58FFF]" />
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2">
+            <BookOpen className="w-4 h-4 text-[#4F46E5] dark:text-[#818CF8]" />
             Topics Covered in This Lesson
           </h3>
           <div className="space-y-2">
             {video.topicsCovered.map((topic, tIdx) => (
               <div
                 key={tIdx}
-                className="p-3 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5"
+                className="p-3 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-xs text-[#475569] dark:text-[#94A3B8] flex items-start gap-2.5"
               >
                 <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <span>{topic}</span>

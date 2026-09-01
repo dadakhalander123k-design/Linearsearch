@@ -242,31 +242,29 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
     <div className="max-w-5xl mx-auto space-y-8 pb-16">
       {/* Header */}
       <div className="space-y-1">
-        <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
-            Interactive Search Lab
-          </span>
-        </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#4F46E5] dark:text-[#818CF8] font-mono">
+          INTERACTIVE SANDBOX
+        </span>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
           Interactive Linear Search Lab
         </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+        <p className="text-sm text-[#475569] dark:text-[#94A3B8]">
           Create your custom array or use presets, set a target value, and watch Linear Search inspect each element one by one.
         </p>
       </div>
 
       {/* Custom Array Creation Panel */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E1E7F0] dark:border-[#25204B] pb-3.5">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] pb-3.5">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 flex items-center justify-center text-[#4F46F5] dark:text-[#A58FFF]">
+            <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] flex items-center justify-center text-[#4F46E5] dark:text-[#818CF8]">
               <ListPlus className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-[#11182D] dark:text-[#F5F7FF]">
+              <h2 className="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 Custom Array Configuration
               </h2>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-[#475569] dark:text-[#94A3B8]">
                 Choose the array size, enter desired integer values, and apply to search.
               </p>
             </div>
@@ -274,7 +272,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
 
           {/* Size presets quick buttons */}
           <div className="flex items-center gap-1.5 text-xs">
-            <span className="text-slate-400 text-[11px] font-medium mr-1 hidden sm:inline">Size Presets:</span>
+            <span className="text-[#64748B] dark:text-[#94A3B8] text-[11px] font-medium mr-1 hidden sm:inline">Size Presets:</span>
             {[4, 6, 8, 10, 12].map(sz => (
               <button
                 key={sz}
@@ -282,8 +280,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 onClick={() => handleCustomSizeChange(sz)}
                 className={`px-2.5 py-1 rounded-lg font-mono text-xs font-semibold transition cursor-pointer ${
                   customSizeInput === sz
-                    ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
-                    : 'bg-[#F8FAFC] dark:bg-[#111633] text-slate-600 dark:text-slate-300 border border-[#E1E7F0] dark:border-[#25204B] hover:bg-slate-100 dark:hover:bg-[#191F44]'
+                    ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white shadow-xs'
+                    : 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#475569] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D]'
                 }`}
               >
                 {sz}
@@ -296,7 +294,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
         <div className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center gap-3">
             <div className="w-full sm:w-56 space-y-1.5">
-              <label htmlFor="custom-array-size-input" className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+              <label htmlFor="custom-array-size-input" className="block text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 Array Size (2 – 16)
               </label>
               <div className="flex items-center gap-2">
@@ -310,37 +308,37 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     const parsed = parseInt(e.target.value, 10);
                     handleCustomSizeChange(parsed);
                   }}
-                  className="w-full px-3 py-2 rounded-xl text-sm bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30 focus:border-[#4F46F5]"
+                  className="w-full px-3 py-2 rounded-xl text-sm bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] font-mono font-bold text-[#0F172A] dark:text-[#F8FAFC] focus:outline-hidden focus:ring-2 focus:ring-[#4F46E5]/30 focus:border-[#4F46E5]"
                 />
               </div>
             </div>
 
-            <div className="flex-1 text-xs text-slate-500 dark:text-slate-400 sm:pt-5">
-              <span>Generating <strong className="text-[#4F46F5] dark:text-[#A58FFF] font-mono">{customElements.length}</strong> input fields below. Enter any integer for each element.</span>
+            <div className="flex-1 text-xs text-[#475569] dark:text-[#94A3B8] sm:pt-5">
+              <span>Generating <strong className="text-[#4F46E5] dark:text-[#818CF8] font-mono">{customElements.length}</strong> input fields below. Enter any integer for each element.</span>
             </div>
           </div>
 
           {/* Dynamic Element Inputs Grid */}
           <div className="space-y-2">
-            <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+            <label className="block text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
               Array Elements
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2.5">
               {customElements.map((val, idx) => (
                 <div 
                   key={idx} 
-                  className="flex flex-col p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] focus-within:border-[#4F46F5] focus-within:ring-2 focus-within:ring-[#4F46F5]/20 transition"
+                  className="flex flex-col p-2 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] focus-within:border-[#4F46E5] focus-within:ring-2 focus-within:ring-[#4F46E5]/20 transition"
                 >
-                  <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pb-1">
+                  <div className="flex items-center justify-between text-[10px] font-mono text-[#64748B] dark:text-[#94A3B8] pb-1">
                     <span>Element {idx + 1}</span>
-                    <span className="text-slate-400 font-semibold">[{idx}]</span>
+                    <span className="text-[#64748B] dark:text-[#94A3B8] font-semibold">[{idx}]</span>
                   </div>
                   <input
                     type="number"
                     value={val}
                     onChange={(e) => handleElementValueChange(idx, e.target.value)}
                     placeholder={`val`}
-                    className="w-full bg-white dark:bg-[#0B1025] px-2 py-1.5 rounded-lg text-sm font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] border border-[#E1E7F0] dark:border-[#25204B] text-center focus:outline-hidden focus:border-[#4F46F5]"
+                    className="w-full bg-white dark:bg-[#0F172A] px-2 py-1.5 rounded-lg text-sm font-mono font-bold text-[#0F172A] dark:text-[#F8FAFC] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-center focus:outline-hidden focus:border-[#4F46E5]"
                   />
                 </div>
               ))}
@@ -353,7 +351,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={handleApplyUserArray}
-                className="px-5 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white text-xs font-bold shadow-xs flex items-center gap-2 transition cursor-pointer active:scale-95"
+                className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white text-xs font-bold shadow-xs flex items-center gap-2 transition cursor-pointer active:scale-95"
               >
                 <Check className="w-4 h-4" />
                 <span>Apply Array</span>
@@ -362,7 +360,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={() => handleGenerateRandom(customSizeInput || 8)}
-                className="px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] hover:bg-slate-100 dark:hover:bg-[#191F44] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
+                className="px-3.5 py-2.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
               >
                 <Shuffle className="w-3.5 h-3.5" />
                 <span>Randomize</span>
@@ -387,22 +385,22 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       </div>
 
       {/* Main Interactive Stage */}
-      <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-8">
+      <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-8">
         {/* Visual Array Canvas */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-[#080D20] text-white space-y-6 shadow-inner border border-[#25204B]">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#090D1A] text-white space-y-6 shadow-inner border border-[rgba(99,102,241,0.2)]">
           {/* Target and Status header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#25204B] pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[rgba(99,102,241,0.18)] pb-4">
             <div className="flex items-center gap-3">
               <span className="text-xs font-mono font-bold text-slate-400">Target To Find:</span>
-              <span className="px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-mono font-extrabold text-base shadow-sm">
+              <span className="px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-mono font-extrabold text-base shadow-xs">
                 {isNaN(targetNum) ? '—' : targetNum}
               </span>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#111633] border border-[#25204B] text-xs font-mono">
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#16203B] border border-[rgba(99,102,241,0.2)] text-xs font-mono">
                 <span className="text-slate-400">Comparisons:</span>
-                <span className="font-bold text-[#A58FFF]">{comparisons}</span>
+                <span className="font-bold text-[#818CF8]">{comparisons}</span>
               </div>
 
               {/* Status Badge */}
@@ -412,8 +410,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                   : searchState === 'not_found'
                   ? 'bg-red-500/20 text-red-300 border border-red-500/50'
                   : searchState === 'searching'
-                  ? 'bg-[#4F46F5]/20 text-indigo-300 border border-[#4F46F5]/50'
-                  : 'bg-[#111633] text-slate-400 border border-[#25204B]'
+                  ? 'bg-[#4F46E5]/20 text-indigo-300 border border-[#4F46E5]/50'
+                  : 'bg-[#16203B] text-slate-400 border border-[rgba(99,102,241,0.2)]'
               }`}>
                 {searchState === 'found' && <CheckCircle2 className="w-4 h-4" />}
                 {searchState === 'not_found' && <XCircle className="w-4 h-4" />}
@@ -453,10 +451,10 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                           isMatch
                             ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300 scale-105 shadow-lg shadow-emerald-950 ring-4 ring-emerald-400/40'
                             : isCurrent
-                            ? 'bg-[#4F46F5]/40 border-amber-400 text-amber-300 scale-105 shadow-md ring-2 ring-amber-400/50'
+                            ? 'bg-[#4F46E5]/40 border-amber-400 text-amber-300 scale-105 shadow-xs ring-2 ring-amber-400/50'
                             : isPast
-                            ? 'bg-[#111633]/60 border-[#25204B] text-slate-500 opacity-60'
-                            : 'bg-[#111633] border-[#25204B] text-white'
+                            ? 'bg-[#16203B]/60 border-[rgba(99,102,241,0.18)] text-slate-500 opacity-60'
+                            : 'bg-[#16203B] border-[rgba(99,102,241,0.2)] text-white'
                         }`}
                       >
                         <span className="text-xs font-sans text-slate-400 text-[10px]">val</span>
@@ -483,7 +481,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
           </div>
 
           {/* Current comparison comparison equation banner */}
-          <div className="p-4 rounded-xl bg-[#111633] border border-[#25204B] text-center font-mono">
+          <div className="p-4 rounded-xl bg-[#16203B] border border-[rgba(99,102,241,0.2)] text-center font-mono">
             {currentIndex === -1 ? (
               <span className="text-xs text-slate-400">
                 Ready to search. Click "Start Search" or "Step Forward".
@@ -507,11 +505,11 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
         </div>
 
         {/* Controls Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-2xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-2xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]">
           {/* Target Input & Quick Actions */}
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <label htmlFor="search-target-number-input" className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              <label htmlFor="search-target-number-input" className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 Search Target Number
               </label>
               <input
@@ -520,12 +518,12 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 value={targetInput}
                 onChange={(e) => setTargetInput(e.target.value)}
                 placeholder="Enter a number"
-                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30 focus:border-[#4F46F5]"
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] font-mono font-bold text-[#0F172A] dark:text-[#F8FAFC] focus:outline-hidden focus:ring-2 focus:ring-[#4F46E5]/30 focus:border-[#4F46E5]"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+              <label className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
                 Quick Array Presets
               </label>
               <div className="grid grid-cols-4 gap-1.5">
@@ -539,8 +537,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     }}
                     className={`py-1.5 rounded-lg text-xs font-mono font-bold transition cursor-pointer ${
                       arraySize === sz
-                        ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
-                        : 'bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#191F44]'
+                        ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D]'
                     }`}
                   >
                     {sz} items
@@ -552,14 +550,14 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
 
           {/* Action Buttons */}
           <div className="space-y-3">
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">
+            <label className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
               Playback Execution
             </label>
             <div className="space-y-2">
               <button
                 type="button"
                 onClick={toggleAutoPlay}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] active:scale-95 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-2 transition cursor-pointer"
+                className="w-full py-2.5 px-4 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] active:scale-98 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-2 transition cursor-pointer"
               >
                 {searchState === 'searching' ? (
                   <>
@@ -579,7 +577,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                   type="button"
                   onClick={stepForward}
                   disabled={searchState === 'searching' || searchState === 'found' || searchState === 'not_found'}
-                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 dark:hover:bg-[#191F44] disabled:opacity-40 flex items-center justify-center gap-1.5 transition cursor-pointer"
+                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] font-bold text-xs hover:bg-[#F1F5F9] dark:hover:bg-[#1E2B4D] disabled:opacity-40 flex items-center justify-center gap-1.5 transition cursor-pointer"
                 >
                   <StepForward className="w-3.5 h-3.5" />
                   <span>Step Forward</span>
@@ -588,7 +586,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 <button
                   type="button"
                   onClick={() => handleReset()}
-                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 dark:hover:bg-[#191F44] flex items-center justify-center gap-1.5 transition cursor-pointer"
+                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] font-bold text-xs hover:bg-[#F1F5F9] dark:hover:bg-[#1E2B4D] flex items-center justify-center gap-1.5 transition cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset</span>
@@ -598,7 +596,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={() => handleGenerateRandom()}
-                className="w-full py-2 px-3 rounded-xl bg-[#EEF2FF] hover:bg-[#E0E7FF] dark:bg-[#6C4CFF]/20 dark:hover:bg-[#6C4CFF]/30 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+                className="w-full py-2 px-3 rounded-xl bg-[#EEF2FF] hover:bg-[#E0E7FF] dark:bg-[rgba(99,102,241,0.18)] dark:hover:bg-[rgba(99,102,241,0.28)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] text-[#4F46E5] dark:text-[#818CF8] font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Shuffle className="w-3.5 h-3.5" />
                 <span>Generate Random List</span>
@@ -609,8 +607,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
           {/* Speed settings */}
           <div className="space-y-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
+              <label className="text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-1.5">
+                <Sliders className="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#818CF8]" />
                 Animation Speed
               </label>
               <div className="grid grid-cols-4 gap-1.5">
@@ -629,8 +627,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     }}
                     className={`py-1.5 rounded-lg text-xs font-mono font-bold transition cursor-pointer ${
                       speed === s.val
-                        ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
-                        : 'bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#191F44]'
+                        ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#1E2B4D]'
                     }`}
                   >
                     {s.label}
@@ -639,12 +637,12 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/15 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-xs text-[#11182D] dark:text-[#F5F7FF] space-y-1">
-              <span className="font-bold flex items-center gap-1 text-[#4F46F5] dark:text-[#A58FFF]">
+            <div className="p-3 rounded-xl bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.14)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] text-xs text-[#0F172A] dark:text-[#F8FAFC] space-y-1">
+              <span className="font-bold flex items-center gap-1 text-[#4F46E5] dark:text-[#818CF8]">
                 <Info className="w-3.5 h-3.5" />
                 Active Search Array
               </span>
-              <p className="font-mono text-[11px] text-slate-600 dark:text-slate-400 break-all">
+              <p className="font-mono text-[11px] text-[#475569] dark:text-[#94A3B8] break-all">
                 [{array.join(', ')}] ({array.length} items)
               </p>
             </div>
@@ -653,21 +651,21 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
 
         {/* Live Step Log */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
+          <div className="flex items-center justify-between text-xs font-bold text-[#0F172A] dark:text-[#F8FAFC]">
             <span className="flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
+              <Info className="w-3.5 h-3.5 text-[#4F46E5] dark:text-[#818CF8]" />
               Live Execution Log
             </span>
-            <span className="font-mono text-slate-500">{log.length} steps recorded</span>
+            <span className="font-mono text-[#64748B] dark:text-[#94A3B8]">{log.length} steps recorded</span>
           </div>
 
-          <div className="h-32 overflow-y-auto p-3 rounded-xl bg-[#080D20] text-slate-200 font-mono text-xs space-y-1.5 border border-[#25204B] scrollbar-thin">
+          <div className="h-32 overflow-y-auto p-3 rounded-xl bg-[#090D1A] text-slate-200 font-mono text-xs space-y-1.5 border border-[rgba(99,102,241,0.2)] scrollbar-thin">
             {log.length === 0 ? (
-              <p className="text-slate-500 italic py-2">No steps taken yet. Press "Start Search" or "Step Forward" to begin execution.</p>
+              <p className="text-[#64748B] italic py-2">No steps taken yet. Press "Start Search" or "Step Forward" to begin execution.</p>
             ) : (
               log.map((item, lIdx) => (
                 <div key={lIdx} className="flex items-center gap-2">
-                  <span className="text-[#A58FFF]">›</span>
+                  <span className="text-[#818CF8]">›</span>
                   <span>{item}</span>
                 </div>
               ))

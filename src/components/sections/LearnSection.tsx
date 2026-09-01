@@ -69,52 +69,52 @@ export function LearnSection({
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 pb-16">
-      {/* ─── TOP COURSE HEADER CARD (REFERENCE IMAGE 3) ─── */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-3">
+      {/* ─── TOP COURSE HEADER CARD ─── */}
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-3">
         {/* Top line with Curriculum badge and progress pill */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="px-3 py-1 rounded-lg bg-[#EEF2FF] dark:bg-[#6C4CFF]/15 text-[#4F46F5] dark:text-[#A58FFF] font-mono text-[11px] font-extrabold tracking-wider uppercase">
+            <span className="px-3 py-1 rounded-lg bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] text-[#4F46E5] dark:text-[#818CF8] font-mono text-[11px] font-extrabold tracking-wider uppercase">
               CURRICULUM // VOL. 01
             </span>
-            <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+            <span className="text-xs sm:text-sm text-[#64748B] dark:text-[#94A3B8] font-medium">
               Theory & Mathematical Foundations
             </span>
           </div>
 
-          <div className="px-3 py-1 rounded-lg bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-600 dark:text-slate-300 font-mono text-xs font-semibold">
+          <div className="px-3 py-1 rounded-lg bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] dark:text-[#94A3B8] font-mono text-xs font-semibold">
             Progress: {completedCount} / {totalChapters} Chapters ({percentCompleted}%)
           </div>
         </div>
 
         {/* Course Main Title */}
         <div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight mt-2">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight mt-2">
             Theory of Linear Search & Sequential Algorithms
           </h1>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-2 leading-relaxed max-w-4xl">
+          <p className="text-sm sm:text-base text-[#475569] dark:text-[#94A3B8] mt-2 leading-relaxed max-w-4xl">
             An intuitive and rigorous technical guide covering keys, element comparisons, memory indexes, time complexity phenomena, and algorithmic resolution engines.
           </p>
         </div>
       </div>
 
-      {/* ─── TWO COLUMN LAYOUT: SIDEBAR TOC + MAIN CONTENT (REFERENCE IMAGE 3) ─── */}
+      {/* ─── TWO COLUMN LAYOUT: SIDEBAR TOC + MAIN CONTENT ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* TABLE OF CONTENTS (Full width vertical list on Mobile, Left Column lg:col-span-4 sticky on Desktop) */}
+        {/* TABLE OF CONTENTS */}
         <div className="w-full lg:col-span-4 lg:sticky lg:top-6">
-          <div className="rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs overflow-hidden">
+          <div className="rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs overflow-hidden">
             {/* TOC Card Header */}
-            <div className="p-4 sm:p-5 border-b border-[#E1E7F0] dark:border-[#25204B] flex items-center justify-between">
-              <span className="font-mono text-xs font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-wider uppercase">
+            <div className="p-4 sm:p-5 border-b border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center justify-between">
+              <span className="font-mono text-xs font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-wider uppercase">
                 TABLE OF CONTENTS
               </span>
-              <span className="font-mono text-xs text-slate-400 font-medium">
+              <span className="font-mono text-xs text-[#64748B] dark:text-[#94A3B8] font-medium">
                 {totalChapters} Chapters
               </span>
             </div>
 
             {/* Chapter Items Vertical Full-Width List */}
-            <div className="divide-y divide-[#E1E7F0] dark:divide-[#25204B]">
+            <div className="divide-y divide-[#E2E8F0] dark:divide-[rgba(99,102,241,0.15)]">
               {LEARN_MODULES.map((m) => {
                 const isDone = progress.completedTheoryModules.includes(m.id);
                 const isCurrent = m.id === activeModuleId;
@@ -130,28 +130,28 @@ export function LearnSection({
                     }}
                     className={`w-full py-3.5 px-4 text-left flex items-center justify-between gap-3 transition cursor-pointer border-l-4 ${
                       isCurrent
-                        ? 'bg-[#EEF2FF]/60 dark:bg-[#6C4CFF]/15 border-[#4F46F5] dark:border-[#6C4CFF] text-[#4F46F5] dark:text-[#A58FFF] font-bold'
-                        : 'bg-white dark:bg-[#0B1025] border-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633]'
+                        ? 'bg-[#EEF2FF]/70 dark:bg-[rgba(99,102,241,0.16)] border-[#4F46E5] dark:border-[#6366F1] text-[#4F46E5] dark:text-[#818CF8] font-bold'
+                        : 'bg-white dark:bg-[#0F172A] border-transparent text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B]'
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <span className={`font-mono text-xs shrink-0 ${
                         isCurrent 
-                          ? 'font-extrabold text-[#4F46F5] dark:text-[#A58FFF]' 
-                          : 'font-medium text-slate-400'
+                          ? 'font-extrabold text-[#4F46E5] dark:text-[#818CF8]' 
+                          : 'font-medium text-[#64748B]'
                       }`}>
                         {chapterNum}
                       </span>
-                      <span className={`text-xs sm:text-sm leading-snug ${isCurrent ? 'font-bold' : 'font-semibold text-slate-800 dark:text-slate-200'}`}>
+                      <span className={`text-xs sm:text-sm leading-snug ${isCurrent ? 'font-bold' : 'font-semibold text-[#0F172A] dark:text-[#F8FAFC]'}`}>
                         {moduleName}
                       </span>
                     </div>
 
-                    {/* Right status indicator: Purple solid dot for active, green checkmark for completed, hollow circle for incomplete */}
+                    {/* Right status indicator */}
                     {isDone ? (
                       <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
                     ) : isCurrent ? (
-                      <span className="w-2 h-2 rounded-full bg-[#4F46F5] dark:bg-[#6C4CFF] shrink-0" />
+                      <span className="w-2 h-2 rounded-full bg-[#4F46E5] dark:bg-[#6366F1] shrink-0" />
                     ) : (
                       <span className="w-3.5 h-3.5 rounded-full border-2 border-slate-300 dark:border-slate-700 shrink-0" />
                     )}
@@ -162,44 +162,44 @@ export function LearnSection({
           </div>
         </div>
 
-        {/* RIGHT COLUMN: MAIN CHAPTER CONTENT CARD (lg:col-span-8) */}
-        <div className="lg:col-span-8 p-6 sm:p-8 lg:p-9 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-6">
+        {/* RIGHT COLUMN: MAIN CHAPTER CONTENT CARD */}
+        <div className="lg:col-span-8 p-6 sm:p-8 lg:p-9 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-6">
           {/* Chapter Sub-Header: Badge + Read Time */}
           <div className="flex items-center justify-between gap-3">
-            <span className="px-3 py-1 rounded-lg bg-[#EEF2FF] dark:bg-[#6C4CFF]/15 text-[#4F46F5] dark:text-[#A58FFF] font-mono text-xs font-bold uppercase tracking-wider">
+            <span className="px-3 py-1 rounded-lg bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] text-[#4F46E5] dark:text-[#818CF8] font-mono text-xs font-bold uppercase tracking-wider">
               CHAPTER {activeChapterNumber} // FUNDAMENTALS
             </span>
-            <span className="text-slate-400 dark:text-slate-500 font-mono text-xs flex items-center gap-1.5 font-medium">
+            <span className="text-[#64748B] dark:text-[#94A3B8] font-mono text-xs flex items-center gap-1.5 font-medium">
               <Clock className="w-3.5 h-3.5" />
               <span>Est. Read: 2 MIN</span>
             </span>
           </div>
 
-          <div className="border-t border-[#E1E7F0] dark:border-[#25204B] pt-1" />
+          <div className="border-t border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] pt-1" />
 
           {/* Chapter Title */}
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight uppercase">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight uppercase">
               {activeModule.id}. {cleanTitle}
             </h2>
 
             {/* Executive Definition */}
             <div className="mt-4">
-              <span className="font-mono text-[11px] font-extrabold text-slate-400 dark:text-slate-500 uppercase tracking-widest block">
+              <span className="font-mono text-[11px] font-extrabold text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest block">
                 EXECUTIVE DEFINITION
               </span>
-              <p className="text-slate-700 dark:text-slate-300 text-sm sm:text-base leading-relaxed mt-1.5 font-normal">
+              <p className="text-[#475569] dark:text-[#94A3B8] text-sm sm:text-base leading-relaxed mt-1.5 font-normal">
                 {activeModule.summary}
               </p>
             </div>
           </div>
 
-          {/* Core Intuition / Analogy Callout (Reference Image 3 styling) */}
-          <div className="p-5 sm:p-6 rounded-xl bg-[#EEF2FF]/40 dark:bg-[#6C4CFF]/10 border-l-4 border-[#4F46F5] dark:border-[#6C4CFF] space-y-2">
-            <span className="font-mono text-xs font-extrabold text-[#4F46F5] dark:text-[#A58FFF] tracking-wider uppercase block">
+          {/* Core Intuition / Analogy Callout */}
+          <div className="p-5 sm:p-6 rounded-xl bg-[#EEF2FF]/60 dark:bg-[rgba(99,102,241,0.14)] border-l-4 border-[#4F46E5] dark:border-[#6366F1] space-y-2">
+            <span className="font-mono text-xs font-extrabold text-[#4F46E5] dark:text-[#818CF8] tracking-wider uppercase block">
               CORE INTUITION // ANALOGY
             </span>
-            <p className="text-sm sm:text-base text-slate-800 dark:text-slate-200 leading-relaxed font-medium">
+            <p className="text-sm sm:text-base text-[#0F172A] dark:text-[#F8FAFC] leading-relaxed font-medium">
               {activeModule.realLifeExample 
                 ? `"${activeModule.realLifeExample.description}"` 
                 : activeModule.subtitle}
@@ -901,26 +901,26 @@ export function LearnSection({
                       </h4>
                     )}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <div className="p-3.5 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] space-y-1">
-                        <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">
+                      <div className="p-3.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] space-y-1">
+                        <span className="text-xs font-mono font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">
                           Time Complexity
                         </span>
-                        <div className="text-lg font-mono font-black text-[#4F46F5] dark:text-[#A58FFF]">
+                        <div className="text-lg font-mono font-black text-[#4F46E5] dark:text-[#818CF8]">
                           O(n)
                         </div>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                        <p className="text-xs text-[#475569] dark:text-[#94A3B8]">
                           {time}
                         </p>
                       </div>
 
-                      <div className="p-3.5 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] space-y-1">
-                        <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400 uppercase">
+                      <div className="p-3.5 rounded-xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] space-y-1">
+                        <span className="text-xs font-mono font-bold text-[#64748B] dark:text-[#94A3B8] uppercase">
                           Space Complexity
                         </span>
                         <div className="text-lg font-mono font-black text-emerald-600 dark:text-emerald-400">
                           O(1)
                         </div>
-                        <p className="text-xs text-slate-600 dark:text-slate-400">
+                        <p className="text-xs text-[#475569] dark:text-[#94A3B8]">
                           {space}
                         </p>
                       </div>
@@ -933,8 +933,8 @@ export function LearnSection({
                 return (
                   <div key={idx} className="space-y-2">
                     {block.heading && (
-                      <h4 className="text-sm font-bold text-[#11182D] dark:text-[#F5F7FF] flex items-center gap-2">
-                        <Code2 className="w-4 h-4 text-[#4F46F5] dark:text-[#6C4CFF]" />
+                      <h4 className="text-sm font-bold text-[#0F172A] dark:text-[#F8FAFC] flex items-center gap-2">
+                        <Code2 className="w-4 h-4 text-[#4F46E5] dark:text-[#818CF8]" />
                         {block.heading}
                       </h4>
                     )}
@@ -948,22 +948,22 @@ export function LearnSection({
           </div>
 
           {/* Key Takeaway Card */}
-          <div className="p-5 rounded-xl bg-[#EEF2FF]/60 dark:bg-[#6C4CFF]/15 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 space-y-1.5">
-            <div className="flex items-center gap-2 text-[#4F46F5] dark:text-[#A58FFF] text-xs font-extrabold uppercase tracking-wider font-mono">
+          <div className="p-5 rounded-xl bg-[#EEF2FF]/60 dark:bg-[rgba(99,102,241,0.14)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] space-y-1.5">
+            <div className="flex items-center gap-2 text-[#4F46E5] dark:text-[#818CF8] text-xs font-extrabold uppercase tracking-wider font-mono">
               <Sparkles className="w-4 h-4" />
               <span>Key Takeaway</span>
             </div>
-            <p className="text-sm md:text-base font-bold text-[#11182D] dark:text-[#F5F7FF] leading-relaxed">
+            <p className="text-sm md:text-base font-bold text-[#0F172A] dark:text-[#F8FAFC] leading-relaxed">
               {activeModule.keyTakeaway}
             </p>
           </div>
 
           {/* Bottom Module Controls */}
-          <div className="pt-6 border-t border-[#E1E7F0] dark:border-[#25204B] flex flex-wrap items-center justify-between gap-4">
+          <div className="pt-6 border-t border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex flex-wrap items-center justify-between gap-4">
             <button
               onClick={handlePrev}
               disabled={activeModuleId === 1}
-              className="px-5 py-2.5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633] disabled:opacity-40 disabled:pointer-events-none flex items-center gap-2 transition cursor-pointer"
+              className="px-5 py-2.5 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-xs font-bold text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] disabled:opacity-40 disabled:pointer-events-none flex items-center gap-2 transition cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Previous Chapter</span>
@@ -976,7 +976,7 @@ export function LearnSection({
                 className={`px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 transition cursor-pointer ${
                   isCompleted
                     ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800'
-                    : 'bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white shadow-xs'
+                    : 'bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white shadow-xs'
                 }`}
               >
                 {isCompleted ? (
@@ -995,7 +995,7 @@ export function LearnSection({
               {activeModuleId < totalChapters ? (
                 <button
                   onClick={handleNext}
-                  className="px-5 py-2.5 rounded-xl bg-[#11182D] dark:bg-white text-white dark:text-[#11182D] font-bold text-xs hover:bg-slate-800 dark:hover:bg-slate-100 flex items-center gap-2 transition cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-[#0F172A] dark:bg-[#F8FAFC] text-white dark:text-[#0F172A] font-bold text-xs hover:bg-slate-800 dark:hover:bg-slate-100 flex items-center gap-2 transition cursor-pointer"
                 >
                   <span>Next Chapter</span>
                   <ArrowRight className="w-4 h-4" />
@@ -1006,7 +1006,7 @@ export function LearnSection({
                     sound.playNavigate();
                     onNavigate('visualize');
                   }}
-                  className="px-5 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white font-bold text-xs shadow-md flex items-center gap-2 transition cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold text-xs shadow-xs flex items-center gap-2 transition cursor-pointer"
                 >
                   <span>Go to Visualize</span>
                   <ArrowRight className="w-4 h-4" />

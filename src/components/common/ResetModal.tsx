@@ -37,7 +37,7 @@ export function ResetModal({
       aria-labelledby="reset-modal-title"
     >
       <div
-        className="relative w-full max-w-[420px] bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] shadow-2xl p-6 sm:p-8 overflow-hidden animate-in fade-in zoom-in-95 duration-200 text-center"
+        className="relative w-full max-w-[420px] bg-white dark:bg-[#0F172A] rounded-3xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-2xl p-6 sm:p-8 overflow-hidden animate-in fade-in zoom-in-95 duration-200 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Warning Alert Icon */}
@@ -48,17 +48,17 @@ export function ResetModal({
         {/* Modal Title */}
         <h3
           id="reset-modal-title"
-          className="text-xl sm:text-2xl font-black text-[#11182D] dark:text-[#F5F7FF] uppercase tracking-tight"
+          className="text-xl sm:text-2xl font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-tight"
         >
           RESET PROGRESS?
         </h3>
 
         {/* Modal Primary & Secondary Description */}
         <div className="mt-3 space-y-1.5">
-          <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <p className="text-xs sm:text-sm font-semibold text-[#334155] dark:text-[#CBD5E1]">
             Are you sure you want to reset your learning progress?
           </p>
-          <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed max-w-xs mx-auto">
+          <p className="text-xs text-[#64748B] dark:text-[#94A3B8] leading-relaxed max-w-xs mx-auto">
             All completed theory chapters, watched videos, completed game levels, quiz progress, and mastery progress will be reset.
           </p>
         </div>
@@ -68,7 +68,7 @@ export function ResetModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-3 px-4 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-[#F8FAFC] dark:bg-[#111633] hover:bg-slate-100 dark:hover:bg-[#191F44] text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm tracking-wide uppercase transition active:scale-95 cursor-pointer focus:outline-hidden"
+            className="w-full py-3 px-4 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] bg-[#F1F5F9] dark:bg-[#16203B] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D] text-[#0F172A] dark:text-[#F8FAFC] font-extrabold text-xs sm:text-sm tracking-wide uppercase transition active:scale-95 cursor-pointer focus:outline-hidden"
           >
             EXIT
           </button>
@@ -79,7 +79,7 @@ export function ResetModal({
               onConfirmReset();
               onClose();
             }}
-            className="w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-extrabold text-xs sm:text-sm tracking-wide uppercase flex items-center justify-center gap-1.5 transition shadow-md shadow-red-600/20 active:scale-95 cursor-pointer focus:outline-hidden"
+            className="w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-extrabold text-xs sm:text-sm tracking-wide uppercase flex items-center justify-center gap-1.5 transition shadow-xs active:scale-95 cursor-pointer focus:outline-hidden"
           >
             <RotateCcw className="w-4 h-4 stroke-[2.5]" />
             <span>RESET</span>

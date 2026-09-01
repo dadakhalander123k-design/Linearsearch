@@ -134,7 +134,7 @@ export function QuizSection({
 
   const currentQIdentifier = `CORE-${String(currentQ.id).padStart(2, '0')}`;
 
-  // ─── FINAL RESULT / QUIZ ASSESSMENT COMPLETED (TARGET REFERENCE 2 - NO XP) ───
+  // ─── FINAL RESULT / QUIZ ASSESSMENT COMPLETED ───
   if (isSubmitted) {
     const masteryGrade = 
       scorePercent >= 90
@@ -147,7 +147,7 @@ export function QuizSection({
 
     return (
       <div className="max-w-4xl mx-auto space-y-6 pb-16 animate-in fade-in duration-300">
-        <div className="p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs flex flex-col items-center text-center space-y-6">
+        <div className="p-6 sm:p-12 rounded-3xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs flex flex-col items-center text-center space-y-6">
           
           {/* Top Trophy Icon */}
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-700/50 flex items-center justify-center text-amber-500 dark:text-amber-400 shadow-xs">
@@ -163,10 +163,10 @@ export function QuizSection({
 
           {/* Main Completion Heading & Supporting Description */}
           <div className="space-y-2 max-w-xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#11182D] dark:text-[#F5F7FF] uppercase tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F172A] dark:text-[#F8FAFC] uppercase tracking-tight">
               QUIZ ASSESSMENT COMPLETED
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-[#475569] dark:text-[#94A3B8] leading-relaxed font-normal">
               {scorePercent >= 70
                 ? 'Incredible performance! You demonstrated thorough command of Linear Search operations and algorithmic constraints.'
                 : 'Good effort! Review the curriculum modules to strengthen your understanding of Linear Search and retake the quiz.'}
@@ -174,25 +174,25 @@ export function QuizSection({
           </div>
 
           {/* Large Highlighted Score Card */}
-          <div className="w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#111633] border-2 border-[#E1E7F0] dark:border-[#25204B] shadow-xs text-center space-y-2">
-            <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase block">
+          <div className="w-full max-w-md mx-auto p-6 sm:p-8 rounded-2xl sm:rounded-3xl bg-white dark:bg-[#16203B] border-2 border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs text-center space-y-2">
+            <span className="text-[11px] sm:text-xs font-mono font-bold tracking-widest text-[#64748B] dark:text-[#94A3B8] uppercase block">
               FINAL HIGHLIGHTED SCORE
             </span>
             <div className="text-5xl sm:text-6xl font-black text-emerald-500 dark:text-emerald-400 font-mono tracking-tight my-2">
               {scorePercent}%
             </div>
             <div>
-              <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-slate-100 dark:bg-[#0B1025] border border-slate-200/80 dark:border-[#25204B] text-xs font-semibold text-slate-700 dark:text-slate-300">
+              <span className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-[#F1F5F9] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-xs font-semibold text-[#475569] dark:text-[#94A3B8]">
                 {correctCount} / {totalQuestions} Questions Correct
               </span>
             </div>
           </div>
 
-          {/* Summary Statistics Cards (3 Cards Row - STRICTLY NO XP) */}
+          {/* Summary Statistics Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full max-w-2xl mx-auto pt-2">
             {/* CORRECT Card */}
             <div className="p-4 sm:p-5 rounded-2xl bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-900/50 text-center">
-              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] block mb-1">
                 CORRECT
               </span>
               <span className="text-xl sm:text-2xl font-black font-mono text-emerald-600 dark:text-emerald-400">
@@ -202,7 +202,7 @@ export function QuizSection({
 
             {/* INCORRECT Card */}
             <div className="p-4 sm:p-5 rounded-2xl bg-rose-50/50 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/50 text-center">
-              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] block mb-1">
                 INCORRECT
               </span>
               <span className="text-xl sm:text-2xl font-black font-mono text-rose-500 dark:text-rose-400">
@@ -211,11 +211,11 @@ export function QuizSection({
             </div>
 
             {/* ACCURACY Card */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-[#EEF2FF]/60 dark:bg-[#6C4CFF]/10 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-center">
-              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-1">
+            <div className="p-4 sm:p-5 rounded-2xl bg-[#EEF2FF]/60 dark:bg-[rgba(99,102,241,0.14)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] text-center">
+              <span className="text-[10px] sm:text-[11px] font-mono font-bold uppercase tracking-wider text-[#64748B] dark:text-[#94A3B8] block mb-1">
                 ACCURACY
               </span>
-              <span className="text-xl sm:text-2xl font-black font-mono text-[#4F46F5] dark:text-[#A58FFF]">
+              <span className="text-xl sm:text-2xl font-black font-mono text-[#4F46E5] dark:text-[#818CF8]">
                 {scorePercent}%
               </span>
             </div>
@@ -225,26 +225,26 @@ export function QuizSection({
 
         {/* Action Buttons: Retake Quiz and Back to Home */}
         <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-          {/* Button 1: Retake Quiz (Primary filled button with restart icon) */}
+          {/* Button 1: Retake Quiz */}
           <button
             onClick={handleRetake}
-            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[#4F46F5] hover:bg-[#4338CA] dark:bg-[#6C4CFF] dark:hover:bg-[#5838EB] text-white font-bold text-sm sm:text-base shadow-sm shadow-[#4F46F5]/25 hover:shadow-md transition-all duration-150 active:scale-98 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/50 select-none"
+            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white font-bold text-sm sm:text-base shadow-xs transition-all duration-150 active:scale-98 cursor-pointer"
             aria-label="Retake Quiz"
           >
             <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2]" />
             <span>Retake Quiz</span>
           </button>
 
-          {/* Button 2: Back to Home (Secondary outlined button with home icon) */}
+          {/* Button 2: Back to Home */}
           <button
             onClick={() => {
               sound.playClick();
               onNavigate('overview');
             }}
-            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-white dark:bg-[#0B1025] hover:bg-[#F8FAFC] dark:hover:bg-[#131A38] border border-[#E1E7F0] dark:border-[#25204B] text-[#11182D] dark:text-[#F5F7FF] font-bold text-sm sm:text-base shadow-2xs hover:shadow-xs transition-all duration-150 active:scale-98 cursor-pointer focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/40 select-none"
+            className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-white dark:bg-[#0F172A] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#0F172A] dark:text-[#F8FAFC] font-bold text-sm sm:text-base shadow-2xs transition-all duration-150 active:scale-98 cursor-pointer"
             aria-label="Back to Home"
           >
-            <Home className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] text-[#4F46F5] dark:text-[#A58FFF]" />
+            <Home className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.2] text-[#4F46E5] dark:text-[#818CF8]" />
             <span>Back to Home</span>
           </button>
         </div>
@@ -254,39 +254,39 @@ export function QuizSection({
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 pb-16">
-      {/* ─── CARD 1: QUIZ OVERVIEW & PROGRESS HEADER (REFERENCE IMAGE 2) ─── */}
-      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-4">
+      {/* ─── CARD 1: QUIZ OVERVIEW & PROGRESS HEADER ─── */}
+      <div className="p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] shadow-xs space-y-4">
         {/* Top Meta Line */}
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] font-mono text-[11px] font-extrabold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] text-[#4F46E5] dark:text-[#818CF8] font-mono text-[11px] font-extrabold uppercase tracking-wider">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>KNOWLEDGE ASSESSMENT</span>
           </div>
-          <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
+          <span className="text-xs sm:text-sm text-[#64748B] dark:text-[#94A3B8] font-medium">
             Linear Search Knowledge Assessment ({totalQuestions} Questions)
           </span>
         </div>
 
         {/* Main Title & Description */}
         <div>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] tracking-tight">
             Algorithm Knowledge Check
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-1.5 leading-relaxed max-w-3xl">
+          <p className="text-sm sm:text-base text-[#475569] dark:text-[#94A3B8] mt-1.5 leading-relaxed max-w-3xl">
             Test your understanding of sequential array scanning, pointer movements, best/worst-case complexities, comparison limits, and search termination conditions.
           </p>
         </div>
 
-        <div className="border-t border-[#E1E7F0] dark:border-[#25204B] pt-4 space-y-3">
+        <div className="border-t border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] pt-4 space-y-3">
           {/* Progress label */}
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300">
-              <Sparkles className="w-4 h-4 text-[#4F46F5] dark:text-[#A58FFF]" />
+            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#0F172A] dark:text-[#F8FAFC]">
+              <Sparkles className="w-4 h-4 text-[#4F46E5] dark:text-[#818CF8]" />
               <span>
-                Progress: <strong className="text-[#4F46F5] dark:text-[#A58FFF] font-bold">{answeredCount}</strong> / {totalQuestions} Answered
+                Progress: <strong className="text-[#4F46E5] dark:text-[#818CF8] font-bold">{answeredCount}</strong> / {totalQuestions} Answered
               </span>
             </div>
-            <span className="text-xs font-mono text-slate-400 dark:text-slate-500">
+            <span className="text-xs font-mono text-[#64748B] dark:text-[#94A3B8]">
               Pass Mark: 70%
             </span>
           </div>
@@ -309,12 +309,12 @@ export function QuizSection({
                   }}
                   className={`min-w-[54px] sm:min-w-[62px] px-3.5 py-2.5 rounded-xl font-mono text-xs font-bold transition flex flex-col items-center justify-center shrink-0 relative cursor-pointer ${
                     isCur
-                      ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs ring-2 ring-[#4F46F5]/30'
+                      ? 'bg-[#4F46E5] dark:bg-[#6366F1] text-white shadow-xs ring-2 ring-[#4F46E5]/30'
                       : qEvaluated
-                      ? 'bg-slate-50 dark:bg-[#111633] text-[#11182D] dark:text-[#F5F7FF] border border-[#E1E7F0] dark:border-[#25204B] hover:bg-slate-100 dark:hover:bg-[#191F44]'
+                      ? 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#0F172A] dark:text-[#F8FAFC] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] hover:bg-[#E2E8F0] dark:hover:bg-[#1E2B4D]'
                       : qSelected
-                      ? 'bg-slate-100 dark:bg-[#111633] text-slate-800 dark:text-slate-300 border border-slate-300 dark:border-[#25204B]'
-                      : 'bg-slate-50 dark:bg-[#111633]/60 text-slate-600 dark:text-slate-400 border border-[#E1E7F0] dark:border-[#25204B] hover:bg-slate-100 dark:hover:bg-[#111633]'
+                      ? 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#0F172A] dark:text-[#F8FAFC] border border-slate-300 dark:border-[rgba(99,102,241,0.2)]'
+                      : 'bg-[#F1F5F9] dark:bg-[#16203B]/60 text-[#64748B] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] hover:bg-[#E2E8F0] dark:hover:bg-[#16203B]'
                   }`}
                 >
                   <span className="text-xs">Q{idx + 1}</span>
@@ -340,22 +340,22 @@ export function QuizSection({
         </div>
       </div>
 
-      {/* ─── CARD 2: QUESTION / ANSWERING CARD (REFERENCE IMAGES) ─── */}
-      <div className={`p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border-2 transition shadow-xs space-y-6 ${
+      {/* ─── CARD 2: QUESTION / ANSWERING CARD ─── */}
+      <div className={`p-6 sm:p-8 rounded-2xl bg-white dark:bg-[#0F172A] border-2 transition shadow-xs space-y-6 ${
         isEvaluated
           ? isCorrect
             ? 'border-emerald-400 dark:border-emerald-600'
             : 'border-red-400 dark:border-red-600'
-          : 'border-[#E1E7F0] dark:border-[#25204B]'
+          : 'border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]'
       }`}>
         {/* Question Header Row */}
         <div className="flex items-center justify-between gap-3">
           {/* Left: Purple Badge + Question Identifier */}
           <div className="flex items-center gap-3">
-            <span className="px-3.5 py-1 rounded-lg bg-[#4F46F5] dark:bg-[#6C4CFF] text-white font-bold text-xs tracking-wide">
+            <span className="px-3.5 py-1 rounded-lg bg-[#4F46E5] dark:bg-[#6366F1] text-white font-bold text-xs tracking-wide">
               Question {String(currentQIndex + 1).padStart(2, '0')} of {String(totalQuestions).padStart(2, '0')}
             </span>
-            <span className="font-mono text-xs font-extrabold text-[#4F46F5] dark:text-[#A58FFF] tracking-wider">
+            <span className="font-mono text-xs font-extrabold text-[#4F46E5] dark:text-[#818CF8] tracking-wider">
               {currentQIdentifier}
             </span>
           </div>
@@ -374,7 +374,7 @@ export function QuizSection({
               </div>
             )
           ) : (
-            <div className="px-3 py-1 rounded-lg bg-slate-50 dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-400 text-xs font-semibold">
+            <div className="px-3 py-1 rounded-lg bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#64748B] dark:text-[#94A3B8] text-xs font-semibold">
               Pending Evaluation
             </div>
           )}
@@ -382,11 +382,11 @@ export function QuizSection({
 
         {/* Question Title */}
         <div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] leading-snug">
+          <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A] dark:text-[#F8FAFC] leading-snug">
             {currentQIndex + 1}. {currentQ.question}
           </h3>
           {currentQ.context && (
-            <p className="text-xs font-mono text-[#4F46F5] dark:text-[#A58FFF] bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 px-3 py-1.5 rounded-xl w-fit mt-2.5">
+            <p className="text-xs font-mono text-[#4F46E5] dark:text-[#818CF8] bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)] px-3 py-1.5 rounded-xl w-fit mt-2.5">
               {currentQ.context}
             </p>
           )}
@@ -398,16 +398,8 @@ export function QuizSection({
             const isThisOptionSelected = selectedKey === opt.key;
             const isThisOptionCorrect = opt.key === currentQ.correctKey;
 
-            // Strict Visual State Resolution:
-            // 1. EVALUATED:
-            //    - Correct Answer => GREEN border, mint bg, green badge
-            //    - Selected Incorrect Answer => RED border, light red bg, red badge
-            //    - Unselected other options => Neutral dimmed
-            // 2. UN-EVALUATED:
-            //    - Selected => Neutral slate selected (NO green/red)
-            //    - Unselected => Neutral default
-            let containerClasses = 'bg-white dark:bg-[#0B1025] border-[#E1E7F0] dark:border-[#25204B] text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-[#111633]';
-            let badgeClasses = 'bg-slate-100 dark:bg-[#111633] text-slate-600 dark:text-slate-300 border-[#E1E7F0] dark:border-[#25204B]';
+            let containerClasses = 'bg-white dark:bg-[#0F172A] border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#0F172A] dark:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B]';
+            let badgeClasses = 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#475569] dark:text-[#94A3B8] border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]';
 
             if (isEvaluated) {
               if (isThisOptionCorrect) {
@@ -417,12 +409,12 @@ export function QuizSection({
                 containerClasses = 'bg-red-50 dark:bg-red-950/50 border-2 border-red-500 dark:border-red-600 text-red-950 dark:text-red-200 font-bold shadow-xs';
                 badgeClasses = 'bg-red-500 text-white border-red-500';
               } else {
-                containerClasses = 'bg-white/60 dark:bg-[#0B1025]/60 border-[#E1E7F0]/60 dark:border-[#25204B]/60 text-slate-400 dark:text-slate-500 opacity-60';
-                badgeClasses = 'bg-slate-100 dark:bg-[#111633] text-slate-400 border-[#E1E7F0] dark:border-[#25204B]';
+                containerClasses = 'bg-white/60 dark:bg-[#0F172A]/60 border-[#E2E8F0]/60 dark:border-[rgba(99,102,241,0.15)] text-[#64748B] dark:text-[#94A3B8] opacity-60';
+                badgeClasses = 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#64748B] dark:text-[#94A3B8] border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]';
               }
             } else if (isThisOptionSelected) {
-              containerClasses = 'bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border-2 border-[#4F46F5] dark:border-[#6C4CFF] text-[#11182D] dark:text-[#F5F7FF] shadow-xs font-semibold';
-              badgeClasses = 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white border-[#4F46F5] dark:border-[#6C4CFF]';
+              containerClasses = 'bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.18)] border-2 border-[#4F46E5] dark:border-[#6366F1] text-[#0F172A] dark:text-[#F8FAFC] shadow-xs font-semibold';
+              badgeClasses = 'bg-[#4F46E5] dark:bg-[#6366F1] text-white border-[#4F46E5] dark:border-[#6366F1]';
             }
 
             return (
@@ -459,11 +451,11 @@ export function QuizSection({
         )}
 
         {/* Bottom Question Navigation Controls */}
-        <div className="pt-5 border-t border-[#E1E7F0] dark:border-[#25204B] flex items-center justify-between gap-4">
+        <div className="pt-5 border-t border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex items-center justify-between gap-4">
           <button
             onClick={handlePrev}
             disabled={currentQIndex === 0}
-            className="px-5 py-2.5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-xs font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633] disabled:opacity-30 disabled:pointer-events-none flex items-center gap-2 transition cursor-pointer"
+            className="px-5 py-2.5 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-xs font-bold text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] disabled:opacity-30 disabled:pointer-events-none flex items-center gap-2 transition cursor-pointer"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>← Previous</span>
@@ -473,7 +465,7 @@ export function QuizSection({
             <button
               onClick={handleNextClick}
               disabled={isSubmitting}
-              className="px-6 py-3 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs transition cursor-pointer active:scale-98 disabled:opacity-50"
+              className="px-6 py-3 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] dark:bg-[#6366F1] dark:hover:bg-[#4F46E5] text-white text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-xs transition cursor-pointer active:scale-98 disabled:opacity-50"
             >
               <span>
                 {!isEvaluated
@@ -486,18 +478,18 @@ export function QuizSection({
           </div>
         </div>
 
-        {/* ─── TECHNICAL EXPLANATION CARD (SECTIONS 7 & 8: VISIBLE ONLY AFTER EVALUATION) ─── */}
+        {/* ─── TECHNICAL EXPLANATION CARD ─── */}
         {isEvaluated && currentQ.explanation && (
-          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] space-y-2.5 shadow-xs animate-in fade-in duration-200">
+          <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F1F5F9] dark:bg-[#16203B] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] space-y-2.5 shadow-xs animate-in fade-in duration-200">
             <div className="flex items-center gap-2.5">
-              <div className="w-5 h-5 rounded-full bg-[#4F46F5] dark:bg-[#6C4CFF] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
+              <div className="w-5 h-5 rounded-full bg-[#4F46E5] dark:bg-[#6366F1] text-white flex items-center justify-center font-bold text-xs shrink-0 shadow-xs">
                 ?
               </div>
-              <span className="font-bold text-sm text-[#11182D] dark:text-[#F5F7FF]">
+              <span className="font-bold text-sm text-[#0F172A] dark:text-[#F8FAFC]">
                 Technical Explanation:
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal pl-7 sm:pl-7">
+            <p className="text-xs sm:text-sm text-[#475569] dark:text-[#94A3B8] leading-relaxed font-normal pl-7 sm:pl-7">
               {currentQ.explanation}
             </p>
           </div>

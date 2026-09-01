@@ -19,23 +19,23 @@ export function CodeBlock({ code, language = 'java', title }: CodeBlockProps) {
   };
 
   return (
-    <div className="rounded-2xl overflow-hidden border border-[#E1E7F0] dark:border-[#25204B] bg-[#0A0F24] dark:bg-[#070B1C] text-slate-100 shadow-sm">
-      <div className="flex items-center justify-between px-4 py-2.5 bg-[#0D1430] dark:bg-[#0B1025] border-b border-[#25204B]">
+    <div className="rounded-2xl overflow-hidden border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] bg-[#0A0E1F] dark:bg-[#070A16] text-slate-100 shadow-xs">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-[#0F162E] dark:bg-[#0B0F1F] border-b border-[rgba(99,102,241,0.18)]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
           </div>
-          {title && <span className="text-xs font-mono text-[#AAB6D1] ml-2">{title}</span>}
+          {title && <span className="text-xs font-mono text-[#94A3B8] ml-2">{title}</span>}
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[11px] font-mono font-semibold text-[#6C4CFF] dark:text-[#7E60FF] uppercase tracking-wider">
+          <span className="text-[11px] font-mono font-semibold text-[#818CF8] uppercase tracking-wider">
             {language}
           </span>
           <button
             onClick={handleCopy}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-white/10 transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-100 hover:bg-white/10 transition cursor-pointer"
             title="Copy code"
             aria-label="Copy code to clipboard"
           >
@@ -43,7 +43,7 @@ export function CodeBlock({ code, language = 'java', title }: CodeBlockProps) {
           </button>
         </div>
       </div>
-      <pre className="p-4 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto text-[#D5DCF7] selection:bg-[#4F46F5]/40">
+      <pre className="p-4 font-mono text-xs md:text-sm leading-relaxed overflow-x-auto text-[#E2E8F0] selection:bg-[#4F46E5]/40">
         <code>{code}</code>
       </pre>
     </div>

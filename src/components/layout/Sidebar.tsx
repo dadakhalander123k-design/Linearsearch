@@ -72,7 +72,7 @@ export function Sidebar({
         id="main-navigation-sidebar"
         onMouseEnter={() => setIsSidebarHovered(true)}
         onMouseLeave={() => setIsSidebarHovered(false)}
-        className={`group/sidebar fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-[#0B1025] border-r border-[#E1E7F0] dark:border-[#25204B] flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
+        className={`group/sidebar fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-[#090D1A] border-r border-[#E2E8F0] dark:border-[rgba(99,102,241,0.18)] flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Main Navigation"
@@ -84,7 +84,7 @@ export function Sidebar({
               sound.playClick();
               onClose();
             }}
-            className="w-10 h-10 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-[#506080] hover:text-[#11182D] dark:text-[#AAB6D1] dark:hover:text-[#F5F7FF] hover:bg-[#F1F4F9] dark:hover:bg-[#0D132C] transition active:scale-95 flex items-center justify-center cursor-pointer shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)] text-[#475569] hover:text-[#0F172A] dark:text-[#94A3B8] dark:hover:text-[#F8FAFC] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] transition active:scale-95 flex items-center justify-center cursor-pointer shadow-xs focus:outline-hidden focus:ring-2 focus:ring-[#4F46E5]/30"
             aria-label="Close navigation"
             title="Close navigation"
           >
@@ -93,7 +93,7 @@ export function Sidebar({
         </div>
 
         {/* Navigation Menu Label (Appears exactly ONCE) */}
-        <div className="px-5 pb-2 text-[11px] font-bold tracking-wider text-[#8290A8] dark:text-[#7885A5] uppercase font-mono">
+        <div className="px-5 pb-2 text-[11px] font-bold tracking-wider text-[#64748B] dark:text-[#64748B] uppercase font-mono">
           NAVIGATION MENU
         </div>
 
@@ -113,15 +113,15 @@ export function Sidebar({
                     onClose();
                   }
                 }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/40 ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46E5]/40 cursor-pointer ${
                   isActive
-                    ? 'bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] text-[#4F46F5] dark:text-[#F5F7FF] font-semibold shadow-xs border border-[#DCE3EF] dark:border-[#38306E]'
-                    : 'text-[#506080] dark:text-[#AAB6D1] hover:bg-[#F1F4F9] dark:hover:bg-[#0D132C] hover:text-[#11182D] dark:hover:text-[#F5F7FF]'
+                    ? 'bg-[#EEF2FF] dark:bg-[rgba(99,102,241,0.16)] text-[#4F46E5] dark:text-[#F8FAFC] font-semibold shadow-xs border border-[rgba(79,70,229,0.2)] dark:border-[rgba(99,102,241,0.3)]'
+                    : 'text-[#475569] dark:text-[#94A3B8] hover:bg-[#F1F5F9] dark:hover:bg-[#16203B] hover:text-[#0F172A] dark:hover:text-[#F8FAFC]'
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#4F46F5] dark:text-[#6C4CFF]' : 'text-[#8290A8] dark:text-[#7885A5]'}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#4F46E5] dark:text-[#818CF8]' : 'text-[#64748B] dark:text-[#64748B]'}`} />
                   </div>
                   <span className="truncate">{item.label}</span>
                 </div>
@@ -132,8 +132,8 @@ export function Sidebar({
                       : 'opacity-0 group-hover/sidebar:opacity-100 group-focus-within/sidebar:opacity-100'
                   } ${
                     isActive
-                      ? 'bg-[#4F46F5]/10 dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#AAB6D1] font-bold border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30'
-                      : 'bg-[#F1F4F9] dark:bg-[#0D132C] text-[#8290A8] dark:text-[#7885A5] border border-[#E1E7F0] dark:border-[#25204B]'
+                      ? 'bg-[#4F46E5]/10 dark:bg-[#6366F1]/20 text-[#4F46E5] dark:text-[#818CF8] font-bold border border-[#4F46E5]/20 dark:border-[#6366F1]/30'
+                      : 'bg-[#F1F5F9] dark:bg-[#16203B] text-[#64748B] dark:text-[#94A3B8] border border-[#E2E8F0] dark:border-[rgba(99,102,241,0.2)]'
                   }`}>
                     {item.badge}
                   </span>

@@ -62,7 +62,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#080D20] text-[#11182D] dark:text-[#F5F7FF] flex flex-col transition-colors duration-200">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#090D1A] text-[#0F172A] dark:text-[#F8FAFC] flex flex-col transition-colors duration-200">
       {/* Navigation Sidebar (Desktop + Mobile overlay drawer) */}
       <Sidebar
         isOpen={isSidebarOpen}
