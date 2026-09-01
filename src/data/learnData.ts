@@ -625,5 +625,238 @@ else:
         }
       }
     ]
+  },
+
+  // ─── TOPIC 11: REAL-WORLD APPLICATIONS & EDGE CASES ─────────────────────
+  {
+    id: 11,
+    slug: 'real-world-applications-edge-cases',
+    badge: 'Module 11',
+    title: '11. Real-World Applications & Edge Cases',
+    subtitle: 'Duplicate elements, empty collections, single-item lookups, and practical optimizations',
+    summary: 'Linear search handles diverse data structures and real-world edge cases effortlessly, including duplicates, empty inputs, and non-numeric searches.',
+    realLifeExample: {
+      icon: 'Layers',
+      title: 'Everyday Analogy: Finding Keys in Multiple Pockets',
+      description: 'When looking through the pockets of your jacket, you check the first pocket, then the next. If you find your keys early, you stop immediately. If a pocket has two identical coins, you pick the first one you touch.'
+    },
+    computerExamples: [
+      "Searching for a contact by name or phone number in an address book",
+      "Scanning a database table without an indexed primary key",
+      "Finding an active network socket connection from an open connections array",
+      "Locating a specific word or character in an unformatted text document",
+      "Verifying if a freshly entered username is already taken in memory",
+      "Checking sensor telemetry records for an anomaly threshold"
+    ],
+    keyTakeaway: 'Linear search gracefully handles unsorted data, empty inputs, and duplicate values by returning the first matching index found.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'In practical software engineering, data is not always clean integers in neat order. Programs frequently search through strings, user objects, database rows, and collections that may be empty or contain duplicates.'
+      },
+      {
+        type: 'key_value_cards',
+        heading: 'Crucial Edge Cases to Consider',
+        data: [
+          {
+            title: '1. Empty Array (n = 0)',
+            badge: 'Edge Case',
+            description: 'Loop condition (0 < 0) immediately evaluates to false. The function instantly returns -1 safely without runtime errors.'
+          },
+          {
+            title: '2. Single Element (n = 1)',
+            badge: 'Edge Case',
+            description: 'Only 1 comparison is performed. If it matches target, returns 0. Otherwise, the loop terminates and returns -1.'
+          },
+          {
+            title: '3. Duplicate Values',
+            badge: 'Behavior',
+            description: 'Standard linear search returns the FIRST occurrence (lowest index). If you need ALL occurrences, collect matching indices in a list.'
+          }
+        ]
+      },
+      {
+        type: 'visual_diagram',
+        heading: 'Duplicate Element Search: Array [14, 9, 25, 9, 40] with Target = 9',
+        data: {
+          title: 'First Occurrence Returned at Index 1',
+          array: [14, 9, 25, 9, 40],
+          highlightIndex: 1,
+          target: 9,
+          caption: 'Target 9 exists at both index 1 and index 3. Standard linear search stops at index 1 and returns 1.'
+        }
+      },
+      {
+        type: 'multi_code',
+        heading: 'Searching Objects and Strings in Real Applications',
+        data: {
+          c: `// Searching array of user records by ID
+struct User {
+    int id;
+    char name[50];
+};
+
+int findUserById(struct User users[], int size, int targetId) {
+    for (int i = 0; i < size; i++) {
+        if (users[i].id == targetId) {
+            return i; // User found
+        }
+    }
+    return -1; // User not found
+}`,
+          cExplanation: [
+            'Iterates through struct User records sequentially.',
+            'Compares user.id with the target search ID.',
+            'Returns the array index where the user record resides.'
+          ],
+          cpp: `// Finding string in vector
+#include <vector>
+#include <string>
+
+int findStudent(const std::vector<std::string>& students, const std::string& name) {
+    for (size_t i = 0; i < students.size(); ++i) {
+        if (students[i] == name) {
+            return static_cast<int>(i);
+        }
+    }
+    return -1;
+}`,
+          cppExplanation: [
+            'Accepts std::vector of student names as strings.',
+            'Uses size_t for safe index bounds checking.',
+            'Returns matching index or -1 if the student is absent.'
+          ],
+          java: `// Search an array of objects
+class Employee {
+    int id;
+    String department;
+}
+
+public static int findByDept(Employee[] list, String dept) {
+    for (int i = 0; i < list.length; i++) {
+        if (list[i].department.equalsIgnoreCase(dept)) {
+            return i;
+        }
+    }
+    return -1;
+}`,
+          javaExplanation: [
+            'Iterates over an array of Employee objects.',
+            'Uses equalsIgnoreCase() for robust case-insensitive string matching.',
+            'Returns index of first employee matching the target department.'
+          ],
+          python: `# Finding all matching indices in Python
+def linear_search_all(arr, target):
+    matches = []
+    for i in range(len(arr)):
+        if arr[i] == target:
+            matches.append(i)
+    return matches  # Returns list of all indices
+
+scores = [85, 92, 85, 78, 85]
+# Returns [0, 2, 4] for target 85
+print(linear_search_all(scores, 85))`,
+          pythonExplanation: [
+            'Rather than stopping at the first match, continues through the full array.',
+            'Appends each matching index to a results list.',
+            'Returns a complete list of occurrences [0, 2, 4].'
+          ]
+        }
+      },
+      {
+        type: 'callout',
+        alertType: 'tip',
+        heading: 'Early Exit Optimization',
+        text: 'Always return the index immediately when a match is found rather than continuing the loop. This ensures your best case stays O(1) and average search time is cut in half (n/2 comparisons)!'
+      }
+    ]
+  },
+
+  // ─── TOPIC 12: LINEAR SEARCH VS BINARY SEARCH & MASTER SUMMARY ───────────
+  {
+    id: 12,
+    slug: 'linear-vs-binary-search-master-summary',
+    badge: 'Module 12',
+    title: '12. Linear Search vs. Binary Search & Summary',
+    subtitle: 'Choosing the right searching algorithm, sorting tradeoffs, and complete curriculum synthesis',
+    summary: 'Compare Linear Search with Binary Search, understand when sorting justifies the logarithmic speedup, and review the complete linear search mastery checklist.',
+    realLifeExample: {
+      icon: 'Scale',
+      title: 'Everyday Analogy: Finding a Word in an Unsorted Pile vs. a Dictionary',
+      description: 'If papers are scattered randomly on a table, you have no choice but to scan one by one (Linear Search). But in a printed dictionary sorted alphabetically from A to Z, you can open the middle and eliminate half the pages at each step (Binary Search).'
+    },
+    computerExamples: [
+      "Unsorted grocery shopping cart items → Linear Search (fastest, no sort overhead)",
+      "Sorted national voter ID registry (100 million entries) → Binary Search (sub-millisecond lookups)",
+      "Small cached lists (< 50 items) → Linear Search (low CPU cache miss overhead)",
+      "Dynamic linked lists where middle jumps are impossible → Linear Search",
+      "Single one-off search on raw data → Linear Search (avoid O(n log n) sorting cost)"
+    ],
+    keyTakeaway: 'Use Linear Search for unsorted or small datasets where sorting is impractical. Use Binary Search when data is already sorted and searched repeatedly.',
+    content: [
+      {
+        type: 'paragraph',
+        text: 'A foundational question in computer science is: when should you use Linear Search over faster algorithms like Binary Search? The answer depends on data volume, whether the collection is already sorted, and how frequently searches occur.'
+      },
+      {
+        type: 'comparison_cases',
+        heading: 'Head-to-Head: Linear Search vs Binary Search',
+        data: {
+          items: [
+            {
+              criterion: 'Time Complexity (Worst)',
+              linear: 'O(n) — Linear time (checks up to n items)',
+              binary: 'O(log n) — Logarithmic time (divides search space in half)'
+            },
+            {
+              criterion: 'Data Prerequisite',
+              linear: 'None! Works on unsorted, random, and duplicate data',
+              binary: 'STRICT: Data MUST be sorted beforehand'
+            },
+            {
+              criterion: 'Data Structure Support',
+              linear: 'Arrays, Linked Lists, Streams, Files, Trees',
+              binary: 'Arrays with random index access (O(1) indexing)'
+            },
+            {
+              criterion: 'Implementation Simplicity',
+              linear: 'Trivial (single loop, ~5 lines of code)',
+              binary: 'Moderate (tracking low, high, mid pointers & overflow)'
+            },
+            {
+              criterion: 'Best Used For',
+              linear: 'Small arrays (n < 50), unsorted lists, single search queries',
+              binary: 'Large sorted arrays (n > 10,000) with frequent repeated lookups'
+            }
+          ]
+        }
+      },
+      {
+        type: 'step_list',
+        heading: 'Linear Search Master Rulebook',
+        data: [
+          'Step 1: Always verify if data is sorted. If unsorted, Linear Search is your direct, zero-overhead solution.',
+          'Step 2: Start pointer at index 0 and inspect element arr[i] against target.',
+          'Step 3: If arr[i] == target, return index i immediately (Early Termination).',
+          'Step 4: Increment pointer i by 1 and repeat until i == array.length.',
+          'Step 5: If the loop finishes without finding target, safely return -1 (Not Found).',
+          'Step 6: Remember: Best Case = O(1) (first item), Worst Case = O(n) (last item or not present), Space = O(1).'
+        ]
+      },
+      {
+        type: 'complexity_summary',
+        heading: 'Complete Linear Search Formula Matrix',
+        data: {
+          time: 'Best: O(1) | Average: O(n/2) = O(n) | Worst: O(n)',
+          space: 'O(1) Auxiliary Space (In-place algorithm requiring no extra memory)'
+        }
+      },
+      {
+        type: 'callout',
+        alertType: 'success',
+        heading: 'Curriculum Mastery Complete!',
+        text: 'You have mastered all 12 core theory modules! Continue to the Interactive Visualizer, Challenge Games, and Mastery Quiz to earn your Official Certificate of Mastery!'
+      }
+    ]
   }
 ];

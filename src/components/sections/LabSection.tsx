@@ -243,11 +243,11 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       {/* Header */}
       <div className="space-y-1">
         <div className="flex items-center gap-2">
-          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+          <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
             Interactive Search Lab
           </span>
         </div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
           Interactive Linear Search Lab
         </h1>
         <p className="text-sm text-slate-600 dark:text-slate-400">
@@ -256,14 +256,14 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       </div>
 
       {/* Custom Array Creation Panel */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3.5">
+      <div className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E1E7F0] dark:border-[#25204B] pb-3.5">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/70 border border-indigo-200 dark:border-indigo-800/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+            <div className="w-8 h-8 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 flex items-center justify-center text-[#4F46F5] dark:text-[#A58FFF]">
               <ListPlus className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-slate-900 dark:text-white">
+              <h2 className="text-sm font-bold text-[#11182D] dark:text-[#F5F7FF]">
                 Custom Array Configuration
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -280,10 +280,10 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 key={sz}
                 type="button"
                 onClick={() => handleCustomSizeChange(sz)}
-                className={`px-2.5 py-1 rounded-lg font-mono text-xs font-semibold transition ${
+                className={`px-2.5 py-1 rounded-lg font-mono text-xs font-semibold transition cursor-pointer ${
                   customSizeInput === sz
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+                    ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
+                    : 'bg-[#F8FAFC] dark:bg-[#111633] text-slate-600 dark:text-slate-300 border border-[#E1E7F0] dark:border-[#25204B] hover:bg-slate-100 dark:hover:bg-[#191F44]'
                 }`}
               >
                 {sz}
@@ -310,13 +310,13 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     const parsed = parseInt(e.target.value, 10);
                     handleCustomSizeChange(parsed);
                   }}
-                  className="w-full px-3 py-2 rounded-xl text-sm bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono font-bold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3 py-2 rounded-xl text-sm bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30 focus:border-[#4F46F5]"
                 />
               </div>
             </div>
 
             <div className="flex-1 text-xs text-slate-500 dark:text-slate-400 sm:pt-5">
-              <span>Generating <strong className="text-indigo-600 dark:text-indigo-400 font-mono">{customElements.length}</strong> input fields below. Enter any integer for each element.</span>
+              <span>Generating <strong className="text-[#4F46F5] dark:text-[#A58FFF] font-mono">{customElements.length}</strong> input fields below. Enter any integer for each element.</span>
             </div>
           </div>
 
@@ -329,7 +329,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               {customElements.map((val, idx) => (
                 <div 
                   key={idx} 
-                  className="flex flex-col p-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/20 transition"
+                  className="flex flex-col p-2 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] focus-within:border-[#4F46F5] focus-within:ring-2 focus-within:ring-[#4F46F5]/20 transition"
                 >
                   <div className="flex items-center justify-between text-[10px] font-mono text-slate-400 pb-1">
                     <span>Element {idx + 1}</span>
@@ -340,7 +340,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                     value={val}
                     onChange={(e) => handleElementValueChange(idx, e.target.value)}
                     placeholder={`val`}
-                    className="w-full bg-white dark:bg-slate-900 px-2 py-1.5 rounded-lg text-sm font-mono font-bold text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 text-center focus:outline-hidden focus:border-indigo-500"
+                    className="w-full bg-white dark:bg-[#0B1025] px-2 py-1.5 rounded-lg text-sm font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] border border-[#E1E7F0] dark:border-[#25204B] text-center focus:outline-hidden focus:border-[#4F46F5]"
                   />
                 </div>
               ))}
@@ -353,7 +353,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={handleApplyUserArray}
-                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-xs font-bold shadow-sm flex items-center gap-2 transition focus:outline-hidden focus:ring-2 focus:ring-indigo-500/50"
+                className="px-5 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white text-xs font-bold shadow-xs flex items-center gap-2 transition cursor-pointer active:scale-95"
               >
                 <Check className="w-4 h-4" />
                 <span>Apply Array</span>
@@ -362,7 +362,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={() => handleGenerateRandom(customSizeInput || 8)}
-                className="px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1.5 transition"
+                className="px-3.5 py-2.5 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] hover:bg-slate-100 dark:hover:bg-[#191F44] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
               >
                 <Shuffle className="w-3.5 h-3.5" />
                 <span>Randomize</span>
@@ -387,11 +387,11 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
       </div>
 
       {/* Main Interactive Stage */}
-      <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-8">
+      <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-8">
         {/* Visual Array Canvas */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-slate-950 text-white space-y-6 shadow-inner border border-slate-800">
+        <div className="p-6 sm:p-8 rounded-2xl bg-[#080D20] text-white space-y-6 shadow-inner border border-[#25204B]">
           {/* Target and Status header */}
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-4">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#25204B] pb-4">
             <div className="flex items-center gap-3">
               <span className="text-xs font-mono font-bold text-slate-400">Target To Find:</span>
               <span className="px-3 py-1 rounded-xl bg-amber-400 text-slate-950 font-mono font-extrabold text-base shadow-sm">
@@ -400,9 +400,9 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-slate-900 border border-slate-700 text-xs font-mono">
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#111633] border border-[#25204B] text-xs font-mono">
                 <span className="text-slate-400">Comparisons:</span>
-                <span className="font-bold text-indigo-400">{comparisons}</span>
+                <span className="font-bold text-[#A58FFF]">{comparisons}</span>
               </div>
 
               {/* Status Badge */}
@@ -412,8 +412,8 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                   : searchState === 'not_found'
                   ? 'bg-red-500/20 text-red-300 border border-red-500/50'
                   : searchState === 'searching'
-                  ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/50'
-                  : 'bg-slate-800 text-slate-400 border border-slate-700'
+                  ? 'bg-[#4F46F5]/20 text-indigo-300 border border-[#4F46F5]/50'
+                  : 'bg-[#111633] text-slate-400 border border-[#25204B]'
               }`}>
                 {searchState === 'found' && <CheckCircle2 className="w-4 h-4" />}
                 {searchState === 'not_found' && <XCircle className="w-4 h-4" />}
@@ -453,10 +453,10 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                           isMatch
                             ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300 scale-105 shadow-lg shadow-emerald-950 ring-4 ring-emerald-400/40'
                             : isCurrent
-                            ? 'bg-indigo-600/40 border-amber-400 text-amber-300 scale-105 shadow-md ring-2 ring-amber-400/50'
+                            ? 'bg-[#4F46F5]/40 border-amber-400 text-amber-300 scale-105 shadow-md ring-2 ring-amber-400/50'
                             : isPast
-                            ? 'bg-slate-900/60 border-slate-700 text-slate-500 opacity-60'
-                            : 'bg-slate-900 border-slate-700 text-white'
+                            ? 'bg-[#111633]/60 border-[#25204B] text-slate-500 opacity-60'
+                            : 'bg-[#111633] border-[#25204B] text-white'
                         }`}
                       >
                         <span className="text-xs font-sans text-slate-400 text-[10px]">val</span>
@@ -483,7 +483,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
           </div>
 
           {/* Current comparison comparison equation banner */}
-          <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-center font-mono">
+          <div className="p-4 rounded-xl bg-[#111633] border border-[#25204B] text-center font-mono">
             {currentIndex === -1 ? (
               <span className="text-xs text-slate-400">
                 Ready to search. Click "Start Search" or "Step Forward".
@@ -507,7 +507,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
         </div>
 
         {/* Controls Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 rounded-2xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B]">
           {/* Target Input & Quick Actions */}
           <div className="space-y-4">
             <div className="space-y-1.5">
@@ -520,7 +520,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 value={targetInput}
                 onChange={(e) => setTargetInput(e.target.value)}
                 placeholder="Enter a number"
-                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 font-mono font-bold text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3.5 py-2 rounded-xl text-sm bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] font-mono font-bold text-[#11182D] dark:text-[#F5F7FF] focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30 focus:border-[#4F46F5]"
               />
             </div>
 
@@ -537,10 +537,10 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                       handleCustomSizeChange(sz);
                       handleGenerateRandom(sz);
                     }}
-                    className={`py-1.5 rounded-lg text-xs font-mono font-bold transition ${
+                    className={`py-1.5 rounded-lg text-xs font-mono font-bold transition cursor-pointer ${
                       arraySize === sz
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'
+                        ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#191F44]'
                     }`}
                   >
                     {sz} items
@@ -559,7 +559,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={toggleAutoPlay}
-                className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-2 transition"
+                className="w-full py-2.5 px-4 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] active:scale-95 text-white font-bold text-xs shadow-xs flex items-center justify-center gap-2 transition cursor-pointer"
               >
                 {searchState === 'searching' ? (
                   <>
@@ -579,7 +579,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                   type="button"
                   onClick={stepForward}
                   disabled={searchState === 'searching' || searchState === 'found' || searchState === 'not_found'}
-                  className="py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 flex items-center justify-center gap-1.5 transition"
+                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 dark:hover:bg-[#191F44] disabled:opacity-40 flex items-center justify-center gap-1.5 transition cursor-pointer"
                 >
                   <StepForward className="w-3.5 h-3.5" />
                   <span>Step Forward</span>
@@ -588,7 +588,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                 <button
                   type="button"
                   onClick={() => handleReset()}
-                  className="py-2 px-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 flex items-center justify-center gap-1.5 transition"
+                  className="py-2 px-3 rounded-xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-50 dark:hover:bg-[#191F44] flex items-center justify-center gap-1.5 transition cursor-pointer"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Reset</span>
@@ -598,7 +598,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               <button
                 type="button"
                 onClick={() => handleGenerateRandom()}
-                className="w-full py-2 px-3 rounded-xl bg-slate-200/70 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs hover:bg-slate-300 dark:hover:bg-slate-700 flex items-center justify-center gap-1.5 transition"
+                className="w-full py-2 px-3 rounded-xl bg-[#EEF2FF] hover:bg-[#E0E7FF] dark:bg-[#6C4CFF]/20 dark:hover:bg-[#6C4CFF]/30 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
               >
                 <Shuffle className="w-3.5 h-3.5" />
                 <span>Generate Random List</span>
@@ -610,7 +610,7 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
           <div className="space-y-4">
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5 text-indigo-500" />
+                <Sliders className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
                 Animation Speed
               </label>
               <div className="grid grid-cols-4 gap-1.5">
@@ -627,10 +627,10 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
                       sound.playClick();
                       setSpeed(s.val);
                     }}
-                    className={`py-1.5 rounded-lg text-xs font-mono font-bold transition ${
+                    className={`py-1.5 rounded-lg text-xs font-mono font-bold transition cursor-pointer ${
                       speed === s.val
-                        ? 'bg-indigo-600 text-white'
-                        : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300'
+                        ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white shadow-xs'
+                        : 'bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#191F44]'
                     }`}
                   >
                     {s.label}
@@ -639,9 +639,9 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
               </div>
             </div>
 
-            <div className="p-3 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-100 dark:border-indigo-900/40 text-xs text-indigo-900 dark:text-indigo-200 space-y-1">
-              <span className="font-bold flex items-center gap-1">
-                <Info className="w-3.5 h-3.5 text-indigo-500" />
+            <div className="p-3 rounded-xl bg-[#EEF2FF] dark:bg-[#6C4CFF]/15 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-xs text-[#11182D] dark:text-[#F5F7FF] space-y-1">
+              <span className="font-bold flex items-center gap-1 text-[#4F46F5] dark:text-[#A58FFF]">
+                <Info className="w-3.5 h-3.5" />
                 Active Search Array
               </span>
               <p className="font-mono text-[11px] text-slate-600 dark:text-slate-400 break-all">
@@ -655,19 +655,19 @@ export function LabSection({ onCompleteLabActivity }: LabSectionProps) {
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs font-bold text-slate-700 dark:text-slate-300">
             <span className="flex items-center gap-1.5">
-              <Info className="w-3.5 h-3.5 text-indigo-500" />
+              <Info className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
               Live Execution Log
             </span>
             <span className="font-mono text-slate-500">{log.length} steps recorded</span>
           </div>
 
-          <div className="h-32 overflow-y-auto p-3 rounded-2xl bg-slate-900 text-slate-200 font-mono text-xs space-y-1.5 border border-slate-800 scrollbar-thin">
+          <div className="h-32 overflow-y-auto p-3 rounded-xl bg-[#080D20] text-slate-200 font-mono text-xs space-y-1.5 border border-[#25204B] scrollbar-thin">
             {log.length === 0 ? (
               <p className="text-slate-500 italic py-2">No steps taken yet. Press "Start Search" or "Step Forward" to begin execution.</p>
             ) : (
               log.map((item, lIdx) => (
                 <div key={lIdx} className="flex items-center gap-2">
-                  <span className="text-indigo-400">›</span>
+                  <span className="text-[#A58FFF]">›</span>
                   <span>{item}</span>
                 </div>
               ))

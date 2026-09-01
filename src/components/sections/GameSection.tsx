@@ -174,7 +174,7 @@ export function GameSection({
       <div className="py-4 px-2 sm:px-6">
         <div className="relative flex items-center justify-between max-w-4xl mx-auto">
           {/* Horizontal Connecting Track Line running behind circles */}
-          <div className="absolute left-6 right-6 top-[22px] h-[2px] bg-slate-200 dark:bg-slate-800 -z-0" />
+          <div className="absolute left-6 right-6 top-[22px] h-[2px] bg-[#E1E7F0] dark:bg-[#25204B] -z-0" />
 
           {milestones.map((m) => {
             const isMilestoneActive = m.levelId === activeLevelId;
@@ -194,7 +194,7 @@ export function GameSection({
                 <div className="h-11 flex items-center justify-center">
                   {isMilestoneActive ? (
                     // Active Level: Large purple/indigo outer ring + solid center + white dot
-                    <div className="w-10 h-10 rounded-full bg-[#5442F6] flex items-center justify-center shadow-lg ring-4 ring-[#5442F6]/25 dark:ring-[#5442F6]/40 transition-transform transform scale-105">
+                    <div className="w-10 h-10 rounded-full bg-[#4F46F5] dark:bg-[#6C4CFF] flex items-center justify-center shadow-lg ring-4 ring-[#4F46F5]/25 dark:ring-[#6C4CFF]/40 transition-transform transform scale-105">
                       <div className="w-3 h-3 rounded-full bg-white shadow-xs" />
                     </div>
                   ) : isMilestoneCompleted ? (
@@ -208,13 +208,13 @@ export function GameSection({
                     </div>
                   ) : m.isTrophy ? (
                     // Final Trophy Circle (Incomplete)
-                    <div className="w-9 h-9 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-2xs">
+                    <div className="w-9 h-9 rounded-full border-2 border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0B1025] flex items-center justify-center shadow-2xs">
                       <Trophy className="w-4 h-4 text-slate-400 dark:text-slate-500" />
                     </div>
                   ) : (
                     // Inactive Level Circle
-                    <div className="w-8 h-8 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 flex items-center justify-center shadow-2xs">
-                      <div className="w-2.5 h-2.5 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-800" />
+                    <div className="w-8 h-8 rounded-full border-2 border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0B1025] flex items-center justify-center shadow-2xs">
+                      <div className="w-2.5 h-2.5 rounded-full border border-[#E1E7F0] dark:border-slate-600 bg-slate-50 dark:bg-[#111633]" />
                     </div>
                   )}
                 </div>
@@ -222,7 +222,7 @@ export function GameSection({
                 {/* Milestone Number */}
                 <span className={`text-[11px] font-mono font-bold mt-2 ${
                   isMilestoneActive 
-                    ? 'text-[#5442F6] dark:text-indigo-400 font-extrabold' 
+                    ? 'text-[#4F46F5] dark:text-[#A58FFF] font-extrabold' 
                     : isMilestoneCompleted
                     ? 'text-emerald-600 dark:text-emerald-400'
                     : 'text-slate-500 dark:text-slate-400'
@@ -233,7 +233,7 @@ export function GameSection({
                 {/* Milestone Label Underneath */}
                 <span className={`text-[10px] sm:text-xs font-semibold text-center max-w-[76px] sm:max-w-[100px] line-clamp-1 sm:line-clamp-2 mt-0.5 leading-tight ${
                   isMilestoneActive 
-                    ? 'text-[#5442F6] dark:text-indigo-400 font-bold' 
+                    ? 'text-[#4F46F5] dark:text-[#A58FFF] font-bold' 
                     : 'text-slate-600 dark:text-slate-400'
                 }`}>
                   {m.title}
@@ -245,8 +245,8 @@ export function GameSection({
 
         {/* Level Banner Pill (Matching Image 2) */}
         <div className="flex justify-center mt-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FF] dark:bg-indigo-950/70 border border-indigo-200/80 dark:border-indigo-800 text-[#4F46E5] dark:text-indigo-300 text-xs font-mono font-extrabold tracking-wide uppercase shadow-2xs">
-            <Sparkles className="w-3.5 h-3.5 text-[#5442F6] dark:text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] text-xs font-mono font-extrabold tracking-wide uppercase shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#4F46F5] dark:text-[#A58FFF]" />
             {isCompletionView ? (
               <span>COMPLETION & SANDBOX • 5 CHALLENGE LEVELS & INTERACTIVE LAB</span>
             ) : (
@@ -257,11 +257,11 @@ export function GameSection({
       </div>
 
       {/* ─── 2. PROGRESS SUMMARY CARD (EXACTLY MATCHING IMAGE 1 & 2) ─── */}
-      <div className="p-6 sm:p-7 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-2">
           {/* Metadata Row: Yellow Pill + Progress Text */}
           <div className="flex flex-wrap items-center gap-2.5">
-            <span className="px-3 py-0.5 rounded-full text-xs font-mono font-extrabold bg-[#FEF3C7] dark:bg-amber-950 text-[#92400E] dark:text-amber-300 shadow-2xs">
+            <span className="px-3 py-0.5 rounded-full text-xs font-mono font-extrabold bg-[#FEF3C7] dark:bg-amber-950/60 text-[#92400E] dark:text-amber-300 shadow-2xs border border-amber-200 dark:border-amber-800/60">
               {isCompletionView ? 'Completion & Sandbox' : `Level ${activeLevel.levelNumber} of 5`}
             </span>
             <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
@@ -270,7 +270,7 @@ export function GameSection({
           </div>
 
           {/* Current Level Title */}
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-black text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
             {isCompletionView ? 'Linear Search Game Completion' : activeLevel.title}
           </h2>
         </div>
@@ -294,93 +294,14 @@ export function GameSection({
             <span>Completed & Saved</span>
           </div>
         ) : (
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 font-semibold text-xs self-start sm:self-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-50 dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-slate-500 dark:text-slate-400 font-semibold text-xs self-start sm:self-center">
             <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
             <span>In Progress</span>
           </div>
         )}
       </div>
 
-      {/* ─── 3. LEVEL CARDS ROW (EXACTLY MATCHING IMAGE 1) ─── */}
-      <div className="grid grid-cols-2 sm:grid-cols-6 gap-3 sm:gap-3.5">
-        {GAME_LEVELS.map((lvl) => {
-          const isDone = progress.completedGameLevels.includes(lvl.id);
-          const isCurrent = lvl.id === activeLevelId;
 
-          return (
-            <button
-              key={lvl.id}
-              onClick={() => {
-                handleOpenOrReplayLevel(lvl.id);
-              }}
-              className={`p-3.5 sm:p-4 rounded-2xl border text-left flex flex-col justify-between h-[86px] sm:h-[92px] transition-all cursor-pointer ${
-                isCurrent
-                  ? 'bg-[#FF9800] text-slate-950 border-[#FF9800] shadow-md'
-                  : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800/60 shadow-2xs'
-              }`}
-            >
-              {/* Card Header: LEVEL 0X on left, Icon on right */}
-              <div className="flex items-center justify-between w-full">
-                <span className={`text-[11px] font-mono font-extrabold uppercase tracking-wider ${
-                  isCurrent ? 'text-slate-950 font-black' : 'text-slate-700 dark:text-slate-300'
-                }`}>
-                  LEVEL 0{lvl.levelNumber}
-                </span>
-
-                {isDone ? (
-                  <Check className={`w-4 h-4 stroke-[3] ${
-                    isCurrent ? 'text-slate-950' : 'text-emerald-500'
-                  }`} />
-                ) : isCurrent ? (
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-950" />
-                ) : (
-                  <span className="w-3.5 h-3.5 rounded-full border-2 border-slate-300 dark:border-slate-700" />
-                )}
-              </div>
-
-              {/* Card Title */}
-              <span className={`text-xs sm:text-[13px] font-bold truncate leading-snug ${
-                isCurrent ? 'text-slate-950 font-black' : 'text-slate-900 dark:text-slate-100'
-              }`}>
-                {lvl.title}
-              </span>
-            </button>
-          );
-        })}
-
-        {/* 6th Tab for Completion & Sandbox */}
-        <button
-          onClick={() => {
-            sound.playClick();
-            setActiveLevelId(6);
-          }}
-          className={`p-3.5 sm:p-4 rounded-2xl border text-left flex flex-col justify-between h-[86px] sm:h-[92px] transition-all cursor-pointer ${
-            isCompletionView
-              ? 'bg-[#FF9800] text-slate-950 border-[#FF9800] shadow-md'
-              : 'bg-indigo-50/50 dark:bg-indigo-950/20 border-indigo-200/80 dark:border-indigo-900/60 text-slate-900 dark:text-white hover:bg-indigo-50 dark:hover:bg-indigo-950/40 shadow-2xs'
-          }`}
-        >
-          <div className="flex items-center justify-between w-full">
-            <span className={`text-[11px] font-mono font-extrabold uppercase tracking-wider ${
-              isCompletionView ? 'text-slate-950 font-black' : 'text-indigo-700 dark:text-indigo-300'
-            }`}>
-              SANDBOX
-            </span>
-            {allLevelsCompleted ? (
-              <Trophy className={`w-4 h-4 ${isCompletionView ? 'text-slate-950' : 'text-amber-500'}`} />
-            ) : isCompletionView ? (
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-950" />
-            ) : (
-              <FlaskConical className="w-3.5 h-3.5 text-indigo-500" />
-            )}
-          </div>
-          <span className={`text-xs sm:text-[13px] font-bold truncate leading-snug ${
-            isCompletionView ? 'text-slate-950 font-black' : 'text-indigo-900 dark:text-indigo-200'
-          }`}>
-            Completion & Lab
-          </span>
-        </button>
-      </div>
 
       {/* ─── 4. INTERACTIVE GAMEPLAY ENGINE OR COMPLETION SECTION ─── */}
       {isCompletionView ? (
@@ -388,13 +309,13 @@ export function GameSection({
         /* 6-CARD COMPLETION & LAB GRID (PRESERVING EXACT REFERENCE SPECS) */
         /* ============================================================ */
         <div className="space-y-6">
-          <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-6">
+          <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-6">
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 text-xs font-mono font-extrabold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30 text-[#4F46F5] dark:text-[#A58FFF] text-xs font-mono font-extrabold uppercase tracking-wider">
+                <Sparkles className="w-3.5 h-3.5" />
                 <span>Linear Search Curriculum Cards</span>
               </div>
-              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+              <h3 className="text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
                 Linear Search Game Levels & Interactive Sandbox
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-2xl">
@@ -410,12 +331,12 @@ export function GameSection({
                 return (
                   <div
                     key={card.id}
-                    className={`rounded-2xl sm:rounded-3xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 ${
+                    className={`rounded-2xl border p-5 sm:p-6 flex flex-col justify-between transition-all duration-200 ${
                       card.isLab
-                        ? 'bg-gradient-to-br from-indigo-50/80 via-purple-50/50 to-indigo-50/80 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-indigo-950/40 border-indigo-200/90 dark:border-indigo-800/80 shadow-sm hover:border-indigo-300 dark:hover:border-indigo-700'
+                        ? 'bg-gradient-to-br from-[#EEF2FF] via-purple-50/50 to-[#EEF2FF] dark:from-[#111633] dark:via-[#191F44] dark:to-[#111633] border-[#4F46F5]/30 dark:border-[#6C4CFF]/40 shadow-xs hover:border-[#4F46F5] dark:hover:border-[#6C4CFF]'
                         : isCardDone
-                        ? 'bg-white dark:bg-slate-900 border-emerald-200/80 dark:border-emerald-900/60 shadow-xs hover:border-emerald-300 dark:hover:border-emerald-700'
-                        : 'bg-white dark:bg-slate-900 border-slate-200/90 dark:border-slate-800 shadow-xs hover:border-slate-300 dark:hover:border-slate-700'
+                        ? 'bg-white dark:bg-[#0B1025] border-emerald-300/80 dark:border-emerald-900/60 shadow-xs hover:border-emerald-400 dark:hover:border-emerald-700'
+                        : 'bg-white dark:bg-[#0B1025] border-[#E1E7F0] dark:border-[#25204B] shadow-xs hover:border-slate-300 dark:hover:border-slate-700'
                     }`}
                   >
                     <div className="space-y-3">
@@ -424,7 +345,7 @@ export function GameSection({
                         <span className={`px-2.5 py-0.5 rounded-md text-[11px] font-mono font-extrabold uppercase tracking-wider ${
                           card.isLab
                             ? 'bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-800'
-                            : 'bg-indigo-50 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800'
+                            : 'bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30'
                         }`}>
                           {card.badge}
                         </span>
@@ -446,7 +367,7 @@ export function GameSection({
                       </div>
 
                       {/* Card Title */}
-                      <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+                      <h4 className="text-base sm:text-lg font-bold text-[#11182D] dark:text-[#F5F7FF] tracking-tight leading-snug">
                         {card.title}
                       </h4>
 
@@ -457,14 +378,14 @@ export function GameSection({
                     </div>
 
                     {/* Divider & Bottom Action Button */}
-                    <div className="pt-4 mt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
+                    <div className="pt-4 mt-4 border-t border-[#E1E7F0] dark:border-[#25204B] flex items-center justify-between">
                       {card.isLab ? (
                         <button
                           onClick={() => {
                             sound.playNavigate();
                             onNavigate('lab');
                           }}
-                          className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer"
+                          className="w-full py-2.5 px-4 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white font-bold text-xs shadow-xs flex items-center justify-center gap-2 transition active:scale-98 cursor-pointer"
                         >
                           <FlaskConical className="w-4 h-4" />
                           <span>Open Linear Search Lab</span>
@@ -477,8 +398,8 @@ export function GameSection({
                           }}
                           className={`w-full py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition active:scale-98 cursor-pointer ${
                             isCardDone
-                              ? 'bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700'
-                              : 'bg-slate-900 dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-100 text-white dark:text-slate-900'
+                              ? 'bg-[#F8FAFC] dark:bg-[#111633] hover:bg-slate-100 dark:hover:bg-[#191F44] text-slate-700 dark:text-slate-200 border border-[#E1E7F0] dark:border-[#25204B]'
+                              : 'bg-[#11182D] dark:bg-white hover:bg-slate-800 dark:hover:bg-slate-100 text-white dark:text-[#11182D]'
                           }`}
                         >
                           <span>{isCardDone ? `Replay Level 0${card.id}` : `Play Level 0${card.id}`}</span>
@@ -493,12 +414,12 @@ export function GameSection({
           </div>
 
           {/* Navigation Footer for Completion View */}
-          <div className="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+          <div className="p-5 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] flex items-center justify-between">
             <button
               onClick={() => {
                 handleOpenOrReplayLevel(1);
               }}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+              className="px-4 py-2 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633] cursor-pointer"
             >
               ← Back to Level 01
             </button>
@@ -508,7 +429,7 @@ export function GameSection({
                 sound.playNavigate();
                 onNavigate('quiz');
               }}
-              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95 transition"
             >
               <span>Take Mastery Quiz</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -516,11 +437,11 @@ export function GameSection({
           </div>
         </div>
       ) : (
-        <div className="p-6 md:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xs space-y-6">
+        <div className="p-6 md:p-8 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-6">
           {/* Objective banner */}
-          <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 space-y-1">
+          <div className="p-4 rounded-2xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] space-y-1">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-mono font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+              <span className="text-xs font-mono font-bold text-[#4F46F5] dark:text-[#A58FFF] uppercase tracking-wider">
                 Objective
               </span>
               <button
@@ -531,7 +452,7 @@ export function GameSection({
                 <span>Retry / Reset</span>
               </button>
             </div>
-            <p className="text-sm font-bold text-slate-900 dark:text-white">
+            <p className="text-sm font-bold text-[#11182D] dark:text-[#F5F7FF]">
               {activeLevel.objective}
             </p>
             <p className="text-xs text-slate-600 dark:text-slate-400">
@@ -542,10 +463,10 @@ export function GameSection({
         {/* ---------------- LEVEL 01: CLICK SEQUENCE ---------------- */}
         {activeLevel.id === 1 && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-slate-950 text-white space-y-4">
+            <div className="p-6 rounded-2xl bg-[#080D20] text-white space-y-4 border border-[#25204B]">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-slate-400">Target to find: <strong className="text-amber-400 font-extrabold text-sm">7</strong></span>
-                <span className="text-indigo-300">Rule: Click from index 0 sequentially</span>
+                <span className="text-[#A58FFF]">Rule: Click from index 0 sequentially</span>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 py-4">
@@ -576,10 +497,10 @@ export function GameSection({
                         isTargetFound
                           ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300 shadow-lg'
                           : isPast
-                          ? 'bg-slate-900/50 border-slate-700 text-slate-500'
+                          ? 'bg-[#111633]/60 border-[#25204B] text-slate-500'
                           : isCurrent
-                          ? 'bg-indigo-600/40 border-amber-400 text-amber-300 ring-2 ring-amber-400 animate-pulse'
-                          : 'bg-slate-900 border-slate-700 text-white hover:border-slate-500'
+                          ? 'bg-[#4F46F5]/40 border-amber-400 text-amber-300 ring-2 ring-amber-400 animate-pulse'
+                          : 'bg-[#111633] border-[#25204B] text-white hover:border-slate-500'
                       }`}
                     >
                       <span className="text-[10px] text-slate-400">idx {idx}</span>
@@ -606,7 +527,7 @@ export function GameSection({
         {/* ---------------- LEVEL 02: BUDGET SEARCH ---------------- */}
         {activeLevel.id === 2 && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-slate-950 text-white space-y-4">
+            <div className="p-6 rounded-2xl bg-[#080D20] text-white space-y-4 border border-[#25204B]">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-slate-400">Target to find: <strong className="text-amber-400 font-extrabold text-sm">23</strong></span>
                 <span className="text-amber-300">Comparison Budget: {l2Comparisons} / {activeLevel.maxComparisons}</span>
@@ -624,8 +545,8 @@ export function GameSection({
                         isMatch
                           ? 'bg-emerald-600/30 border-emerald-400 text-emerald-300 shadow-lg'
                           : isChecked
-                          ? 'bg-slate-900 border-slate-600 text-slate-400'
-                          : 'bg-slate-900 border-slate-700 text-white'
+                          ? 'bg-[#111633] border-[#25204B] text-slate-400'
+                          : 'bg-[#111633] border-[#25204B] text-white'
                       }`}
                     >
                       <span className="text-[10px] text-slate-400">idx {idx}</span>
@@ -652,7 +573,7 @@ export function GameSection({
                         }
                       }
                     }}
-                    className="px-6 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md cursor-pointer"
+                    className="px-6 py-2.5 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white font-bold text-xs shadow-md cursor-pointer active:scale-95 transition"
                   >
                     Step & Inspect Next Item
                   </button>
@@ -670,15 +591,15 @@ export function GameSection({
         {/* ---------------- LEVEL 03: IS IT THERE? ---------------- */}
         {activeLevel.id === 3 && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-slate-950 text-white space-y-4">
+            <div className="p-6 rounded-2xl bg-[#080D20] text-white space-y-4 border border-[#25204B]">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-slate-400">Target to evaluate: <strong className="text-amber-400 font-extrabold text-sm">10</strong></span>
-                <span className="text-indigo-300">Array: [3, 14, 8, 21, 5]</span>
+                <span className="text-[#A58FFF]">Array: [3, 14, 8, 21, 5]</span>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 py-4">
                 {activeLevel.sampleArray.map((num, idx) => (
-                  <div key={idx} className="w-16 h-20 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col items-center justify-center font-mono">
+                  <div key={idx} className="w-16 h-20 rounded-2xl bg-[#111633] border border-[#25204B] flex flex-col items-center justify-center font-mono">
                     <span className="text-[10px] text-slate-400">idx {idx}</span>
                     <span className="text-lg font-bold text-white">{num}</span>
                   </div>
@@ -697,7 +618,7 @@ export function GameSection({
                       setL3Feedback('❌ Incorrect. Look closely: 3, 14, 8, 21, 5 — none of these are 10!');
                     }}
                     className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
-                      l3Choice === 'found' ? 'bg-red-500/20 border-red-500 text-red-300' : 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800'
+                      l3Choice === 'found' ? 'bg-red-500/20 border-red-500 text-red-300' : 'bg-[#111633] border-[#25204B] text-white hover:bg-[#191F44]'
                     }`}
                   >
                     Yes, It is Present
@@ -711,7 +632,7 @@ export function GameSection({
                       handleFinishLevel(3);
                     }}
                     className={`px-5 py-2.5 rounded-xl text-xs font-bold border transition cursor-pointer ${
-                      l3Choice === 'not_found' ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800'
+                      l3Choice === 'not_found' ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300' : 'bg-[#111633] border-[#25204B] text-white hover:bg-[#191F44]'
                     }`}
                   >
                     Not Found ❌
@@ -719,7 +640,7 @@ export function GameSection({
                 </div>
 
                 {l3Feedback && (
-                  <p className="text-center text-xs font-mono font-bold mt-2 text-indigo-300">
+                  <p className="text-center text-xs font-mono font-bold mt-2 text-[#A58FFF]">
                     {l3Feedback}
                   </p>
                 )}
@@ -731,7 +652,7 @@ export function GameSection({
         {/* ---------------- LEVEL 04: COUNT THE COMPARISONS ---------------- */}
         {activeLevel.id === 4 && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-slate-950 text-white space-y-4">
+            <div className="p-6 rounded-2xl bg-[#080D20] text-white space-y-4 border border-[#25204B]">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-slate-400">Array: [7, 4, 12, 9, 20, 5]</span>
                 <span className="text-amber-400 font-bold">Target = 20</span>
@@ -739,7 +660,7 @@ export function GameSection({
 
               <div className="flex flex-wrap items-center justify-center gap-3 py-4">
                 {activeLevel.sampleArray.map((num, idx) => (
-                  <div key={idx} className="w-16 h-20 rounded-2xl bg-slate-900 border border-slate-700 flex flex-col items-center justify-center font-mono">
+                  <div key={idx} className="w-16 h-20 rounded-2xl bg-[#111633] border border-[#25204B] flex flex-col items-center justify-center font-mono">
                     <span className="text-[10px] text-slate-400">idx {idx}</span>
                     <span className="text-lg font-bold text-white">{num}</span>
                   </div>
@@ -770,7 +691,7 @@ export function GameSection({
                           ? count === 5
                             ? 'bg-emerald-600 border-emerald-400 text-white'
                             : 'bg-red-600 border-red-400 text-white'
-                          : 'bg-slate-900 border-slate-700 text-white hover:bg-slate-800'
+                          : 'bg-[#111633] border-[#25204B] text-white hover:bg-[#191F44]'
                       }`}
                     >
                       {count}
@@ -779,7 +700,7 @@ export function GameSection({
                 </div>
 
                 {l4Feedback && (
-                  <p className="text-center text-xs font-mono font-bold mt-2 text-indigo-300">
+                  <p className="text-center text-xs font-mono font-bold mt-2 text-[#A58FFF]">
                     {l4Feedback}
                   </p>
                 )}
@@ -791,10 +712,10 @@ export function GameSection({
         {/* ---------------- LEVEL 05: LINEAR SEARCH MASTER ---------------- */}
         {activeLevel.id === 5 && (
           <div className="space-y-6">
-            <div className="p-6 rounded-2xl bg-slate-950 text-white space-y-4">
+            <div className="p-6 rounded-2xl bg-[#080D20] text-white space-y-4 border border-[#25204B]">
               <div className="flex items-center justify-between text-xs font-mono">
                 <span className="text-slate-400">Target to locate: <strong className="text-amber-400 font-extrabold text-sm">{l5Target}</strong></span>
-                <span className="text-indigo-300 font-bold">Comparisons: {l5Comparisons}</span>
+                <span className="text-[#A58FFF] font-bold">Comparisons: {l5Comparisons}</span>
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-3 py-4">
@@ -810,10 +731,10 @@ export function GameSection({
                         isMatch
                           ? 'bg-emerald-600/40 border-emerald-400 text-emerald-300 shadow-xl'
                           : isCurrent
-                          ? 'bg-indigo-600/40 border-amber-400 text-amber-300 ring-2 ring-amber-400 animate-pulse'
+                          ? 'bg-[#4F46F5]/40 border-amber-400 text-amber-300 ring-2 ring-amber-400 animate-pulse'
                           : isChecked
-                          ? 'bg-slate-900/60 border-slate-700 text-slate-500'
-                          : 'bg-slate-900 border-slate-700 text-white'
+                          ? 'bg-[#111633]/60 border-[#25204B] text-slate-500'
+                          : 'bg-[#111633] border-[#25204B] text-white'
                       }`}
                     >
                       <span className="text-[10px] text-slate-400">idx {idx}</span>
@@ -840,7 +761,7 @@ export function GameSection({
                         }
                       }
                     }}
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold text-xs shadow-md cursor-pointer active:scale-95 transition"
                   >
                     Step & Check Index {l5CurrentIdx + 1}
                   </button>
@@ -857,7 +778,7 @@ export function GameSection({
                     <div className="pt-2 flex items-center justify-center gap-3">
                       <button
                         onClick={handleResetLevel}
-                        className="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 text-slate-300 font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
+                        className="px-4 py-2 rounded-xl border border-[#25204B] bg-[#111633] hover:bg-[#191F44] text-slate-300 font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
                       >
                         <RotateCcw className="w-3.5 h-3.5" />
                         <span>Replay Level 05</span>
@@ -867,7 +788,7 @@ export function GameSection({
                           sound.playClick();
                           setActiveLevelId(6);
                         }}
-                        className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white font-bold text-xs inline-flex items-center gap-1.5 cursor-pointer active:scale-95 transition"
                       >
                         <Trophy className="w-3.5 h-3.5 text-amber-300" />
                         <span>View Game Completion →</span>
@@ -881,7 +802,7 @@ export function GameSection({
         )}
 
         {/* Level Navigation Footer */}
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <div className="pt-4 border-t border-[#E1E7F0] dark:border-[#25204B] flex items-center justify-between">
           <button
             onClick={() => {
               if (activeLevelId > 1) {
@@ -889,7 +810,7 @@ export function GameSection({
               }
             }}
             disabled={activeLevelId === 1}
-            className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed"
+            className="px-4 py-2 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-xs font-semibold text-slate-700 dark:text-slate-300 disabled:opacity-40 cursor-pointer disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-[#111633]"
           >
             Previous Level
           </button>
@@ -899,7 +820,7 @@ export function GameSection({
               onClick={() => {
                 handleOpenOrReplayLevel(activeLevelId + 1);
               }}
-              className="px-5 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+              className="px-5 py-2 rounded-xl bg-[#11182D] dark:bg-white text-white dark:text-[#11182D] text-xs font-bold flex items-center gap-1.5 cursor-pointer hover:bg-slate-800 dark:hover:bg-slate-100 active:scale-95 transition"
             >
               <span>Next Level</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -910,7 +831,7 @@ export function GameSection({
                 sound.playClick();
                 setActiveLevelId(6);
               }}
-              className="px-5 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+              className="px-5 py-2 rounded-xl bg-[#4F46F5] hover:bg-[#4335E0] dark:bg-[#6C4CFF] dark:hover:bg-[#5E3DE8] text-white text-xs font-bold flex items-center gap-1.5 cursor-pointer active:scale-95 transition"
             >
               <span>View Game Completion</span>
               <ArrowRight className="w-3.5 h-3.5" />

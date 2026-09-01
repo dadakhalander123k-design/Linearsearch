@@ -1,0 +1,54 @@
+<svg width="420" height="100" viewBox="0 0 420 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="capTopSurface" x1="20" y1="10" x2="110" y2="55" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#0E215C" />
+      <stop offset="45%" stopColor="#123B9E" />
+      <stop offset="100%" stopColor="#1E66F5" />
+    </linearGradient>
+    <linearGradient id="capTopRim" x1="10" y1="30" x2="115" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#2563EB" />
+      <stop offset="60%" stopColor="#38BDF8" />
+      <stop offset="100%" stopColor="#60A5FA" />
+    </linearGradient>
+    <linearGradient id="capBase3D" x1="30" y1="50" x2="90" y2="90" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#4338CA" />
+      <stop offset="35%" stopColor="#2563EB" />
+      <stop offset="70%" stopColor="#0284C7" />
+      <stop offset="100%" stopColor="#00D2FF" />
+    </linearGradient>
+    <linearGradient id="tasselDrop" x1="88" y1="35" x2="105" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stopColor="#38BDF8" />
+      <stop offset="60%" stopColor="#2563EB" />
+      <stop offset="100%" stopColor="#1D4ED8" />
+    </linearGradient>
+    <linearGradient id="learnGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stopColor="#1D4ED8" />
+      <stop offset="50%" stopColor="#2563EB" />
+      <stop offset="100%" stopColor="#6366F1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Skull Cap 3D Cup -->
+  <path d="M 37 50 L 63 65 L 89 50 C 89 50 90 74 63 83 C 36 74 37 50 37 50 Z" fill="url(#capBase3D)" />
+  <path d="M 41 54 C 41 54 43 71 63 78 C 83 71 85 54 85 54 C 85 63 76 75 63 78 C 50 75 41 63 41 54 Z" fill="#00F0FF" opacity="0.6" />
+
+  <!-- Top Diamond Mortarboard -->
+  <path d="M 60 10 C 62 8.8 64 8.8 66 10 L 114 36 C 116 37.2 116 39.5 114 40.7 L 66 67 C 64 68.2 62 68.2 60 67 L 12 40.7 C 10 39.5 10 37.2 12 36 Z" fill="url(#capTopSurface)" stroke="url(#capTopRim)" stroke-width="2" stroke-linejoin="round" />
+  
+  <ellipse cx="63" cy="38.5" rx="3.5" ry="2.7" fill="#38BDF8" />
+  
+  <!-- Tassel String and Droplet -->
+  <path d="M 63 38.5 Q 84 44 98 53 L 98 67" stroke="url(#tasselDrop)" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <circle cx="98" cy="65" r="2.5" fill="#38BDF8" />
+  <path d="M 98 67 C 95 70 94 75 98 79 C 102 75 101 70 98 67 Z" fill="url(#tasselDrop)" />
+
+  <!-- Text Wordmark: AlgoLearn -->
+  <text x="135" y="58" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="46" font-weight="900" letter-spacing="-1">
+    <tspan fill="#0B132B">Algo</tspan><tspan fill="url(#learnGrad)">Learn</tspan>
+  </text>
+  
+  <!-- Tagline: YOUR DSA JOURNEY -->
+  <text x="138" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="800" fill="#475569" letter-spacing="4">
+    YOUR DSA JOURNEY
+  </text>
+</svg>

@@ -62,7 +62,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col transition-colors">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#080D20] text-[#11182D] dark:text-[#F5F7FF] flex flex-col transition-colors duration-200">
       {/* Navigation Sidebar (Desktop + Mobile overlay drawer) */}
       <Sidebar
         isOpen={isSidebarOpen}
@@ -82,7 +82,8 @@ export default function App() {
         {/* Top Header */}
         <Header
           currentSection={currentSection}
-          onOpenMobileMenu={() => setIsSidebarOpen((prev) => !prev)}
+          isSidebarOpen={isSidebarOpen}
+          onOpenMobileMenu={() => setIsSidebarOpen(true)}
           progress={progress}
           onToggleTheme={() => progressManager.toggleTheme()}
           onToggleSound={() => progressManager.toggleSound()}
@@ -105,7 +106,10 @@ export default function App() {
           )}
 
           {currentSection === 'visualize' && (
-            <VisualizeSection />
+            <VisualizeSection
+              progress={progress}
+              onCompleteVideo={(id) => progressManager.completeVideo(id)}
+            />
           )}
 
           {currentSection === 'lab' && (

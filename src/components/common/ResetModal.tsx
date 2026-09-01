@@ -37,7 +37,7 @@ export function ResetModal({
       aria-labelledby="reset-modal-title"
     >
       <div
-        className="relative w-full max-w-[420px] bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-2xl p-6 sm:p-8 overflow-hidden animate-in fade-in zoom-in-95 duration-200 text-center"
+        className="relative w-full max-w-[420px] bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] shadow-2xl p-6 sm:p-8 overflow-hidden animate-in fade-in zoom-in-95 duration-200 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Top Warning Alert Icon */}
@@ -48,7 +48,7 @@ export function ResetModal({
         {/* Modal Title */}
         <h3
           id="reset-modal-title"
-          className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight"
+          className="text-xl sm:text-2xl font-black text-[#11182D] dark:text-[#F5F7FF] uppercase tracking-tight"
         >
           RESET PROGRESS?
         </h3>
@@ -68,7 +68,7 @@ export function ResetModal({
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm tracking-wide uppercase transition active:scale-95 focus:outline-hidden focus:ring-2 focus:ring-slate-400"
+            className="w-full py-3 px-4 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-[#F8FAFC] dark:bg-[#111633] hover:bg-slate-100 dark:hover:bg-[#191F44] text-slate-800 dark:text-slate-200 font-extrabold text-xs sm:text-sm tracking-wide uppercase transition active:scale-95 cursor-pointer focus:outline-hidden"
           >
             EXIT
           </button>
@@ -79,7 +79,7 @@ export function ResetModal({
               onConfirmReset();
               onClose();
             }}
-            className="w-full py-3 px-4 rounded-xl bg-[#c4002b] hover:bg-[#b00027] active:bg-[#9a0022] text-white font-extrabold text-xs sm:text-sm tracking-wide uppercase flex items-center justify-center gap-1.5 transition shadow-md shadow-red-600/20 active:scale-95 focus:outline-hidden focus:ring-2 focus:ring-red-400"
+            className="w-full py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-extrabold text-xs sm:text-sm tracking-wide uppercase flex items-center justify-center gap-1.5 transition shadow-md shadow-red-600/20 active:scale-95 cursor-pointer focus:outline-hidden"
           >
             <RotateCcw className="w-4 h-4 stroke-[2.5]" />
             <span>RESET</span>

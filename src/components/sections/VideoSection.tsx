@@ -137,23 +137,23 @@ export function VideoSection({
   return (
     <div className="max-w-5xl mx-auto space-y-8 pb-16">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs">
         <div>
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
               Interactive Video Classroom
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
               {progress.completedVideos.length}/2 Lessons Completed
             </span>
           </div>
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
+          <h2 className="text-xl font-bold text-[#11182D] dark:text-[#F5F7FF] mt-1">
             {video.title}
           </h2>
         </div>
 
         {isVideoCompleted && (
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-800 dark:text-emerald-300 font-bold text-xs">
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-300 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
             <span>Watched & Completed</span>
           </div>
@@ -172,21 +172,21 @@ export function VideoSection({
                 sound.playClick();
                 setSelectedVideoId(v.id);
               }}
-              className={`p-4 rounded-2xl border text-left flex items-center justify-between transition ${
+              className={`p-4 rounded-2xl border text-left flex items-center justify-between transition cursor-pointer ${
                 isCurrent
-                  ? 'bg-indigo-600 text-white border-indigo-600 shadow-md'
+                  ? 'bg-[#4F46F5] dark:bg-[#6C4CFF] text-white border-[#4F46F5] dark:border-[#6C4CFF] shadow-md'
                   : isDone
                   ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300'
-                  : 'bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
+                  : 'bg-white dark:bg-[#0B1025] border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#111633]'
               }`}
             >
               <div className="flex items-center gap-3">
-                <div className={`p-2.5 rounded-xl ${isCurrent ? 'bg-white/20' : 'bg-slate-100 dark:bg-slate-800'}`}>
+                <div className={`p-2.5 rounded-xl ${isCurrent ? 'bg-white/20' : 'bg-slate-100 dark:bg-[#111633]'}`}>
                   <Tv className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold truncate">{v.title}</h4>
-                  <span className={`text-xs ${isCurrent ? 'text-indigo-100' : 'text-slate-500'}`}>
+                  <span className={`text-xs ${isCurrent ? 'text-indigo-100' : 'text-slate-500 dark:text-slate-400'}`}>
                     Duration: {v.durationLabel}
                   </span>
                 </div>
@@ -366,51 +366,51 @@ export function VideoSection({
       {/* Chapters & Topics Covered List */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Chapters */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <List className="w-4 h-4 text-indigo-500" />
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-[#11182D] dark:text-[#F5F7FF] flex items-center gap-2">
+            <List className="w-4 h-4 text-[#4F46F5] dark:text-[#A58FFF]" />
             Lesson Chapters ({video.chapters.length})
           </h3>
           <div className="space-y-2">
             {video.chapters.map((chap, idx) => {
-              const isChapActive = idx === activeChapterIndex;
-              return (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    sound.playClick();
-                    handleSeek(chap.time);
-                  }}
-                  className={`w-full p-3 rounded-2xl border text-left flex items-center justify-between transition ${
-                    isChapActive
-                      ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-300 dark:border-indigo-800 text-indigo-900 dark:text-indigo-200 font-semibold'
-                      : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs font-bold text-indigo-600 dark:text-indigo-400">
-                      {formatTime(chap.time)}
-                    </span>
-                    <span className="text-xs truncate">{chap.title}</span>
-                  </div>
-                  {isChapActive && <span className="text-[10px] uppercase font-bold text-indigo-600 dark:text-indigo-400">Now Playing</span>}
-                </button>
-              );
-            })}
+               const isChapActive = idx === activeChapterIndex;
+               return (
+                 <button
+                   key={idx}
+                   onClick={() => {
+                     sound.playClick();
+                     handleSeek(chap.time);
+                   }}
+                   className={`w-full p-3 rounded-xl border text-left flex items-center justify-between transition cursor-pointer ${
+                     isChapActive
+                       ? 'bg-[#EEF2FF] dark:bg-[#6C4CFF]/20 border-[#4F46F5]/40 dark:border-[#6C4CFF]/50 text-[#4F46F5] dark:text-[#A58FFF] font-semibold'
+                       : 'bg-[#F8FAFC] dark:bg-[#111633] border-[#E1E7F0] dark:border-[#25204B] text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#191F44]'
+                   }`}
+                 >
+                   <div className="flex items-center gap-3">
+                     <span className="font-mono text-xs font-bold text-[#4F46F5] dark:text-[#A58FFF]">
+                       {formatTime(chap.time)}
+                     </span>
+                     <span className="text-xs truncate">{chap.title}</span>
+                   </div>
+                   {isChapActive && <span className="text-[10px] uppercase font-bold text-[#4F46F5] dark:text-[#A58FFF]">Now Playing</span>}
+                 </button>
+               );
+             })}
           </div>
         </div>
 
         {/* Topics Covered */}
-        <div className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs space-y-4">
-          <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-indigo-500" />
+        <div className="p-6 rounded-2xl bg-white dark:bg-[#0B1025] border border-[#E1E7F0] dark:border-[#25204B] shadow-xs space-y-4">
+          <h3 className="text-base font-bold text-[#11182D] dark:text-[#F5F7FF] flex items-center gap-2">
+            <BookOpen className="w-4 h-4 text-[#4F46F5] dark:text-[#A58FFF]" />
             Topics Covered in This Lesson
           </h3>
           <div className="space-y-2">
             {video.topicsCovered.map((topic, tIdx) => (
               <div
                 key={tIdx}
-                className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5"
+                className="p-3 rounded-xl bg-[#F8FAFC] dark:bg-[#111633] border border-[#E1E7F0] dark:border-[#25204B] text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2.5"
               >
                 <Check className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <span>{topic}</span>

@@ -3,6 +3,34 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @layer base {
+  :root {
+    --bg-page: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --bg-surface: #F1F4F9;
+    --bg-accent-soft: #EEF0FF;
+    --border-subtle: #E1E7F0;
+    --text-heading: #11182D;
+    --text-body: #506080;
+    --text-muted: #8290A8;
+    --accent-purple: #4F46F5;
+    --accent-purple-hover: #4338CA;
+    --accent-purple-active: #3730A3;
+  }
+
+  .dark {
+    --bg-page: #080D20;
+    --bg-card: #0D132C;
+    --bg-surface: #0B1025;
+    --bg-accent-soft: rgba(108, 76, 255, 0.14);
+    --border-subtle: #25204B;
+    --text-heading: #F5F7FF;
+    --text-body: #AAB6D1;
+    --text-muted: #7885A5;
+    --accent-purple: #6C4CFF;
+    --accent-purple-hover: #7E60FF;
+    --accent-purple-active: #5B38E6;
+  }
+
   html {
     color-scheme: light dark;
     text-rendering: optimizeLegibility;
@@ -11,7 +39,9 @@
   }
 
   body {
-    @apply antialiased text-slate-900 bg-slate-50 dark:bg-slate-950 dark:text-slate-100 min-h-screen transition-colors duration-200;
+    @apply antialiased min-h-screen transition-colors duration-200;
+    background-color: var(--bg-page);
+    color: var(--text-body);
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
@@ -23,6 +53,7 @@
   /* Headings typography hierarchy */
   h1, h2, h3, h4 {
     letter-spacing: -0.025em;
+    color: var(--text-heading);
   }
 
   /* Numeric legibility */
@@ -31,9 +62,95 @@
   }
 }
 
-/* Subtle, smooth transitions for interactive cards and buttons */
+/* Reusable Design System Component Utilities */
+.algolearn-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1.25rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease-in-out;
+}
+
+.algolearn-card:hover {
+  border-color: #D4DDEB;
+}
+
+.dark .algolearn-card:hover {
+  border-color: #38306E;
+}
+
+.algolearn-card-subtle {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+}
+
+.algolearn-btn-primary {
+  background-color: var(--accent-purple);
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  transition: all 0.18s ease-in-out;
+  box-shadow: 0 2px 8px -1px rgba(79, 70, 245, 0.25);
+}
+
+.algolearn-btn-primary:hover {
+  background-color: var(--accent-purple-hover);
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 245, 0.35);
+  transform: translateY(-1px);
+}
+
+.algolearn-btn-primary:active {
+  transform: translateY(0);
+  background-color: var(--accent-purple-active);
+}
+
+.dark .algolearn-btn-primary {
+  box-shadow: 0 2px 10px -1px rgba(108, 76, 255, 0.35);
+}
+
+.dark .algolearn-btn-primary:hover {
+  box-shadow: 0 4px 16px -2px rgba(108, 76, 255, 0.45);
+}
+
+.algolearn-btn-secondary {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-heading);
+  font-weight: 600;
+  border-radius: 0.75rem;
+  transition: all 0.18s ease-in-out;
+}
+
+.algolearn-btn-secondary:hover {
+  background-color: var(--bg-surface);
+  border-color: #CBD5E1;
+}
+
+.dark .algolearn-btn-secondary:hover {
+  border-color: #38306E;
+}
+
+.algolearn-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  background-color: var(--bg-accent-soft);
+  color: var(--accent-purple);
+  border: 1px solid rgba(79, 70, 245, 0.15);
+}
+
+.dark .algolearn-badge {
+  border-color: rgba(108, 76, 255, 0.3);
+}
+
+/* Interactive elements */
 .interactive-card {
-  @apply transition-all duration-150 ease-out hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700;
+  @apply transition-all duration-150 ease-out;
 }
 
 .interactive-btn {
@@ -56,6 +173,7 @@
 }
 
 .dark .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: rgba(75, 85, 99, 0.45);
+  background-color: rgba(99, 102, 241, 0.3);
 }
+
 

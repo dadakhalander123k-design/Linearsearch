@@ -59,12 +59,12 @@ export function CertificateModal({
       />
 
       {/* Modal Card */}
-      <div className="relative w-full max-w-3xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6 animate-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-3xl bg-white dark:bg-[#0B1025] rounded-3xl shadow-2xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 space-y-6 animate-in zoom-in-95 duration-200">
         {/* Header Actions */}
-        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+        <div className="flex items-center justify-between border-b border-[#E1E7F0] dark:border-[#25204B] pb-4">
           <div className="flex items-center gap-2">
             <Award className="w-5 h-5 text-amber-500" />
-            <h3 className="font-bold text-slate-900 dark:text-white text-base sm:text-lg">
+            <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-base sm:text-lg">
               Official Certificate of Mastery
             </h3>
           </div>
@@ -72,7 +72,7 @@ export function CertificateModal({
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#111633] transition cursor-pointer"
               title="Print Certificate"
               aria-label="Print Certificate"
             >
@@ -80,7 +80,7 @@ export function CertificateModal({
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#111633] transition cursor-pointer"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
@@ -89,7 +89,7 @@ export function CertificateModal({
         </div>
 
         {/* Certificate Frame Preview */}
-        <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-b from-amber-50/70 via-white to-amber-50/70 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 border-4 border-double border-amber-300 dark:border-amber-700/60 text-center space-y-6 shadow-md relative overflow-hidden">
+        <div className="p-6 sm:p-10 rounded-2xl bg-gradient-to-b from-amber-50/70 via-white to-amber-50/70 dark:from-[#080D20] dark:via-[#0B1025] dark:to-[#080D20] border-4 border-double border-amber-300 dark:border-amber-700/60 text-center space-y-6 shadow-md relative overflow-hidden">
           {/* Subtle background seal */}
           <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
             <Award className="w-96 h-96 text-amber-600" />
@@ -99,7 +99,7 @@ export function CertificateModal({
             <span className="font-mono text-xs font-bold text-amber-700 dark:text-amber-400 tracking-widest uppercase">
               AlgoLearn Academy • Verified Certificate
             </span>
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-serif">
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] font-serif">
               Certificate of Completion
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
@@ -115,22 +115,22 @@ export function CertificateModal({
                   type="text"
                   value={nameInput}
                   onChange={(e) => setNameInput(e.target.value)}
-                  className="px-3 py-1.5 rounded-xl border border-indigo-500 text-center font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-800 text-base focus:outline-hidden"
+                  className="px-3 py-1.5 rounded-xl border border-[#4F46F5] text-center font-bold text-[#11182D] dark:text-white bg-white dark:bg-[#111633] text-base focus:outline-hidden"
                   placeholder="Enter full name"
                 />
                 <button
                   onClick={handleSaveName}
-                  className="px-3 py-1.5 bg-indigo-600 text-white rounded-xl text-xs font-bold"
+                  className="px-3 py-1.5 bg-[#4F46F5] dark:bg-[#6C4CFF] text-white rounded-xl text-xs font-bold cursor-pointer"
                 >
                   Save
                 </button>
               </div>
             ) : (
               <div className="inline-block group cursor-pointer" onClick={() => setEditingName(true)}>
-                <h1 className="text-2xl sm:text-3xl font-extrabold text-indigo-700 dark:text-indigo-300 border-b-2 border-dashed border-indigo-300 dark:border-indigo-700 pb-1 px-4 inline-block font-serif">
+                <h1 className="text-2xl sm:text-3xl font-extrabold text-[#4F46F5] dark:text-[#A58FFF] border-b-2 border-dashed border-[#4F46F5]/40 dark:border-[#6C4CFF]/40 pb-1 px-4 inline-block font-serif">
                   {progress.learnerName}
                 </h1>
-                <span className="text-[10px] text-slate-400 block mt-1 group-hover:text-indigo-500">
+                <span className="text-[10px] text-slate-400 block mt-1 group-hover:text-[#4F46F5] dark:group-hover:text-[#A58FFF]">
                   (Click name to customize)
                 </span>
               </div>
@@ -141,7 +141,7 @@ export function CertificateModal({
             <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
               has successfully completed all theory modules, interactive laboratories, sequential search challenges, and the comprehensive evaluation for:
             </p>
-            <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+            <h4 className="text-base sm:text-lg font-bold text-[#11182D] dark:text-[#F5F7FF]">
               Linear Search Algorithm & Sequential Analysis
             </h4>
           </div>
@@ -175,7 +175,7 @@ export function CertificateModal({
           <div className="flex items-center gap-2">
             <button
               onClick={handlePrint}
-              className="px-4 py-2 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold hover:bg-slate-800 dark:hover:bg-slate-100 flex items-center gap-1.5 transition"
+              className="px-4 py-2 rounded-xl bg-[#11182D] dark:bg-[#F5F7FF] text-white dark:text-[#080D20] text-xs font-bold hover:opacity-90 flex items-center gap-1.5 transition cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print / Save as PDF</span>
@@ -183,7 +183,7 @@ export function CertificateModal({
 
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+              className="px-4 py-2 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-xs font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-[#111633] transition cursor-pointer"
             >
               Done
             </button>

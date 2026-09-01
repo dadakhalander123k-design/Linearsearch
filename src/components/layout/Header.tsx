@@ -8,9 +8,11 @@ import {
 } from 'lucide-react';
 import { SectionId, UserProgressState } from '../../types';
 import { sound } from '../../audio/soundEngine';
+import { AlgoLearnLogo } from '../common/AlgoLearnLogo';
 
 interface HeaderProps {
   currentSection: SectionId;
+  isSidebarOpen: boolean;
   onOpenMobileMenu: () => void;
   progress: UserProgressState;
   onToggleTheme: () => void;
@@ -21,6 +23,7 @@ interface HeaderProps {
 
 export function Header({
   currentSection,
+  isSidebarOpen,
   onOpenMobileMenu,
   progress,
   onToggleTheme,
@@ -41,35 +44,32 @@ export function Header({
   const currentSectionName = sectionDisplayNames[currentSection] || 'Overview';
 
   return (
-    <header className="sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between transition-colors">
-      {/* LEFT: Hamburger & AlgoLearn Brand + Current Section */}
-      <div className="flex items-center gap-3 sm:gap-3.5">
-        {/* Hamburger Menu Button */}
-        <button
-          onClick={() => {
-            sound.playClick();
-            onOpenMobileMenu();
-          }}
-          className="w-10 h-10 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 flex items-center justify-center shrink-0 shadow-2xs"
-          aria-label="Open navigation"
-          title="Open navigation"
-        >
-          <Menu className="w-5 h-5" />
-        </button>
+    <header className="sticky top-0 z-30 bg-white/95 dark:bg-[#0B1025]/95 backdrop-blur-md border-b border-[#E1E7F0] dark:border-[#25204B] px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between transition-colors">
+      {/* LEFT: Hamburger (ONLY WHEN CLOSED) & AlgoLearn Brand Logo + Current Section */}
+      <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+        {/* Hamburger Menu Button: ONLY VISIBLE WHEN SIDEBAR IS CLOSED */}
+        {!isSidebarOpen && (
+          <button
+            onClick={() => {
+              sound.playClick();
+              onOpenMobileMenu();
+            }}
+            className="w-10 h-10 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0D132C] text-[#506080] dark:text-[#AAB6D1] hover:bg-[#F8FAFC] dark:hover:bg-[#131A38] hover:text-[#11182D] dark:hover:text-[#F5F7FF] transition-all duration-150 active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/40 flex items-center justify-center shrink-0 shadow-2xs cursor-pointer"
+            aria-label="Open navigation"
+            title="Open navigation"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
 
-        {/* Empty Logo Container Placeholder with subtle border matching reference */}
-        <div 
-          id="header-logo-container"
-          className="w-10 h-10 rounded-xl border border-slate-200/90 dark:border-slate-800 bg-slate-50/80 dark:bg-slate-800/40 shadow-2xs shrink-0"
-          aria-hidden="true"
-        />
+        {/* AlgoLearn Official Logo */}
+        <div id="header-logo-container" className="flex items-center shrink-0">
+          <AlgoLearnLogo size="md" />
+        </div>
 
-        {/* Brand and Current Section Title */}
-        <div className="flex flex-col">
-          <h1 className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white tracking-tight leading-none">
-            AlgoLearn
-          </h1>
-          <span className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 mt-0.5 leading-none">
+        {/* Current Section Indicator Divider & Title */}
+        <div className="hidden sm:flex items-center gap-2.5 pl-3 border-l border-[#E1E7F0] dark:border-[#25204B]">
+          <span className="px-2.5 py-1 rounded-lg text-xs font-bold font-mono bg-[#EEF0FF] dark:bg-[#6C4CFF]/15 text-[#4F46F5] dark:text-[#A58FFF] border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30">
             {currentSectionName}
           </span>
         </div>
@@ -82,14 +82,14 @@ export function Header({
           onClick={() => {
             onToggleTheme();
           }}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/30 shadow-2xs"
+          className="p-2 sm:p-2.5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0D132C] text-[#506080] dark:text-[#AAB6D1] hover:bg-[#F8FAFC] dark:hover:bg-[#131A38] hover:text-[#11182D] dark:hover:text-[#F5F7FF] transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/30 shadow-2xs"
           title={progress.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
           aria-label={progress.theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
         >
           {progress.theme === 'dark' ? (
             <Sun className="w-4 h-4 text-amber-400" />
           ) : (
-            <Moon className="w-4 h-4 text-slate-700" />
+            <Moon className="w-4 h-4 text-[#506080]" />
           )}
         </button>
 
@@ -98,14 +98,14 @@ export function Header({
           onClick={() => {
             onToggleSound();
           }}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/30 shadow-2xs"
+          className="p-2 sm:p-2.5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0D132C] text-[#506080] dark:text-[#AAB6D1] hover:bg-[#F8FAFC] dark:hover:bg-[#131A38] hover:text-[#11182D] dark:hover:text-[#F5F7FF] transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/30 shadow-2xs"
           title={progress.soundEnabled ? 'Mute audio' : 'Unmute audio'}
           aria-label={progress.soundEnabled ? 'Mute audio' : 'Unmute audio'}
         >
           {progress.soundEnabled ? (
-            <Volume2 className="w-4 h-4 text-indigo-500" />
+            <Volume2 className="w-4 h-4 text-[#4F46F5] dark:text-[#6C4CFF]" />
           ) : (
-            <VolumeX className="w-4 h-4 text-slate-400" />
+            <VolumeX className="w-4 h-4 text-[#8290A8] dark:text-[#7885A5]" />
           )}
         </button>
 
@@ -115,7 +115,7 @@ export function Header({
             sound.playClick();
             onOpenResetModal();
           }}
-          className="p-2 sm:p-2.5 rounded-xl border border-slate-200/90 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-200 dark:hover:border-red-900/60 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-red-500/30 shadow-2xs"
+          className="p-2 sm:p-2.5 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] bg-white dark:bg-[#0D132C] text-[#506080] dark:text-[#AAB6D1] hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 hover:border-red-200 dark:hover:border-red-900/60 transition-all duration-150 active:scale-95 flex items-center justify-center focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-red-500/30 shadow-2xs"
           title="Reset Progress"
           aria-label="Reset Progress"
         >

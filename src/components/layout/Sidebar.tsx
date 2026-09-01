@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   LayoutGrid, 
   BookOpen, 
@@ -6,7 +6,6 @@ import {
   Gamepad2, 
   HelpCircle, 
   TrendingUp, 
-  Search,
   X
 } from 'lucide-react';
 import { SectionId, UserProgressState } from '../../types';
@@ -33,10 +32,34 @@ export function Sidebar({
 }: SidebarProps) {
   const [isSidebarHovered, setIsSidebarHovered] = useState(false);
 
+  // Click-anywhere-on-main-content to close open sidebar without blocking interactions
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleDocumentClick = (event: MouseEvent | TouchEvent) => {
+      const sidebarEl = document.getElementById('main-navigation-sidebar');
+      if (sidebarEl && !sidebarEl.contains(event.target as Node)) {
+        onClose();
+      }
+    };
+
+    // Attach after the open event finishes to avoid immediate trigger
+    const timer = setTimeout(() => {
+      document.addEventListener('click', handleDocumentClick);
+      document.addEventListener('touchend', handleDocumentClick);
+    }, 10);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('touchend', handleDocumentClick);
+    };
+  }, [isOpen, onClose]);
+
   const navItems: { id: SectionId; label: string; icon: typeof LayoutGrid; badge: string }[] = [
     { id: 'overview', label: 'Overview', icon: LayoutGrid, badge: 'Overview' },
-    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 10` },
-    { id: 'visualize', label: 'Visualize', icon: Sparkles, badge: 'Interactive' },
+    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 12` },
+    { id: 'visualize', label: 'Visualize', icon: Sparkles, badge: `${progress.completedVideos.length} / 2` },
     { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length} / 5` },
     { id: 'quiz', label: 'Quiz', icon: HelpCircle, badge: progress.isQuizCompleted ? 'Done' : '10 Qs' },
     { id: 'progress', label: 'Progress', icon: TrendingUp, badge: `${overallProgress}%` },
@@ -44,52 +67,24 @@ export function Sidebar({
 
   return (
     <>
-      {/* Backdrop (closes sidebar when clicking outside on mobile & tablet) */}
-      {isOpen && (
-        <div
-          onClick={onClose}
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 lg:hidden transition-opacity duration-300"
-          aria-label="Close navigation overlay"
-        />
-      )}
-
       {/* Navigation Sidebar Panel */}
       <aside
+        id="main-navigation-sidebar"
         onMouseEnter={() => setIsSidebarHovered(true)}
         onMouseLeave={() => setIsSidebarHovered(false)}
-        className={`group/sidebar fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
+        className={`group/sidebar fixed top-0 bottom-0 left-0 z-50 w-72 bg-white dark:bg-[#0B1025] border-r border-[#E1E7F0] dark:border-[#25204B] flex flex-col select-none shadow-xl lg:shadow-none transition-transform duration-300 ease-in-out overflow-y-auto ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
         aria-label="Main Navigation"
       >
-        {/* Top Brand Section */}
-        <div className="p-5 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo Icon Container */}
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 via-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-sm shadow-indigo-500/20 shrink-0">
-              <Search className="w-5 h-5" />
-            </div>
-
-            {/* Product Title, Topic & Version Badge */}
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-extrabold text-base sm:text-lg text-slate-900 dark:text-white tracking-tight leading-none">
-                  AlgoLearn
-                </h1>
-                <span className="px-1.5 py-0.5 text-[10px] font-mono font-bold bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 rounded-md">
-                  v1.0
-                </span>
-              </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mt-0.5">
-                Linear Search
-              </p>
-            </div>
-          </div>
-
-          {/* Close Button (X) */}
+        {/* Top Header with Close Button (X) */}
+        <div className="p-4 sm:p-5 flex items-center justify-end">
           <button
-            onClick={onClose}
-            className="p-2 rounded-xl border border-slate-200/80 dark:border-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition active:scale-95 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/30"
+            onClick={() => {
+              sound.playClick();
+              onClose();
+            }}
+            className="w-10 h-10 rounded-xl border border-[#E1E7F0] dark:border-[#25204B] text-[#506080] hover:text-[#11182D] dark:text-[#AAB6D1] dark:hover:text-[#F5F7FF] hover:bg-[#F1F4F9] dark:hover:bg-[#0D132C] transition active:scale-95 flex items-center justify-center cursor-pointer shadow-2xs focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/30"
             aria-label="Close navigation"
             title="Close navigation"
           >
@@ -97,9 +92,9 @@ export function Sidebar({
           </button>
         </div>
 
-        {/* Navigation Menu Label */}
-        <div className="px-5 pt-5 pb-2 text-[11px] font-bold tracking-wider text-slate-400 dark:text-slate-500 uppercase">
-          Navigation Menu
+        {/* Navigation Menu Label (Appears exactly ONCE) */}
+        <div className="px-5 pb-2 text-[11px] font-bold tracking-wider text-[#8290A8] dark:text-[#7885A5] uppercase font-mono">
+          NAVIGATION MENU
         </div>
 
         {/* Navigation Items */}
@@ -118,15 +113,15 @@ export function Sidebar({
                     onClose();
                   }
                 }}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-indigo-500/40 ${
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all focus:outline-hidden focus-visible:ring-2 focus-visible:ring-[#4F46F5]/40 ${
                   isActive
-                    ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 font-semibold shadow-xs border border-indigo-200/70 dark:border-indigo-800/60'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100/80 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-200'
+                    ? 'bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] text-[#4F46F5] dark:text-[#F5F7FF] font-semibold shadow-xs border border-[#DCE3EF] dark:border-[#38306E]'
+                    : 'text-[#506080] dark:text-[#AAB6D1] hover:bg-[#F1F4F9] dark:hover:bg-[#0D132C] hover:text-[#11182D] dark:hover:text-[#F5F7FF]'
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="w-5 h-5 flex items-center justify-center shrink-0">
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400 dark:text-slate-500'}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-[#4F46F5] dark:text-[#6C4CFF]' : 'text-[#8290A8] dark:text-[#7885A5]'}`} />
                   </div>
                   <span className="truncate">{item.label}</span>
                 </div>
@@ -137,8 +132,8 @@ export function Sidebar({
                       : 'opacity-0 group-hover/sidebar:opacity-100 group-focus-within/sidebar:opacity-100'
                   } ${
                     isActive
-                      ? 'bg-indigo-200/60 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 font-bold'
-                      : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'
+                      ? 'bg-[#4F46F5]/10 dark:bg-[#6C4CFF]/20 text-[#4F46F5] dark:text-[#AAB6D1] font-bold border border-[#4F46F5]/20 dark:border-[#6C4CFF]/30'
+                      : 'bg-[#F1F4F9] dark:bg-[#0D132C] text-[#8290A8] dark:text-[#7885A5] border border-[#E1E7F0] dark:border-[#25204B]'
                   }`}>
                     {item.badge}
                   </span>

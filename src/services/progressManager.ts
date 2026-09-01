@@ -119,13 +119,13 @@ class ProgressManager {
       unlockedNow.push('first_search');
     }
 
-    // 2. Search Explorer: Complete 5 theory modules
-    if (this.state.completedTheoryModules.length >= 5 && !current.has('search_explorer')) {
+    // 2. Search Explorer: Complete 6 theory modules (half of 12)
+    if (this.state.completedTheoryModules.length >= 6 && !current.has('search_explorer')) {
       current.add('search_explorer');
       unlockedNow.push('search_explorer');
     }
 
-    // 3. Video Learner: Watch both videos
+    // 3. Video Learner: Watch both video lessons
     if (this.state.completedVideos.length >= 2 && !current.has('video_learner')) {
       current.add('video_learner');
       unlockedNow.push('video_learner');
@@ -143,9 +143,9 @@ class ProgressManager {
       unlockedNow.push('quiz_champion');
     }
 
-    // 6. Linear Search Master: Complete core curriculum (10 theory, 2 videos, 5 games, 1 quiz)
+    // 6. Linear Search Master: Complete all 20 required activities (12 theory, 2 videos, 5 games, 1 quiz)
     const isMaster = 
-      this.state.completedTheoryModules.length >= 10 &&
+      this.state.completedTheoryModules.length >= 12 &&
       this.state.completedVideos.length >= 2 &&
       this.state.completedGameLevels.length >= 5 &&
       this.state.isQuizCompleted;
@@ -170,7 +170,7 @@ class ProgressManager {
 
   public completeTheoryModule(moduleId: number) {
     if (!this.state.completedTheoryModules.includes(moduleId)) {
-      this.state.completedTheoryModules.push(moduleId);
+      this.state.completedTheoryModules = Array.from(new Set([...this.state.completedTheoryModules, moduleId]));
       sound.playCorrect();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -179,7 +179,7 @@ class ProgressManager {
 
   public completeVideo(videoId: number) {
     if (!this.state.completedVideos.includes(videoId)) {
-      this.state.completedVideos.push(videoId);
+      this.state.completedVideos = Array.from(new Set([...this.state.completedVideos, videoId]));
       sound.playCorrect();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -188,7 +188,7 @@ class ProgressManager {
 
   public completeGameLevel(levelId: number) {
     if (!this.state.completedGameLevels.includes(levelId)) {
-      this.state.completedGameLevels.push(levelId);
+      this.state.completedGameLevels = Array.from(new Set([...this.state.completedGameLevels, levelId]));
       sound.playLevelComplete();
       const unlocked = this.checkAchievements();
       this.notify(unlocked[0]);
@@ -197,7 +197,7 @@ class ProgressManager {
 
   public completeLabActivity(activityId: string) {
     if (!this.state.completedLabActivities.includes(activityId)) {
-      this.state.completedLabActivities.push(activityId);
+      this.state.completedLabActivities = Array.from(new Set([...this.state.completedLabActivities, activityId]));
       sound.playCorrect();
       this.notify();
     }
@@ -213,21 +213,23 @@ class ProgressManager {
   }
 
   public getOverallProgressPercentage(): number {
-    // 10 theory modules, 5 game levels, 1 mastery quiz = 16 total core milestones
-    const TOTAL_CORE_ITEMS = 16;
+    // 12 theory modules + 5 game levels + 2 visualization lessons + 1 mastery quiz = 20 total activities
+    const TOTAL_REQUIRED_ACTIVITIES = 20;
     const completedCount = 
       this.state.completedTheoryModules.length +
       this.state.completedGameLevels.length +
+      this.state.completedVideos.length +
       (this.state.isQuizCompleted ? 1 : 0);
     
-    return Math.min(100, Math.round((completedCount / TOTAL_CORE_ITEMS) * 100));
+    return Math.min(100, Math.max(0, Math.round((completedCount / TOTAL_REQUIRED_ACTIVITIES) * 100)));
   }
 
   public isFullyCompleted(): boolean {
     return (
-      this.state.completedTheoryModules.length >= 10 &&
+      this.state.completedTheoryModules.length >= 12 &&
+      this.state.completedVideos.length >= 2 &&
       this.state.completedGameLevels.length >= 5 &&
-      this.state.isQuizCompleted
+      this.state.isQuizCompleted === true
     );
   }
 

@@ -38,8 +38,8 @@ export function MobileNav({
 
   const navItems: { id: SectionId; label: string; icon: typeof Compass; badge: string }[] = [
     { id: 'overview', label: 'Overview', icon: Compass, badge: 'Overview' },
-    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 10` },
-    { id: 'visualize', label: 'Visualize', icon: Eye, badge: 'Interactive' },
+    { id: 'learn', label: 'Learn', icon: BookOpen, badge: `${progress.completedTheoryModules.length} / 12` },
+    { id: 'visualize', label: 'Visualize', icon: Eye, badge: `${progress.completedVideos.length} / 2` },
     { id: 'game', label: 'Game', icon: Gamepad2, badge: `${progress.completedGameLevels.length} / 5` },
     { id: 'quiz', label: 'Quiz', icon: HelpCircle, badge: progress.isQuizCompleted ? 'Done' : '10 Qs' },
     { id: 'progress', label: 'Progress', icon: BarChart3, badge: `${overallProgress}%` },

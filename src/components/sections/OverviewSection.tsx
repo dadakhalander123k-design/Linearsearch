@@ -35,22 +35,22 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
       {/* ─────────────────────────────────────────────────────────────
           HERO SECTION CARD: LINEAR SEARCH FUNDAMENTALS
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 md:p-10 shadow-xs transition-colors">
+      <section className="bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 md:p-10 shadow-sm transition-colors">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Text & Title Area */}
           <div className="lg:col-span-6 space-y-3">
-            <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#4F46F5] dark:text-[#6C4CFF]">
               {hero.category}
             </span>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-[#11182D] dark:text-[#F5F7FF] leading-[1.15]">
               {hero.titleLine1}
               <br />
               {hero.titleLine2}
             </h1>
 
-            <p className="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed max-w-md pt-1">
+            <p className="text-[#506080] dark:text-[#AAB6D1] text-xs sm:text-sm leading-relaxed max-w-md pt-1">
               {hero.description}
             </p>
           </div>
@@ -62,13 +62,13 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
               {/* Search Icon & Curved Dashed Pointer pointing to element 9 (index 3) */}
               <div className="relative h-14 sm:h-16 w-full flex items-center justify-end pr-14 sm:pr-20">
                 {/* Search Magnifying Glass badge */}
-                <div className="w-10 h-10 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs z-10">
+                <div className="w-10 h-10 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shadow-xs z-10">
                   <Search className="w-5 h-5" />
                 </div>
 
                 {/* SVG Curved Dashed Path pointing down to index 3 */}
                 <svg 
-                  className="absolute inset-0 w-full h-full pointer-events-none text-indigo-500 dark:text-indigo-400"
+                  className="absolute inset-0 w-full h-full pointer-events-none text-[#4F46F5] dark:text-[#6C4CFF]"
                   viewBox="0 0 320 60"
                   fill="none"
                 >
@@ -96,8 +96,8 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
                     <div
                       className={`w-full aspect-square rounded-xl flex items-center justify-center font-bold text-base sm:text-lg transition-all ${
                         item.isTarget
-                          ? 'bg-emerald-100 dark:bg-emerald-950/60 border-2 border-emerald-400 dark:border-emerald-500 text-emerald-800 dark:text-emerald-200 shadow-xs'
-                          : 'bg-indigo-50/30 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-800/80 text-indigo-950 dark:text-indigo-100'
+                          ? 'bg-emerald-50 dark:bg-emerald-950/60 border-2 border-emerald-500 text-emerald-700 dark:text-emerald-300 shadow-xs'
+                          : 'bg-[#F1F4F9] dark:bg-[#0D132C] border border-[#E1E7F0] dark:border-[#25204B] text-[#11182D] dark:text-[#F5F7FF]'
                       }`}
                     >
                       {item.value}
@@ -106,7 +106,7 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
                       className={`text-xs font-bold mt-2 ${
                         item.isTarget
                           ? 'text-emerald-600 dark:text-emerald-400'
-                          : 'text-slate-800 dark:text-slate-300'
+                          : 'text-[#8290A8] dark:text-[#7885A5]'
                       }`}
                     >
                       {item.index}
@@ -119,47 +119,47 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
         </div>
 
         {/* 3 Core Highlight Cards inside the Hero card */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-slate-100 dark:border-slate-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8 pt-8 border-t border-[#E1E7F0] dark:border-[#25204B]">
           {/* Card 1: Core Idea */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-800 flex items-start gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex items-start gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs">
               <Target className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm">
                 {hero.features[0].title}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5">
+              <p className="text-xs text-[#506080] dark:text-[#AAB6D1] leading-relaxed mt-0.5">
                 {hero.features[0].description}
               </p>
             </div>
           </div>
 
           {/* Card 2: Key Formula */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-800 flex items-start gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs font-bold text-xl">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex items-start gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs font-bold text-xl">
               <Sigma className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm">
                 {hero.features[1].title}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5">
+              <p className="text-xs text-[#506080] dark:text-[#AAB6D1] leading-relaxed mt-0.5">
                 {hero.features[1].description}
               </p>
             </div>
           </div>
 
           {/* Card 3: Main Challenge */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-slate-50/80 dark:bg-slate-800/40 border border-slate-200/70 dark:border-slate-800 flex items-start gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+          <div className="p-4 sm:p-5 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex items-start gap-3.5">
+            <div className="w-11 h-11 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs">
               <Puzzle className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm">
                 {hero.features[2].title}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-0.5">
+              <p className="text-xs text-[#506080] dark:text-[#AAB6D1] leading-relaxed mt-0.5">
                 {hero.features[2].description}
               </p>
             </div>
@@ -171,13 +171,13 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
       {/* ─────────────────────────────────────────────────────────────
           SECTION 1: 1. THE MAIN IDEA
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs transition-colors space-y-6">
+      <section className="bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 shadow-sm transition-colors space-y-6">
         {/* Section Header */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs">
             <Lightbulb className="w-5 h-5" />
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-lg sm:text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
             {mainIdea.title}
           </h2>
         </div>
@@ -187,66 +187,66 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
           
           {/* Left Explainer */}
           <div className="lg:col-span-4 space-y-2">
-            <h3 className="font-bold text-base sm:text-lg text-indigo-600 dark:text-indigo-400">
+            <h3 className="font-bold text-base sm:text-lg text-[#4F46F5] dark:text-[#6C4CFF]">
               {mainIdea.question}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#506080] dark:text-[#AAB6D1] leading-relaxed">
               {mainIdea.description}
             </p>
           </div>
 
           {/* Right Steps Flow Container */}
-          <div className="lg:col-span-8 p-5 sm:p-6 rounded-2xl bg-slate-50/60 dark:bg-slate-800/30 border border-slate-200/70 dark:border-slate-800">
+          <div className="lg:col-span-8 p-5 sm:p-6 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B]">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-2 items-start relative">
               
               {/* Step 1: Start */}
               <div className="flex flex-col items-center text-center space-y-1.5 relative">
-                <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shadow-xs">
                   <Key className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                <h4 className="font-bold text-xs sm:text-sm text-[#11182D] dark:text-[#F5F7FF]">
                   {mainIdea.steps[0].title}
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                <p className="text-[11px] text-[#506080] dark:text-[#AAB6D1] leading-snug">
                   {mainIdea.steps[0].description}
                 </p>
               </div>
 
               {/* Step 2: Compare */}
               <div className="flex flex-col items-center text-center space-y-1.5 relative">
-                <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shadow-xs">
                   <ListFilter className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                <h4 className="font-bold text-xs sm:text-sm text-[#11182D] dark:text-[#F5F7FF]">
                   {mainIdea.steps[1].title}
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                <p className="text-[11px] text-[#506080] dark:text-[#AAB6D1] leading-snug">
                   {mainIdea.steps[1].description}
                 </p>
               </div>
 
               {/* Step 3: Match? */}
               <div className="flex flex-col items-center text-center space-y-1.5 relative">
-                <div className="w-12 h-12 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-100 dark:border-emerald-900/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-800 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shadow-xs">
                   <Check className="w-5 h-5 stroke-[2.5]" />
                 </div>
-                <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                <h4 className="font-bold text-xs sm:text-sm text-[#11182D] dark:text-[#F5F7FF]">
                   {mainIdea.steps[2].title}
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                <p className="text-[11px] text-[#506080] dark:text-[#AAB6D1] leading-snug">
                   {mainIdea.steps[2].description}
                 </p>
               </div>
 
               {/* Step 4: Result */}
               <div className="flex flex-col items-center text-center space-y-1.5">
-                <div className="w-12 h-12 rounded-full bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs">
+                <div className="w-12 h-12 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shadow-xs">
                   <Flag className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+                <h4 className="font-bold text-xs sm:text-sm text-[#11182D] dark:text-[#F5F7FF]">
                   {mainIdea.steps[3].title}
                 </h4>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug">
+                <p className="text-[11px] text-[#506080] dark:text-[#AAB6D1] leading-snug">
                   {mainIdea.steps[3].description}
                 </p>
               </div>
@@ -260,13 +260,13 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
       {/* ─────────────────────────────────────────────────────────────
           SECTION 2: 2. CONCEPT ROADMAP
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs transition-colors space-y-6">
+      <section className="bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 shadow-sm transition-colors space-y-6">
         {/* Section Header */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs">
             <BookOpen className="w-5 h-5" />
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-lg sm:text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
             {roadmap.title}
           </h2>
         </div>
@@ -275,103 +275,33 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
         {/* DESKTOP / TABLET ROADMAP (sm and above) */}
         <div className="hidden sm:block relative pt-2 pb-2">
           {/* Connector Line behind badges */}
-          <div className="absolute top-[22px] left-[10%] right-[10%] border-t-2 border-dashed border-indigo-300 dark:border-indigo-800 z-0 pointer-events-none" />
+          <div className="absolute top-[22px] left-[10%] right-[10%] border-t-2 border-dashed border-[#DCE3EF] dark:border-[#38306E] z-0 pointer-events-none" />
 
           <div className="grid grid-cols-5 gap-3 relative z-10">
-            {/* 01: What is Linear Search? */}
-            <div 
-              onClick={() => {
-                sound.playClick();
-                onNavigate('learn');
-              }}
-              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                01
+            {roadmap.steps.map((step, idx) => (
+              <div 
+                key={step.id}
+                onClick={() => {
+                  sound.playClick();
+                  onNavigate('learn');
+                }}
+                className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
+              >
+                <div className="w-9 h-9 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  {step.number}
+                </div>
+                <div className="w-10 h-10 rounded-full bg-[#F1F4F9] dark:bg-[#0D132C] text-[#4F46F5] dark:text-[#6C4CFF] flex items-center justify-center group-hover:bg-[#EEF0FF] dark:group-hover:bg-[rgba(108,76,255,0.25)] transition-colors">
+                  {idx === 0 && <Search className="w-5 h-5" />}
+                  {idx === 1 && <ListFilter className="w-5 h-5" />}
+                  {idx === 2 && <Clock className="w-5 h-5" />}
+                  {idx === 3 && <TrendingUp className="w-5 h-5" />}
+                  {idx === 4 && <Code className="w-5 h-5" />}
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-[#11182D] dark:text-[#F5F7FF] leading-tight px-1 group-hover:text-[#4F46F5] dark:group-hover:text-[#6C4CFF] transition-colors">
+                  {step.title}
+                </span>
               </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
-                <Search className="w-5 h-5" />
-              </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                {roadmap.steps[0].title}
-              </span>
-            </div>
-
-            {/* 02: Search Algorithm */}
-            <div 
-              onClick={() => {
-                sound.playClick();
-                onNavigate('learn');
-              }}
-              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                02
-              </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
-                <ListFilter className="w-5 h-5" />
-              </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                {roadmap.steps[1].title}
-              </span>
-            </div>
-
-            {/* 03: Time Complexity */}
-            <div 
-              onClick={() => {
-                sound.playClick();
-                onNavigate('learn');
-              }}
-              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                03
-              </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
-                <Clock className="w-5 h-5" />
-              </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                {roadmap.steps[2].title}
-              </span>
-            </div>
-
-            {/* 04: Best, Worst & Average Case */}
-            <div 
-              onClick={() => {
-                sound.playClick();
-                onNavigate('learn');
-              }}
-              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                04
-              </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
-                <TrendingUp className="w-5 h-5" />
-              </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                {roadmap.steps[3].title}
-              </span>
-            </div>
-
-            {/* 05: Implementation Examples */}
-            <div 
-              onClick={() => {
-                sound.playClick();
-                onNavigate('learn');
-              }}
-              className="flex flex-col items-center text-center space-y-2 cursor-pointer group"
-            >
-              <div className="w-9 h-9 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                05
-              </div>
-              <div className="w-10 h-10 rounded-full bg-indigo-50/70 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/60 transition-colors">
-                <Code className="w-5 h-5" />
-              </div>
-              <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-tight px-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                {roadmap.steps[4].title}
-              </span>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -391,15 +321,15 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
                   className="flex flex-col items-center text-center group cursor-pointer focus:outline-hidden"
                 >
                   {/* 1. Number Circle */}
-                  <div className="w-8 h-8 rounded-full bg-indigo-50 dark:bg-indigo-950/90 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 font-mono font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
+                  <div className="w-8 h-8 rounded-full bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] font-mono font-bold text-xs flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
                     {step.number}
                   </div>
 
                   {/* 2. Thin Vertical Connector (Number to Icon) */}
-                  <div className="w-0.5 h-3 bg-indigo-200 dark:bg-indigo-800 my-0.5" />
+                  <div className="w-0.5 h-3 bg-[#DCE3EF] dark:bg-[#38306E] my-0.5" />
 
                   {/* 3. Concept Icon Container */}
-                  <div className="w-12 h-12 rounded-full bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shadow-xs group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/80 transition-colors">
+                  <div className="w-12 h-12 rounded-full bg-[#F1F4F9] dark:bg-[#0D132C] border border-[#E1E7F0] dark:border-[#25204B] text-[#4F46F5] dark:text-[#6C4CFF] flex items-center justify-center shadow-xs group-hover:bg-[#EEF0FF] dark:group-hover:bg-[rgba(108,76,255,0.25)] transition-colors">
                     {step.iconType === 'search' && <Search className="w-5 h-5" />}
                     {step.iconType === 'algorithm' && <ListFilter className="w-5 h-5" />}
                     {step.iconType === 'time' && <Clock className="w-5 h-5" />}
@@ -408,14 +338,14 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
                   </div>
 
                   {/* 4. Concept Title */}
-                  <span className="text-xs font-bold text-slate-900 dark:text-white leading-snug px-2 mt-2 max-w-[200px] text-center group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                  <span className="text-xs font-bold text-[#11182D] dark:text-[#F5F7FF] leading-snug px-2 mt-2 max-w-[200px] text-center group-hover:text-[#4F46F5] dark:group-hover:text-[#6C4CFF] transition-colors">
                     {step.title}
                   </span>
                 </button>
 
                 {/* 5. Thin Vertical Connector to Next Step */}
                 {!isLast && (
-                  <div className="w-0.5 h-7 bg-indigo-200 dark:bg-indigo-800 my-1.5" />
+                  <div className="w-0.5 h-7 bg-[#DCE3EF] dark:bg-[#38306E] my-1.5" />
                 )}
               </div>
             );
@@ -427,13 +357,13 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
       {/* ─────────────────────────────────────────────────────────────
           SECTION 3: 3. WHY THIS TOPIC MATTERS
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs transition-colors space-y-6">
+      <section className="bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 shadow-sm transition-colors space-y-6">
         {/* Section Header */}
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-100 dark:border-indigo-900/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-9 h-9 rounded-xl bg-[#EEF0FF] dark:bg-[rgba(108,76,255,0.18)] border border-[#DCE3EF] dark:border-[#38306E] text-[#4F46F5] dark:text-[#F5F7FF] flex items-center justify-center shrink-0 shadow-xs">
             <Star className="w-5 h-5" />
           </div>
-          <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-lg sm:text-xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
             {whyItMatters.title}
           </h2>
         </div>
@@ -442,45 +372,45 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
           
           {/* Card 1: Simple & Easy */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 flex flex-col justify-start space-y-3">
-            <div className="w-11 h-11 rounded-full bg-indigo-600 text-white flex items-center justify-center shadow-xs">
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex flex-col justify-start space-y-3">
+            <div className="w-11 h-11 rounded-full bg-[#4F46F5] dark:bg-[#6C4CFF] text-white flex items-center justify-center shadow-xs">
               <Zap className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm sm:text-base">
                 {whyItMatters.cards[0].title}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#506080] dark:text-[#AAB6D1] mt-1 leading-relaxed">
                 {whyItMatters.cards[0].description}
               </p>
             </div>
           </div>
 
-          {/* Card 2: No Extra Space (Matching container theme) */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 flex flex-col justify-start space-y-3">
+          {/* Card 2: No Extra Space */}
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex flex-col justify-start space-y-3">
             <div className="w-11 h-11 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-xs">
               <Folder className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm sm:text-base">
                 {whyItMatters.cards[1].title}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#506080] dark:text-[#AAB6D1] mt-1 leading-relaxed">
                 {whyItMatters.cards[1].description}
               </p>
             </div>
           </div>
 
-          {/* Card 3: Real-World Use (Matching container theme) */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-100 dark:border-indigo-900/50 flex flex-col justify-start space-y-3">
+          {/* Card 3: Real-World Use */}
+          <div className="p-5 sm:p-6 rounded-2xl bg-[#F1F4F9]/70 dark:bg-[#0D132C]/70 border border-[#E1E7F0] dark:border-[#25204B] flex flex-col justify-start space-y-3">
             <div className="w-11 h-11 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-xs">
               <Globe2 className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-slate-900 dark:text-white text-sm sm:text-base">
+              <h3 className="font-bold text-[#11182D] dark:text-[#F5F7FF] text-sm sm:text-base">
                 {whyItMatters.cards[2].title}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#506080] dark:text-[#AAB6D1] mt-1 leading-relaxed">
                 {whyItMatters.cards[2].description}
               </p>
             </div>
@@ -493,7 +423,7 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
       {/* ─────────────────────────────────────────────────────────────
           SECTION 4: 4. READY TO START?
       ───────────────────────────────────────────────────────────── */}
-      <section className="bg-gradient-to-r from-indigo-50/80 via-purple-50/40 to-white dark:from-slate-900 dark:via-indigo-950/20 dark:to-slate-900 rounded-3xl border border-slate-200/90 dark:border-slate-800 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-6 transition-colors overflow-hidden">
+      <section className="bg-white dark:bg-[#0B1025] rounded-3xl border border-[#E1E7F0] dark:border-[#25204B] p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-6 transition-colors overflow-hidden">
         
         {/* Left Side: 3D Rocket Visual & Text */}
         <div className="flex items-center gap-4 sm:gap-6 text-center sm:text-left">
@@ -699,10 +629,10 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
 
           {/* Text Content */}
           <div className="space-y-1">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-[#11182D] dark:text-[#F5F7FF] tracking-tight">
               {readyToStart.title}
             </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 max-w-md leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#506080] dark:text-[#AAB6D1] max-w-md leading-relaxed">
               {readyToStart.description}
             </p>
           </div>
@@ -714,7 +644,7 @@ export function OverviewSection({ onNavigate }: OverviewSectionProps) {
             sound.playNavigate();
             onNavigate('learn');
           }}
-          className="px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-extrabold text-sm shadow-md shadow-indigo-600/25 flex items-center gap-2 transition active:scale-95 shrink-0 focus:outline-hidden focus:ring-2 focus:ring-indigo-400"
+          className="px-7 py-3.5 rounded-xl bg-[#4F46F5] dark:bg-[#6C4CFF] hover:bg-[#4338CA] dark:hover:bg-[#5B3FE6] active:scale-95 text-white font-extrabold text-sm shadow-md shadow-[#4F46F5]/25 flex items-center gap-2 transition shrink-0 focus:outline-hidden focus:ring-2 focus:ring-[#4F46F5]/40"
         >
           <span>{readyToStart.buttonText}</span>
           <ArrowRight className="w-4 h-4" />
